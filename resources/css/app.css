@@ -4,6 +4,22 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe Symbol', 'Noto Color Emoji';
+    --font-serif: 'DM Serif Display', Georgia, serif;
+
+    /* Brand palette — extracted from logo */
+    --color-brand: #f45b0e;
+    --color-brand-dark: #c9440b;
+    --color-brand-light: #f37a39;
+    --color-peach: #fbe5da;
+    --color-peach-medium: #f9c6ac;
+    --color-warm-white: #fef7f3;
+    --color-charcoal: #1a1a1a;
+    --color-charcoal-soft: #2d2d2d;
+    --color-warm-gray: #6b5b4f;
+    --color-cream: #fffaf5;
 }
+
+/* Alpine.js — hide until ready */
+[x-cloak] { display: none !important; }

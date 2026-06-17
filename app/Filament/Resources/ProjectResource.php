@@ -9,10 +9,12 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -35,6 +37,12 @@ class ProjectResource extends Resource
                 Textarea::make('description')
                     ->nullable()
                     ->columnSpanFull(),
+                FileUpload::make('image')
+                    ->image()
+                    ->maxSize(2048)
+                    ->directory('projects')
+                    ->visibility('public')
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -48,6 +56,7 @@ class ProjectResource extends Resource
                 TextColumn::make('client_name')
                     ->sortable()
                     ->searchable(),
+                ImageColumn::make('image'),
                 TextColumn::make('description')
                     ->limit(50)
                     ->toggleable(),
