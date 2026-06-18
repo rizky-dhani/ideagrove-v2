@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
@@ -20,6 +22,18 @@
     --color-warm-gray: #6b5b4f;
     --color-cream: #fffaf5;
 }
+
+/* Dark mode colour overrides */
+.dark {
+    --color-warm-white: #121212;
+    --color-cream: #1a1a1a;
+    --color-charcoal: #f5f0eb;
+    --color-charcoal-soft: #e8e0d8;
+    --color-warm-gray: #b0a090;
+    --color-peach: #2a1f18;
+    --color-peach-medium: #3d2e24;
+}
+
 
 /* Alpine.js — hide until ready */
 [x-cloak] { display: none !important; }

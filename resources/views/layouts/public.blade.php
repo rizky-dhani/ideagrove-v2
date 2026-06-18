@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth" x-data="{ dark: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) }" x-init="$watch('dark', v => { document.documentElement.classList.toggle('dark', v); localStorage.setItem('theme', v ? 'dark' : 'light'); }); document.documentElement.classList.toggle('dark', dark);"
+    :class="dark ? 'dark' : ''">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,17 +31,35 @@
             <nav class="hidden items-center gap-6 text-sm font-medium text-charcoal-soft sm:flex">
                 <a href="/#projects" class="transition-colors hover:text-brand">Work</a>
                 <a href="/#contact" class="transition-colors hover:text-brand">Contact</a>
+                <button @click="dark = !dark" class="ml-2 flex size-8 items-center justify-center rounded-full border border-peach transition-colors hover:bg-peach dark:border-charcoal dark:hover:bg-charcoal/10" aria-label="Toggle dark mode">
+                    <svg x-show="!dark" class="size-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+                    </svg>
+                    <svg x-show="dark" x-cloak class="size-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+                    </svg>
+                </button>
             </nav>
 
-            {{-- Hamburger (mobile) --}}
-            <button @click="open = !open" class="flex size-10 items-center justify-center sm:hidden" aria-label="Toggle menu">
-                <svg class="size-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!open">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-                <svg class="size-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="open" x-cloak>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
+            {{-- Mobile controls --}}
+            <div class="flex items-center gap-2 sm:hidden">
+                <button @click="dark = !dark" class="flex size-10 items-center justify-center" aria-label="Toggle dark mode">
+                    <svg x-show="!dark" class="size-5 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+                    </svg>
+                    <svg x-show="dark" x-cloak class="size-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+                    </svg>
+                </button>
+                <button @click="open = !open" class="flex size-10 items-center justify-center" aria-label="Toggle menu">
+                    <svg class="size-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!open">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg class="size-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="open" x-cloak>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         {{-- Mobile menu --}}
@@ -57,23 +76,27 @@
     {{ $slot }}
 
     <footer class="border-t border-peach bg-cream">
-        <div class="mx-auto max-w-6xl px-6 py-12 sm:px-8 lg:px-12">
+        <div class="mx-auto max-w-6xl px-6 py-8 sm:px-8 lg:px-12">
             <div class="flex flex-col items-center gap-8 sm:flex-row sm:justify-between">
                 <a href="/" class="block max-w-64">
                     <img src="{{ asset('assets/images/Logo_Landscape.webp') }}"
                          alt="The Idea Grove Studio"
                          class="h-28 w-auto opacity-80 transition-opacity hover:opacity-100">
                 </a>
-                <div class="flex flex-col items-center gap-2 text-sm text-warm-gray sm:items-end">
-                    <p>&copy; {{ date('Y') }} The Idea Grove Studio. Rooted in Bali.</p>
-                    <p class="flex items-center gap-2">
-                        <span class="inline-block size-1.5 rounded-full bg-brand"></span>
-                        Made with <span class="italic">soul</span> on the Island of the Gods
-                    </p>
+                <div class="flex flex-col items-center gap-4 sm:items-end">
+                    <div class="flex flex-col items-center gap-2 text-sm text-warm-gray sm:items-end">
+                        <p>&copy; {{ date('Y') }} The Idea Grove Studio. Rooted in Bali.</p>
+                        <p class="flex items-center gap-2">
+                            <span class="inline-block size-1.5 rounded-full bg-brand"></span>
+                            Made with <span class="italic">soul</span> on the Island of the Gods
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <x-back-to-top />
 
 </body>
 </html>
