@@ -26,7 +26,7 @@
                         We design and build brand identities, websites, and applications for organisations that take their craft seriously &mdash; from boutique hospitality to climate, wellness, and culture.
                     </p>
 
-                    <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+                    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 sm:mt-10">
                         <a href="#work" class="inline-flex items-center gap-2 rounded-full bg-charcoal px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-brand-dark">
                             Selected work
                             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -143,11 +143,11 @@
         <div class="mx-auto max-w-6xl">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand uppercase">/selected work</span>
-                    <h2 class="mt-4 font-serif text-3xl text-charcoal sm:text-4xl">Recent projects</h2>
+                    <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand uppercase">/projects</span>
+                    <h2 class="mt-4 font-serif text-3xl text-charcoal sm:text-4xl">Our projects so far</h2>
                 </div>
                 <p class="max-w-sm text-sm leading-relaxed text-warm-gray">
-                    A small selection of recent engagements. A longer list is available on request.
+                    Here are some of the projects we&rsquo;ve had the pleasure of working on. We&rsquo;re always looking for the next one &mdash; get in touch.
                 </p>
             </div>
 
@@ -191,8 +191,8 @@
                 </div>
             @else
                 <div class="mt-14 rounded-xl border border-dashed border-peach-medium/60 px-8 py-20 text-center">
-                    <p class="font-serif text-lg text-warm-gray/60">The portfolio is being curated.</p>
-                    <p class="mt-2 text-sm text-warm-gray/50">Selected work will appear here shortly.</p>
+                    <p class="font-serif text-lg text-warm-gray/60">Projects are loading.</p>
+                    <p class="mt-2 text-sm text-warm-gray/50">Our work will appear here soon.</p>
                 </div>
             @endif
         </div>
@@ -205,7 +205,7 @@
                 <div class="lg:col-span-4">
                     <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand uppercase">/sectors</span>
                     <h2 class="mt-4 font-serif text-2xl text-charcoal sm:text-3xl">
-                        We work with founders in
+                        Open to working across
                     </h2>
                 </div>
                 <ul class="lg:col-span-8 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
@@ -215,6 +215,9 @@
                     <li class="border-t border-peach-medium/60 pt-4 font-serif text-lg text-charcoal">Culture &amp; arts</li>
                     <li class="border-t border-peach-medium/60 pt-4 font-serif text-lg text-charcoal">Lifestyle</li>
                     <li class="border-t border-peach-medium/60 pt-4 font-serif text-lg text-charcoal">Social impact</li>
+                    <li class="border-t border-peach-medium/60 pt-4 font-serif text-lg text-charcoal">Education</li>
+                    <li class="border-t border-peach-medium/60 pt-4 font-serif text-lg text-charcoal">Technology</li>
+                    <li class="border-t border-peach-medium/60 pt-4 font-serif text-lg text-charcoal">And more&hellip;</li>
                 </ul>
             </div>
         </div>
@@ -236,16 +239,6 @@
                         We take on a small number of new engagements each quarter. If you&rsquo;re working on something meaningful, we&rsquo;d love to hear about it.
                     </p>
 
-                    <div class="mt-10 space-y-3 text-sm text-warm-gray">
-                        <p>
-                            <span class="block text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">Studio</span>
-                            Dalung, Bali &middot; GMT+8
-                        </p>
-                        <p>
-                            <span class="block text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">Availability</span>
-                            Currently full — accepting enquiries for late {{ now()->addMonths(4)->format('F') }}
-                        </p>
-                    </div>
                 </div>
 
                 <div class="lg:col-span-7">

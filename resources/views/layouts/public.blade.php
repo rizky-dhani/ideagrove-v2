@@ -23,7 +23,7 @@
             <a href="/" class="block max-w-64">
                 <img src="{{ asset('assets/images/Logo_Landscape.webp') }}"
                      alt="The Idea Grove Studio"
-                     class="h-16 sm:h-20 lg:h-24 w-auto"
+                     class="h-20 sm:h-20 lg:h-24 w-auto"
                      loading="eager">
             </a>
 
