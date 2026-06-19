@@ -1,11 +1,11 @@
 <div>
     {{-- Hero --}}
-    <section class="relative overflow-hidden bg-gradient-to-b from-charcoal to-charcoal-soft px-6 pt-24 pb-20 sm:px-8 lg:px-12">
+    <section class="relative overflow-hidden bg-cream px-6 pt-24 pb-20 sm:px-8 lg:px-12">
         <div class="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
         <div class="mx-auto max-w-6xl">
             <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand-light uppercase">/work</span>
-            <h1 class="mt-4 font-serif text-3xl leading-tight text-cream sm:text-4xl lg:text-5xl">Our work</h1>
-            <p class="mt-4 max-w-xl text-base leading-relaxed text-cream/70">
+            <h1 class="mt-4 font-serif text-3xl leading-tight text-charcoal sm:text-4xl lg:text-5xl">Our work</h1>
+            <p class="mt-4 max-w-xl text-base leading-relaxed text-warm-gray">
                 A curated selection of projects we&rsquo;ve delivered. Brand identities, websites, and applications for organisations that take their craft seriously.
             </p>
         </div>
@@ -20,7 +20,7 @@
                     <label for="sort" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">Sort</label>
                     <select id="sort"
                             wire:model.live="sort"
-                            class="rounded-lg border border-peach bg-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
+                            class="rounded-lg border border-peach bg-warm-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
                         <option value="latest">Latest</option>
                         <option value="oldest">Oldest</option>
                         <option value="name_asc">Name A&ndash;Z</option>
@@ -33,7 +33,7 @@
                     <label for="perPage" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">Show</label>
                     <select id="perPage"
                             wire:model.live="perPage"
-                            class="rounded-lg border border-peach bg-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
+                            class="rounded-lg border border-peach bg-warm-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
                         <option value="12">12</option>
                         <option value="24">24</option>
                         <option value="48">48</option>
@@ -42,7 +42,7 @@
             </div>
 
             {{-- Layout toggle --}}
-            <div class="flex items-center gap-1 rounded-lg border border-peach bg-white p-1">
+            <div class="flex items-center gap-1 rounded-lg border border-peach bg-warm-white p-1">
                 <button wire:click="$set('layout', 'grid')"
                         class="rounded-md p-2 transition-colors {{ $layout === 'grid' ? 'bg-charcoal text-cream' : 'text-warm-gray hover:text-charcoal' }}"
                         aria-label="Grid view">
@@ -112,7 +112,7 @@
                     <div class="space-y-8">
                         @foreach ($projects as $project)
                             <a href="{{ route('projects.show', $project) }}"
-                               class="group flex flex-col gap-6 rounded-xl border border-peach-medium/40 bg-white p-4 transition-shadow hover:shadow-md sm:flex-row">
+                               class="group flex flex-col gap-6 rounded-xl border border-peach-medium/40 bg-warm-white p-4 transition-shadow hover:shadow-md sm:flex-row">
                                 <div class="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-lg bg-peach/40 sm:w-72">
                                     @if ($project->imageUrl())
                                         <img src="{{ $project->imageUrl() }}"
