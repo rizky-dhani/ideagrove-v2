@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectSeeder::class);
 
         SocialLink::factory()->createMany([
-            ['platform' => 'Instagram', 'url' => 'https://instagram.com/ideagrove', 'icon' => 'heroicon-o-camera', 'sort_order' => 1],
-            ['platform' => 'Dribbble', 'url' => 'https://dribbble.com/ideagrove', 'icon' => 'heroicon-o-paint-brush', 'sort_order' => 2],
-            ['platform' => 'GitHub', 'url' => 'https://github.com/ideagrove', 'icon' => 'heroicon-o-code-bracket', 'sort_order' => 3],
+            ['platform' => 'Instagram', 'url' => 'https://instagram.com/ideagrove', 'icon' => 'phosphor-instagram-logo', 'sort_order' => 1],
+            ['platform' => 'Dribbble', 'url' => 'https://dribbble.com/ideagrove', 'icon' => 'phosphor-dribbble-logo', 'sort_order' => 2],
+            ['platform' => 'GitHub', 'url' => 'https://github.com/ideagrove', 'icon' => 'phosphor-github-logo', 'sort_order' => 3],
         ]);
     }
 }

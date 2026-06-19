@@ -20,7 +20,7 @@ class SocialLinkFactory extends Factory
         return [
             'platform' => fake()->randomElement(['Instagram', 'Dribbble', 'GitHub', 'LinkedIn', 'Twitter']),
             'url' => fake()->url(),
-            'icon' => 'heroicon-o-link',
+            'icon' => 'phosphor-'.fake()->randomElement(['instagram', 'dribbble', 'github', 'linkedin', 'x']).'-logo',
             'sort_order' => fake()->numberBetween(0, 10),
         ];
     }

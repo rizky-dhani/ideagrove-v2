@@ -40,17 +40,15 @@
 
             {{-- Right controls: social links + dark toggle --}}
             <div class="hidden items-center gap-4 sm:flex">
-                @if ($socialLinks->isNotEmpty())
                     @foreach ($socialLinks as $link)
                         <a href="{{ $link->url }}"
                            target="_blank"
                            rel="noopener noreferrer"
-                           class="text-xs font-medium tracking-wide text-warm-gray transition-colors hover:text-brand"
+                           class="text-warm-gray transition-colors hover:text-brand"
                            title="{{ $link->platform }}">
-                            {{ $link->platform }}
+                            @svg($link->icon, 'size-5')
                         </a>
                     @endforeach
-                @endif
                 <button @click="dark = !dark" class="flex size-8 items-center justify-center rounded-full border border-peach transition-colors hover:bg-peach dark:border-charcoal dark:hover:bg-charcoal/10" aria-label="Toggle dark mode">
                     <svg x-show="!dark" class="size-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
@@ -98,14 +96,16 @@
                 <a href="/#contact" @click="open = false" class="transition-colors hover:text-brand">Contact</a>
                 @if ($socialLinks->isNotEmpty())
                     <div class="border-t border-peach-medium/40 pt-4 mt-1 flex flex-wrap gap-4">
-                        @foreach ($socialLinks as $link)
-                            <a href="{{ $link->url }}"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="text-sm text-warm-gray transition-colors hover:text-brand">
-                                {{ $link->platform }}
-                            </a>
-                        @endforeach
+                    @foreach ($socialLinks as $link)
+                        <a href="{{ $link->url }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           @click="open = false"
+                           class="flex items-center gap-3 text-sm text-warm-gray transition-colors hover:text-brand">
+                            @svg($link->icon, 'size-5 shrink-0')
+                            {{ $link->platform }}
+                        </a>
+                    @endforeach
                     </div>
                 @endif
             </div>
@@ -149,13 +149,14 @@
                             {{ config('mail.from.address', 'hello@ideagrove.studio') }}
                         </a>
                         @if ($socialLinks->isNotEmpty())
-                            <div class="mt-3 flex flex-wrap gap-3">
+                            <div class="mt-3 flex flex-wrap gap-4">
                                 @foreach ($socialLinks as $link)
                                     <a href="{{ $link->url }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="text-sm text-warm-gray transition-colors hover:text-brand"
+                                       class="flex items-center gap-2 text-sm text-warm-gray transition-colors hover:text-brand"
                                        title="{{ $link->platform }}">
+                                        @svg($link->icon, 'size-4 shrink-0')
                                         {{ $link->platform }}
                                     </a>
                                 @endforeach
