@@ -14,7 +14,7 @@
     @endif
 
     <link rel="icon" type="image/webp" href="{{ asset('assets/images/Logo_Square.webp') }}">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
