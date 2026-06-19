@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\SiteSetting;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -29,7 +30,7 @@ class ContactForm extends Component
         $this->validate();
 
         Mail::raw("Name: {$this->name}\nEmail: {$this->email}\n\n{$this->message}", function ($mail) {
-            $mail->to(config('mail.from.address'))
+            $mail->to(SiteSetting::first()?->email ?? config('mail.from.address'))
                 ->from($this->email, $this->name)
                 ->subject('New enquiry from ideagrove.studio');
         });

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\SiteSetting;
 use App\Models\SocialLink;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('layouts.public', function ($view) {
             $view->with('socialLinks', SocialLink::orderBy('sort_order')->get());
+            $view->with('siteSetting', SiteSetting::first());
         });
     }
 }

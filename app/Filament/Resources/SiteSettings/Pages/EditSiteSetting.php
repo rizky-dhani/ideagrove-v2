@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Filament\Resources\SiteSettings\Pages;
+
+use App\Filament\Resources\SiteSettings\SiteSettingResource;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
+
+class EditSiteSetting extends EditRecord
+{
+    protected static string $resource = SiteSettingResource::class;
+
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('Site settings updated')
+            ->body('The site settings have been saved.');
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('edit', ['record' => $this->record]);
+    }
+}

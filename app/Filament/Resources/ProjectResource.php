@@ -87,6 +87,7 @@ class ProjectResource extends Resource
             ->filters([
                 //
             ])
+            ->recordAction(null)
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

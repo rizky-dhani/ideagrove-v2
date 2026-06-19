@@ -121,10 +121,10 @@
             <div class="grid gap-10 sm:grid-cols-3">
                 {{-- Brand --}}
                 <div>
-                    <a href="/" class="block max-w-48">
+                    <a href="/" class="block max-w-64">
                         <img src="{{ asset('assets/images/Logo_Landscape.webp') }}"
                              alt="The Idea Grove Studio"
-                             class="h-20 w-auto opacity-80 transition-opacity hover:opacity-100">
+                             class="h-28 w-auto opacity-80 transition-opacity hover:opacity-100">
                     </a>
                 </div>
 
@@ -141,10 +141,18 @@
                 <div>
                     <h4 class="text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">Connect</h4>
                     <div class="mt-4 space-y-2">
-                        <a href="mailto:{{ config('mail.from.address', 'hello@ideagrove.studio') }}"
-                           class="text-sm text-warm-gray transition-colors hover:text-brand">
-                            {{ config('mail.from.address', 'hello@ideagrove.studio') }}
-                        </a>
+                        @if ($siteSetting?->email)
+                            <a href="mailto:{{ $siteSetting->email }}"
+                               class="text-sm text-warm-gray transition-colors hover:text-brand">
+                                {{ $siteSetting->email }}
+                            </a>
+                        @endif
+                        @if ($siteSetting?->phone_display)
+                            <a href="tel:{{ $siteSetting->phone }}"
+                               class="text-sm text-warm-gray transition-colors hover:text-brand">
+                                {{ $siteSetting->phone_display }}
+                            </a>
+                        @endif
                         @if ($socialLinks->isNotEmpty())
                             <div class="mt-3 flex flex-wrap gap-4">
                                 @foreach ($socialLinks as $link)
