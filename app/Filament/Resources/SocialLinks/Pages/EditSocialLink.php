@@ -3,17 +3,23 @@
 namespace App\Filament\Resources\SocialLinks\Pages;
 
 use App\Filament\Resources\SocialLinks\SocialLinkResource;
-use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Notifications\Notification;
 
 class EditSocialLink extends EditRecord
 {
     protected static string $resource = SocialLinkResource::class;
 
-    protected function getHeaderActions(): array
+    protected function getSavedNotification(): ?Notification
     {
-        return [
-            DeleteAction::make(),
-        ];
+        return Notification::make()
+            ->success()
+            ->title('Social link updated')
+            ->body('The social link has been updated successfully.');
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return SocialLinkResource::getUrl('index');
     }
 }

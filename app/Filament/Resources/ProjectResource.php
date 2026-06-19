@@ -13,10 +13,13 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
 {
@@ -39,9 +42,16 @@ class ProjectResource extends Resource
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image()
-                    ->maxSize(2048)
+                    ->maxSize(5120)
+                    ->helperText('Max file size: 5 MB')
+                    ->disk('public')
                     ->directory('projects')
                     ->visibility('public')
+                    ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, Get $get): string {
+                        $name = $get('name') ? Str::slug($get('name')) : (string) Str::ulid();
+
+                        return "{$name}.".$file->getClientOriginalExtension();
+                    })
                     ->columnSpanFull(),
             ]);
     }
