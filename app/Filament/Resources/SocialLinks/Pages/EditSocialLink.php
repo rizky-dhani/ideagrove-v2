@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\SocialLinks\Pages;
 
 use App\Filament\Resources\SocialLinks\SocialLinkResource;
-use Filament\Resources\Pages\EditRecord;
 use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
 
 class EditSocialLink extends EditRecord
 {

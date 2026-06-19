@@ -6,12 +6,27 @@ use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-#[Fillable(['name', 'client_name', 'description', 'image', 'web_url'])]
+#[Fillable(['name', 'slug', 'client_name', 'description', 'image', 'web_url'])]
 class Project extends Model
 {
     /** @use HasFactory<ProjectFactory> */
     use HasFactory;
+
+    protected static function booted(): void
+    {
+        static::creating(function (Project $project) {
+            if (! $project->slug) {
+                $project->slug = Str::slug($project->name);
+            }
+        });
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     protected function casts(): array
     {

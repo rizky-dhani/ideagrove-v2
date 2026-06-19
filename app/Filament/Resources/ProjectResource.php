@@ -15,7 +15,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -39,6 +38,11 @@ class ProjectResource extends Resource
                     ->maxLength(255),
                 Textarea::make('description')
                     ->nullable()
+                    ->columnSpanFull(),
+                TextInput::make('web_url')
+                    ->label('URL')
+                    ->url()
+                    ->maxLength(255)
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image()
@@ -66,7 +70,12 @@ class ProjectResource extends Resource
                 TextColumn::make('client_name')
                     ->sortable()
                     ->searchable(),
-                ImageColumn::make('image'),
+                TextColumn::make('web_url')
+                    ->label('URL')
+                    ->formatStateUsing(fn (?string $state): string => $state ? 'Visit Site' : '-')
+                    ->url(fn (?string $state): ?string => $state)
+                    ->openUrlInNewTab()
+                    ->toggleable(),
                 TextColumn::make('description')
                     ->limit(50)
                     ->toggleable(),
