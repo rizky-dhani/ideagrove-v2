@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
 
     @if ($meta ?? false)
         {!! $meta !!}
@@ -17,6 +18,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:outline-none">
+        Skip to content
+    </a>
 
     <header x-data="{ open: false }" class="sticky top-0 z-50 border-b border-peach bg-warm-white/90 backdrop-blur-md">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-6 sm:px-8 lg:px-12">
@@ -29,7 +33,7 @@
 
             {{-- Desktop nav --}}
             <nav class="hidden items-center gap-6 text-sm font-medium text-charcoal-soft sm:flex">
-                <a href="/#projects" class="transition-colors hover:text-brand">Work</a>
+                <a href="{{ route('projects.index') }}" class="transition-colors hover:text-brand">Work</a>
                 <a href="/#contact" class="transition-colors hover:text-brand">Contact</a>
                 <button @click="dark = !dark" class="ml-2 flex size-8 items-center justify-center rounded-full border border-peach transition-colors hover:bg-peach dark:border-charcoal dark:hover:bg-charcoal/10" aria-label="Toggle dark mode">
                     <svg x-show="!dark" class="size-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -67,30 +71,75 @@
              @click.outside="open = false"
              class="border-t border-peach bg-warm-white px-6 pb-6 pt-4 sm:hidden">
             <div class="flex flex-col gap-4 text-base font-medium text-charcoal-soft">
-                <a href="/#projects" @click="open = false" class="transition-colors hover:text-brand">Work</a>
+                <a href="{{ route('projects.index') }}" @click="open = false" class="transition-colors hover:text-brand">Work</a>
                 <a href="/#contact" @click="open = false" class="transition-colors hover:text-brand">Contact</a>
             </div>
         </nav>
     </header>
 
-    {{ $slot }}
+    <main id="main">
+        {{ $slot }}
+    </main>
 
     <footer class="border-t border-peach bg-cream">
-        <div class="mx-auto max-w-6xl px-6 py-8 sm:px-8 lg:px-12">
-            <div class="flex flex-col items-center gap-8 sm:flex-row sm:justify-between">
-                <a href="/" class="block max-w-64">
-                    <img src="{{ asset('assets/images/Logo_Landscape.webp') }}"
-                         alt="The Idea Grove Studio"
-                         class="h-28 w-auto opacity-80 transition-opacity hover:opacity-100">
-                </a>
-                <div class="flex flex-col items-center gap-4 sm:items-end">
-                    <div class="flex flex-col items-center gap-2 text-sm text-warm-gray sm:items-end">
-                        <p>&copy; {{ date('Y') }} The Idea Grove Studio. Rooted in Bali.</p>
-                        <p class="flex items-center gap-2">
-                            <span class="inline-block size-1.5 rounded-full bg-brand"></span>
-                            Made with <span class="italic">soul</span> on the Island of the Gods
-                        </p>
+        <div class="mx-auto max-w-6xl px-6 py-12 sm:px-8 lg:px-12">
+            <div class="grid gap-10 sm:grid-cols-3">
+                {{-- Brand --}}
+                <div>
+                    <a href="/" class="block max-w-48">
+                        <img src="{{ asset('assets/images/Logo_Landscape.webp') }}"
+                             alt="The Idea Grove Studio"
+                             class="h-20 w-auto opacity-80 transition-opacity hover:opacity-100">
+                    </a>
+                    <p class="mt-4 max-w-xs text-sm leading-relaxed text-warm-gray">
+                        A small studio for considered digital work.
+                    </p>
+                </div>
+
+                {{-- Links --}}
+                <div>
+                    <h4 class="text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">Links</h4>
+                    <nav class="mt-4 flex flex-col gap-2">
+                        <a href="{{ route('projects.index') }}" class="text-sm text-warm-gray transition-colors hover:text-brand">Work</a>
+                        <a href="/#contact" class="text-sm text-warm-gray transition-colors hover:text-brand">Contact</a>
+                    </nav>
+                </div>
+
+                {{-- Connect --}}
+                <div>
+                    <h4 class="text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">Connect</h4>
+                    <div class="mt-4 space-y-2">
+                        <a href="mailto:{{ config('mail.from.address', 'hello@ideagrove.studio') }}"
+                           class="text-sm text-warm-gray transition-colors hover:text-brand">
+                            {{ config('mail.from.address', 'hello@ideagrove.studio') }}
+                        </a>
+                        @if ($socialLinks->isNotEmpty())
+                            <div class="mt-3 flex flex-wrap gap-3">
+                                @foreach ($socialLinks as $link)
+                                    <a href="{{ $link->url }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="text-sm text-warm-gray transition-colors hover:text-brand"
+                                       title="{{ $link->platform }}">
+                                        {{ $link->platform }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Bottom bar --}}
+        <div class="border-t border-peach-medium/40">
+            <div class="mx-auto max-w-6xl px-6 py-6 sm:px-8 lg:px-12">
+                <div class="flex flex-col items-center gap-2 text-sm text-warm-gray sm:flex-row sm:justify-between">
+                    <p>&copy; {{ date('Y') }} The Idea Grove Studio. Rooted in Bali.</p>
+                    <p class="flex items-center gap-2">
+                        <span class="inline-block size-1.5 rounded-full bg-brand"></span>
+                        Made with <span class="italic">soul</span> on the Island of the Gods
+                    </p>
                 </div>
             </div>
         </div>

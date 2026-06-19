@@ -12,6 +12,7 @@ class HomePage extends Component
         return [
             'projects' => Project::query()
                 ->orderBy('created_at', 'desc')
+                ->take(6)
                 ->get(),
         ];
     }

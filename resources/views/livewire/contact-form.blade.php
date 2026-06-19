@@ -9,20 +9,20 @@
             <div class="grid gap-5 sm:grid-cols-2">
                 <div>
                     <label for="name" class="mb-1.5 block text-sm font-medium text-charcoal/80">Name</label>
-                    <input wire:model="name" id="name" type="text" placeholder="Your name"
+                    <input wire:model="name" id="name" name="name" type="text" autocomplete="name" placeholder="Your name"
                            class="w-full rounded-xl border border-peach-medium/50 bg-cream px-4 py-3 text-sm text-charcoal placeholder-charcoal-soft/30 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
                     @error('name') <p class="mt-1 text-xs text-brand">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label for="email" class="mb-1.5 block text-sm font-medium text-charcoal/80">Email</label>
-                    <input wire:model="email" id="email" type="email" placeholder="you@example.com"
+                    <input wire:model="email" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"
                            class="w-full rounded-xl border border-peach-medium/50 bg-cream px-4 py-3 text-sm text-charcoal placeholder-charcoal-soft/30 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
                     @error('email') <p class="mt-1 text-xs text-brand">{{ $message }}</p> @enderror
                 </div>
             </div>
             <div>
                 <label for="message" class="mb-1.5 block text-sm font-medium text-charcoal/80">Message</label>
-                <textarea wire:model="message" id="message" rows="4" placeholder="Tell us about your project…"
+                <textarea wire:model="message" id="message" name="message" rows="4" placeholder="Tell us about your project..."
                           class="w-full rounded-xl border border-peach-medium/50 bg-cream px-4 py-3 text-sm text-charcoal placeholder-charcoal-soft/30 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20"></textarea>
                 @error('message') <p class="mt-1 text-xs text-brand">{{ $message }}</p> @enderror
             </div>

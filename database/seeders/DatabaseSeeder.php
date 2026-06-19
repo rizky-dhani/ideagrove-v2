@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SocialLink;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,11 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        $this->call(ProjectSeeder::class);
+
+        SocialLink::factory()->createMany([
+            ['platform' => 'Instagram', 'url' => 'https://instagram.com/ideagrove', 'icon' => 'heroicon-o-camera', 'sort_order' => 1],
+            ['platform' => 'Dribbble', 'url' => 'https://dribbble.com/ideagrove', 'icon' => 'heroicon-o-paint-brush', 'sort_order' => 2],
+            ['platform' => 'GitHub', 'url' => 'https://github.com/ideagrove', 'icon' => 'heroicon-o-code-bracket', 'sort_order' => 3],
         ]);
     }
 }

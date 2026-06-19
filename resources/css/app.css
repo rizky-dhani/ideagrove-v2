@@ -37,3 +37,60 @@
 
 /* Alpine.js — hide until ready */
 [x-cloak] { display: none !important; }
+
+/* Scroll-reveal animation */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1) 750ms,
+                transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) 750ms;
+}
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children inside a scroll-reveal group */
+.scroll-reveal-group > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1) 750ms,
+                transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) 750ms;
+}
+.scroll-reveal-group.is-visible > *:nth-child(1) { transition-delay: 750ms; }
+.scroll-reveal-group.is-visible > *:nth-child(2) { transition-delay: 830ms; }
+.scroll-reveal-group.is-visible > *:nth-child(3) { transition-delay: 910ms; }
+.scroll-reveal-group.is-visible > *:nth-child(4) { transition-delay: 990ms; }
+.scroll-reveal-group.is-visible > *:nth-child(5) { transition-delay: 1070ms; }
+.scroll-reveal-group.is-visible > *:nth-child(6) { transition-delay: 1150ms; }
+.scroll-reveal-group.is-visible > *:nth-child(7) { transition-delay: 1230ms; }
+.scroll-reveal-group.is-visible > *:nth-child(8) { transition-delay: 1310ms; }
+.scroll-reveal-group.is-visible > *:nth-child(9) { transition-delay: 1390ms; }
+.scroll-reveal-group.is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Focus-visible states */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Tactile push on active buttons */
+button:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-reveal,
+    .scroll-reveal-group > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    html { scroll-behavior: auto; }
+}

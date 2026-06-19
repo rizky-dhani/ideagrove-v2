@@ -3,7 +3,7 @@
     <section class="relative overflow-hidden bg-gradient-to-b from-charcoal to-charcoal-soft px-6 pt-24 pb-20 sm:px-8 lg:px-12">
         <div class="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
         <div class="mx-auto max-w-4xl">
-            <a href="/#projects" class="mb-8 inline-flex items-center gap-2 text-sm text-cream/60 transition-colors hover:text-cream">
+            <a href="{{ route('projects.index') }}" class="mb-8 inline-flex items-center gap-2 text-sm text-cream/60 transition-colors hover:text-cream">
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
                 </svg>
@@ -41,11 +41,11 @@
     {{-- Nav --}}
     <section class="border-t border-peach px-6 py-16 sm:px-8 lg:px-12">
         <div class="mx-auto max-w-4xl">
-            <a href="/#projects" class="inline-flex items-center gap-2 text-sm font-medium text-charcoal-soft transition-colors hover:text-brand">
+            <a href="{{ route('projects.index') }}" class="inline-flex items-center gap-2 text-sm font-medium text-charcoal-soft transition-colors hover:text-brand">
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
                 </svg>
-                All projects
+                All work
             </a>
         </div>
     </section>

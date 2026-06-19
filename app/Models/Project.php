@@ -27,4 +27,9 @@ class Project extends Model
             ? Storage::url($this->image)
             : null;
     }
+
+    public function excerpt(int $words = 50): string
+    {
+        return str($this->description)->words($words);
+    }
 }
