@@ -3,7 +3,7 @@
     <section class="relative overflow-hidden bg-cream px-6 py-10 sm:px-8 lg:px-12">
         <div class="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
         <div class="mx-auto flex max-w-4xl flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-            <a href="{{ route('projects.index') }}" class="inline-flex shrink-0 items-center gap-2 text-sm text-warm-gray/60 transition-colors hover:text-charcoal">
+            <a href="{{ route('projects.index') }}" class="inline-flex shrink-0 items-center gap-2 text-sm text-warm-gray/60 transition-colors hover:text-charcoal dark:text-warm-gray/80 dark:hover:text-white">
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
                 </svg>

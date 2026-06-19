@@ -126,9 +126,6 @@
                              alt="The Idea Grove Studio"
                              class="h-20 w-auto opacity-80 transition-opacity hover:opacity-100">
                     </a>
-                    <p class="mt-4 max-w-xs text-sm leading-relaxed text-warm-gray">
-                        A small studio for considered digital work.
-                    </p>
                 </div>
 
                 {{-- Links --}}
