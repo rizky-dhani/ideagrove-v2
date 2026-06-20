@@ -20,14 +20,10 @@
 </head>
 <body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
 @php
-    $otherLocale = app()->getLocale() === 'en' ? 'id' : 'en';
     $segments = request()->segments();
-    if (count($segments) > 0) {
-        $segments[0] = $otherLocale;
-        $switchUrl = url('/' . implode('/', $segments));
-    } else {
-        $switchUrl = url('/' . $otherLocale);
-    }
+    $localeUrl = fn ($locale) => count($segments) > 0
+        ? url('/' . $locale . '/' . implode('/', array_slice($segments, 1)))
+        : url('/' . $locale);
 @endphp
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:outline-none">
         {{ __('layout.nav.skip_to_content') }}
@@ -68,15 +64,14 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
                     </svg>
                 </button>
-                <a href="{{ $switchUrl ?? '#' }}"
-                   class="flex size-8 items-center justify-center rounded-full border border-peach text-xs font-semibold tracking-wider text-warm-gray transition-colors hover:bg-peach hover:text-charcoal dark:border-charcoal dark:hover:bg-charcoal/10 dark:hover:text-white uppercase"
-                   aria-label="{{ app()->getLocale() === 'en' ? 'Switch to Indonesian' : 'Ganti ke Inggris' }}">
-                    {{ app()->getLocale() === 'en' ? 'ID' : 'EN' }}
-                </a>
-            </div>
-
-            {{-- Mobile controls --}}
-            <div class="flex items-center gap-2 sm:hidden">
+                <div class="flex items-center gap-0.5 rounded-full border border-peach p-0.5 text-xs font-semibold tracking-wider uppercase dark:border-charcoal">
+                    <a href="{{ $localeUrl('en') }}"
+                       class="rounded-full px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'en' ? 'bg-charcoal text-cream dark:bg-white dark:text-charcoal' : 'text-warm-gray hover:text-charcoal dark:hover:text-white' }}"
+                       aria-label="English">EN</a>
+                    <a href="{{ $localeUrl('id') }}"
+                       class="rounded-full px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'id' ? 'bg-charcoal text-cream dark:bg-white dark:text-charcoal' : 'text-warm-gray hover:text-charcoal dark:hover:text-white' }}"
+                       aria-label="Bahasa Indonesia">ID</a>
+                </div>
                 <button @click="dark = !dark" class="flex size-10 items-center justify-center" aria-label="{{ __('layout.nav.toggle_dark_mode') }}">
                     <svg x-show="!dark" class="size-5 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
@@ -110,10 +105,13 @@
             <div class="flex flex-col gap-4 text-base font-medium text-charcoal-soft">
                 <a href="{{ route('projects.index') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : '' }}">{{ __('layout.nav.work') }}</a>
                 <a href="{{ route('contact') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : '' }}">{{ __('layout.nav.contact') }}</a>
-                <a href="{{ $switchUrl ?? '#' }}" @click="open = false"
-                   class="transition-colors hover:text-brand">
-                    {{ app()->getLocale() === 'en' ? 'ID' : 'EN' }}
-                </a>
+                <div class="flex items-center gap-2 pt-2">
+                    <a href="{{ $localeUrl('en') }}" @click="open = false"
+                       class="text-sm transition-colors {{ app()->getLocale() === 'en' ? 'text-brand font-medium' : 'text-warm-gray hover:text-brand' }}">EN</a>
+                    <span class="text-warm-gray/30">/</span>
+                    <a href="{{ $localeUrl('id') }}" @click="open = false"
+                       class="text-sm transition-colors {{ app()->getLocale() === 'id' ? 'text-brand font-medium' : 'text-warm-gray hover:text-brand' }}">ID</a>
+                </div>
                 @if ($socialLinks->isNotEmpty())
                     <div class="border-t border-peach-medium/40 pt-4 mt-1 flex flex-wrap gap-4">
                     @foreach ($socialLinks as $link)
