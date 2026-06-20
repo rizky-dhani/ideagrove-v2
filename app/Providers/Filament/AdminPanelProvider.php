@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->profile()
             ->maxContentWidth(Width::Full)
             ->navigationItems([
                 NavigationItem::make('Go to Site')
