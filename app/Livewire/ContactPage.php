@@ -17,6 +17,7 @@ class ContactPage extends Component
             'seo' => [
                 'title' => __('layout.meta.contact.title'),
                 'description' => __('layout.meta.contact.description'),
+                'og_image' => asset('assets/images/Logo_Landscape.webp'),
             ],
         ]);
     }

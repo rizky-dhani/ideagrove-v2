@@ -62,6 +62,15 @@
     <link rel="icon" type="image/webp" href="{{ asset('assets/images/Logo_Square.webp') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (config('services.analytics.property_id'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.analytics.property_id') }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ config('services.analytics.property_id') }}');
+        </script>
+    @endif
     @livewireStyles
 </head>
 <body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
@@ -87,8 +96,8 @@
 
             {{-- Centered desktop nav --}}
             <nav class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden items-center gap-6 text-sm font-medium sm:flex">
-                <a href="{{ route('projects.index') }}" class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.work') }}</a>
-                <a href="{{ route('contact') }}" class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.contact') }}</a>
+                <a href="{{ route('projects.index') }}" {{ request()->routeIs('projects.*') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.work') }}</a>
+                <a href="{{ route('contact') }}" {{ request()->routeIs('contact') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.contact') }}</a>
             </nav>
 
             {{-- Right controls: social links + dark toggle --}}
@@ -132,8 +141,8 @@
         {{-- Mobile menu --}}
         <nav x-show="open"
              x-cloak
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 -translate-y-2"
+                <a href="{{ route('projects.index') }}" @click="open = false" {{ request()->routeIs('projects.*') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : '' }}">{{ __('layout.nav.work') }}</a>
+                <a href="{{ route('contact') }}" @click="open = false" {{ request()->routeIs('contact') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : '' }}">{{ __('layout.nav.contact') }}</a>
              x-transition:enter-end="opacity-100 translate-y-0"
              x-transition:leave="transition ease-in duration-200"
              x-transition:leave-start="opacity-100 translate-y-0"
