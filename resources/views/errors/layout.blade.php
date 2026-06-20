@@ -58,5 +58,6 @@
             <p class="text-center text-sm text-warm-gray dark:text-cream/40">© {{ date('Y') }} {{ config('app.name') }}. {{ app()->getLocale() === 'id' ? 'Berakar di Bali.' : 'Rooted in Bali.' }}</p>
         </div>
     </footer>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
