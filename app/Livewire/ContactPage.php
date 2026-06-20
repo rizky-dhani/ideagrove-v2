@@ -15,8 +15,8 @@ class ContactPage extends Component
             'socialLinks' => SocialLink::orderBy('sort_order')->get(),
         ])->layout('layouts.public', [
             'meta' => implode("\n", [
-                '<title>Contact — The Idea Grove Studio</title>',
-                '<meta name="description" content="Get in touch with The Idea Grove Studio. We\'d love to hear about your project — brand identities, websites, and applications for organisations that take their craft seriously.">',
+                '<title>'.__('layout.meta.contact.title').'</title>',
+                '<meta name="description" content="'.__('layout.meta.contact.description').'">',
             ]),
         ]);
     }

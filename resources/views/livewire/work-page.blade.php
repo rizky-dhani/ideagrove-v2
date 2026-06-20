@@ -3,11 +3,9 @@
     <section class="relative overflow-hidden bg-cream px-6 pt-24 pb-20 sm:px-8 lg:px-12">
         <div class="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
         <div class="mx-auto max-w-6xl">
-            <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand-light uppercase">/work</span>
-            <h1 class="mt-4 font-serif text-3xl leading-tight text-charcoal sm:text-4xl lg:text-5xl">Our work</h1>
-            <p class="mt-4 max-w-xl text-base leading-relaxed text-warm-gray">
-                A curated selection of projects we&rsquo;ve delivered. Brand identities, websites, and applications for organisations that take their craft seriously.
-            </p>
+            <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand-light uppercase">{{ __('work.hero.section_label') }}</span>
+            <h1 class="mt-4 font-serif text-3xl leading-tight text-charcoal sm:text-4xl lg:text-5xl">{{ __('work.hero.heading') }}</h1>
+            <p class="mt-4 max-w-xl text-base leading-relaxed text-warm-gray">{{ __('work.hero.subtitle') }}</p>
         </div>
     </section>
 
@@ -17,20 +15,20 @@
             <div class="flex items-center gap-4">
                 {{-- Sort --}}
                 <div class="flex items-center gap-2">
-                    <label for="sort" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">Sort</label>
+                    <label for="sort" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">{{ __('work.controls.sort') }}</label>
                     <select id="sort"
                             wire:model.live="sort"
                             class="rounded-lg border border-peach bg-warm-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
-                        <option value="latest">Latest</option>
-                        <option value="oldest">Oldest</option>
-                        <option value="name_asc">Name A&ndash;Z</option>
-                        <option value="name_desc">Name Z&ndash;A</option>
+                        <option value="latest">{{ __('work.controls.sort_latest') }}</option>
+                        <option value="oldest">{{ __('work.controls.sort_oldest') }}</option>
+                        <option value="name_asc">{{ __('work.controls.sort_name_asc') }}</option>
+                        <option value="name_desc">{{ __('work.controls.sort_name_desc') }}</option>
                     </select>
                 </div>
 
                 {{-- Per page --}}
                 <div class="hidden items-center gap-2 sm:flex">
-                    <label for="perPage" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">Show</label>
+                    <label for="perPage" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">{{ __('work.controls.show') }}</label>
                     <select id="perPage"
                             wire:model.live="perPage"
                             class="rounded-lg border border-peach bg-warm-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
@@ -45,14 +43,14 @@
             <div class="flex items-center gap-1 rounded-lg border border-peach bg-warm-white p-1">
                 <button wire:click="$set('layout', 'grid')"
                         class="rounded-md p-2 transition-colors {{ $layout === 'grid' ? 'bg-charcoal text-cream' : 'text-warm-gray hover:text-charcoal' }}"
-                        aria-label="Grid view">
+                        aria-label="{{ __('work.controls.grid_aria') }}">
                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
                     </svg>
                 </button>
                 <button wire:click="$set('layout', 'list')"
                         class="rounded-md p-2 transition-colors {{ $layout === 'list' ? 'bg-charcoal text-cream' : 'text-warm-gray hover:text-charcoal' }}"
-                        aria-label="List view">
+                        aria-label="{{ __('work.controls.list_aria') }}">
                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"/>
                     </svg>
@@ -156,8 +154,11 @@
                 </div>
             @else
                 <div class="rounded-xl border border-dashed border-peach-medium/60 px-8 py-20 text-center">
-                    <p class="font-serif text-lg text-warm-gray/60">No projects found.</p>
-                    <p class="mt-2 text-sm text-warm-gray/50">Check back soon, or <a href="/" class="text-brand underline underline-offset-2 hover:text-brand-dark">return home</a>.</p>
+                    @php
+                        $returnHomeLink = '<a href="' . route('home') . '" class="text-brand underline underline-offset-2 hover:text-brand-dark">' . __('work.empty.return_home') . '</a>';
+                    @endphp
+                    <p class="font-serif text-lg text-warm-gray/60">{{ __('work.empty.heading') }}</p>
+                    <p class="mt-2 text-sm text-warm-gray/50">{!! __('work.empty.body', ['link' => $returnHomeLink]) !!}</p>
                 </div>
             @endif
         </div>

@@ -49,8 +49,8 @@ class WorkPage extends Component
         ])
             ->layout('layouts.public', [
                 'meta' => implode("\n", [
-                    '<title>Work — The Idea Grove Studio</title>',
-                    '<meta name="description" content="A curated selection of our work — brand identities, websites, and applications for organisations that take their craft seriously.">',
+                    '<title>'.__('layout.meta.work.title').'</title>',
+                    '<meta name="description" content="'.__('layout.meta.work.description').'">',
                 ]),
             ]);
     }

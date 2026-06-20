@@ -19,7 +19,7 @@ class ShowProject extends Component
         return view('livewire.show-project')
             ->layout('layouts.public', [
                 'meta' => implode("\n", [
-                    "<title>{$this->project->name} — The Idea Grove Studio</title>",
+                    '<title>'.__('layout.meta.project.title', ['project' => $this->project->name]).'</title>',
                     '<meta name="description" content="'.e(str($this->project->description)->limit(160)).'">',
                     '<meta property="og:title" content="'.e($this->project->name).'">',
                     '<meta property="og:description" content="'.e(str($this->project->description)->limit(160)).'">',

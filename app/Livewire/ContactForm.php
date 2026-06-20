@@ -31,8 +31,7 @@ class ContactForm extends Component
 
         Mail::raw("Name: {$this->name}\nEmail: {$this->email}\n\n{$this->message}", function ($mail) {
             $mail->to(SiteSetting::first()?->email ?? config('mail.from.address'))
-                ->from($this->email, $this->name)
-                ->subject('New enquiry from ideagrove.studio');
+                ->subject(__('contact.email.subject'));
         });
 
         $this->sent = true;

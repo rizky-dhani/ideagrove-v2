@@ -7,7 +7,7 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
                 </svg>
-                Back to work
+                {{ __('project.back') }}
             </a>
 
             <div class="text-left sm:text-right">
@@ -43,13 +43,13 @@
                     <div class="space-y-8 md:col-span-3 md:col-start-8 md:row-start-1">
                         @if ($project->client_name)
                             <div>
-                                <p class="mb-1 text-xs font-medium tracking-widest text-brand-light uppercase">Client</p>
+                                <p class="mb-1 text-xs font-medium tracking-widest text-brand-light uppercase">{{ __('project.client_label') }}</p>
                                 <p class="text-lg text-charcoal-soft">{{ $project->client_name }}</p>
                             </div>
                         @endif
 
                         <div>
-                            <p class="mb-1 text-xs font-medium tracking-widest text-brand-light uppercase">Project</p>
+                            <p class="mb-1 text-xs font-medium tracking-widest text-brand-light uppercase">{{ __('project.project_label') }}</p>
                             <p class="text-lg text-charcoal-soft">{{ $project->name }}</p>
                         </div>
 
@@ -57,7 +57,7 @@
                             <a href="{{ $project->web_url }}"
                                target="_blank" rel="noopener noreferrer"
                                class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-charcoal px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-charcoal-soft">
-                                Visit site
+                                {{ __('project.visit_site') }}
                                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                 </svg>
