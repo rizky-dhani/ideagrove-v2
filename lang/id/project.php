@@ -4,5 +4,5 @@ return [
     'back' => 'Kembali ke karya',
     'client_label' => 'Klien',
     'project_label' => 'Proyek',
-    'visit_site' => 'Kunjungi situs',
+    'visit_site' => 'Lihat situsnya',
 ];

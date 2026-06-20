@@ -4,11 +4,11 @@ return [
     'hero' => [
         'section_label' => '/karya',
         'heading' => 'Karya kami',
-        'subtitle' => 'Kurasi proyek yang telah kami selesaikan. Identitas merek, situs web, dan aplikasi untuk organisasi yang serius dalam karya mereka.',
+        'subtitle' => 'Karya pilihan yang udah selesai kami garap. Identitas merek, situs web, aplikasi — buat yang serius sama karyanya.',
     ],
     'controls' => [
-        'sort' => 'Urutkan',
-        'show' => 'Tampilkan',
+        'sort' => 'Urut',
+        'show' => 'Tampil',
         'sort_latest' => 'Terbaru',
         'sort_oldest' => 'Terlama',
         'sort_name_asc' => 'Nama A–Z',
@@ -18,7 +18,7 @@ return [
     ],
     'empty' => [
         'heading' => 'Belum ada proyek.',
-        'body' => 'Nanti lagi ya, atau :link.',
-        'return_home' => 'kembali ke beranda',
+        'body' => 'Bentar lagi, atau :link.',
+        'return_home' => 'balik ke beranda',
     ],
 ];
