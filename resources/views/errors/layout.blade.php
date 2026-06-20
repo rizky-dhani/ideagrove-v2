@@ -8,7 +8,7 @@
     <title>{{ $code }} — {{ config('app.name') }}</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/webp" href="{{ asset('assets/images/Logo_Square.webp') }}">
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         [x-cloak] { display: none !important; }
     </style>
