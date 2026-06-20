@@ -16,6 +16,7 @@
     <link rel="icon" type="image/webp" href="{{ asset('assets/images/Logo_Square.webp') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:outline-none">
@@ -33,9 +34,9 @@
             </a>
 
             {{-- Centered desktop nav --}}
-            <nav class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden items-center gap-6 text-sm font-medium text-charcoal-soft sm:flex">
-                <a href="{{ route('projects.index') }}" class="transition-colors hover:text-brand">Work</a>
-                <a href="/#contact" class="transition-colors hover:text-brand">Contact</a>
+            <nav class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden items-center gap-6 text-sm font-medium sm:flex">
+                <a href="{{ route('projects.index') }}" class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : 'text-charcoal-soft' }}">Work</a>
+                <a href="{{ route('contact') }}" class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : 'text-charcoal-soft' }}">Contact</a>
             </nav>
 
             {{-- Right controls: social links + dark toggle --}}
@@ -92,8 +93,8 @@
              @click.outside="open = false"
              class="border-t border-peach bg-warm-white px-6 pb-6 pt-4 sm:hidden">
             <div class="flex flex-col gap-4 text-base font-medium text-charcoal-soft">
-                <a href="{{ route('projects.index') }}" @click="open = false" class="transition-colors hover:text-brand">Work</a>
-                <a href="/#contact" @click="open = false" class="transition-colors hover:text-brand">Contact</a>
+                <a href="{{ route('projects.index') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : '' }}">Work</a>
+                <a href="{{ route('contact') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : '' }}">Contact</a>
                 @if ($socialLinks->isNotEmpty())
                     <div class="border-t border-peach-medium/40 pt-4 mt-1 flex flex-wrap gap-4">
                     @foreach ($socialLinks as $link)
@@ -133,7 +134,7 @@
                     <h4 class="text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">Links</h4>
                     <nav class="mt-4 flex flex-col gap-2">
                         <a href="{{ route('projects.index') }}" class="text-sm text-warm-gray transition-colors hover:text-brand">Work</a>
-                        <a href="/#contact" class="text-sm text-warm-gray transition-colors hover:text-brand">Contact</a>
+                        <a href="{{ route('contact') }}" class="text-sm text-warm-gray transition-colors hover:text-brand">Contact</a>
                     </nav>
                 </div>
 
@@ -148,6 +149,7 @@
                             </a>
                         @endif
                         @if ($siteSetting?->phone_display)
+                            <br>
                             <a href="tel:{{ $siteSetting->phone }}"
                                class="text-sm text-warm-gray transition-colors hover:text-brand">
                                 {{ $siteSetting->phone_display }}
@@ -187,6 +189,8 @@
     </footer>
 
     <x-back-to-top />
+    @livewireScripts
+    @livewireScriptConfig
 
 </body>
 </html>
