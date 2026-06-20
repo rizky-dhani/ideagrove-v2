@@ -14,10 +14,10 @@ class ContactPage extends Component
             'siteSetting' => SiteSetting::first(),
             'socialLinks' => SocialLink::orderBy('sort_order')->get(),
         ])->layout('layouts.public', [
-            'meta' => implode("\n", [
-                '<title>'.__('layout.meta.contact.title').'</title>',
-                '<meta name="description" content="'.__('layout.meta.contact.description').'">',
-            ]),
+            'seo' => [
+                'title' => __('layout.meta.contact.title'),
+                'description' => __('layout.meta.contact.description'),
+            ],
         ]);
     }
 }

@@ -48,10 +48,10 @@ class WorkPage extends Component
             'projects' => $projects,
         ])
             ->layout('layouts.public', [
-                'meta' => implode("\n", [
-                    '<title>'.__('layout.meta.work.title').'</title>',
-                    '<meta name="description" content="'.__('layout.meta.work.description').'">',
-                ]),
+                'seo' => [
+                    'title' => __('layout.meta.work.title'),
+                    'description' => __('layout.meta.work.description'),
+                ],
             ]);
     }
 }

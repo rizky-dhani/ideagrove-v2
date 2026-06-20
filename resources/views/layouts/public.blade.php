@@ -5,13 +5,59 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
+    {{-- SEO: canonical, hreflang, OG, JSON-LD --}}
+    @php
+        $segments = request()->segments();
+        $locale = app()->getLocale();
+        $otherLocale = $locale === 'en' ? 'id' : 'en';
+        $path = count($segments) > 1 ? '/' . implode('/', array_slice($segments, 1)) : '/';
+        $canonical = url('/' . $locale . $path);
+        $otherUrl = url('/' . $otherLocale . $path);
 
-    @if ($meta ?? false)
-        {!! $meta !!}
-    @else
-        <title>{{ config('app.name', __('layout.meta.home.title')) }}</title>
-        <meta name="description" content="{{ __('layout.meta.home.description') }}">
+        $seo = $seo ?? [];
+        $seoTitle = ($seo['title'] ?? null) ?: config('app.name');
+        $seoDescription = ($seo['description'] ?? null) ?: __('layout.meta.home.description');
+        $ogTitle = ($seo['og_title'] ?? null) ?: $seoTitle;
+        $ogDescription = ($seo['og_description'] ?? null) ?: $seoDescription;
+        $seoImage = $seo['og_image'] ?? null;
+    @endphp
+    <link rel="canonical" href="{{ $canonical }}">
+    <link rel="alternate" hreflang="en" href="{{ url('/en' . $path) }}">
+    <link rel="alternate" hreflang="id" href="{{ url('/id' . $path) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ url('/en' . $path) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+    <meta property="og:title" content="{{ $ogTitle }}">
+    <meta property="og:description" content="{{ $ogDescription }}">
+    @if ($seoImage)
+        <meta property="og:image" content="{{ $seoImage }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
     @endif
+    <meta name="twitter:card" content="{{ $seoImage ? 'summary_large_image' : 'summary' }}">
+    <meta name="twitter:title" content="{{ $ogTitle }}">
+    <meta name="twitter:description" content="{{ $ogDescription }}">
+    @if ($seoImage)
+        <meta name="twitter:image" content="{{ $seoImage }}">
+    @endif
+    <script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => config('app.name'),
+        'url' => config('app.url'),
+        'logo' => asset('assets/images/Logo_Landscape.webp'),
+        'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Bali',
+            'addressCountry' => 'ID',
+        ],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+    </script>
+
+    <title>{{ $seoTitle }}</title>
+    <meta name="description" content="{{ $seoDescription }}">
 
     <link rel="icon" type="image/webp" href="{{ asset('assets/images/Logo_Square.webp') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -73,7 +119,7 @@
                     </svg>
                 </button>
             </div>
-            <button @click="open = !open" class="sm:hidden flex size-10 items-center justify-center" aria-label="{{ __('layout.nav.toggle_menu') }}">
+            <button @click="open = !open" :aria-expanded="open" class="sm:hidden flex size-10 items-center justify-center" aria-label="{{ __('layout.nav.toggle_menu') }}">
                 <svg class="size-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!open">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>

@@ -20,6 +20,11 @@ class HomePage extends Component
     public function render()
     {
         return view('livewire.home-page')
-            ->layout('layouts.public');
+            ->layout('layouts.public', [
+                'seo' => [
+                    'title' => __('layout.meta.home.title'),
+                    'description' => __('layout.meta.home.description'),
+                ],
+            ]);
     }
 }

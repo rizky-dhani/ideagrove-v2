@@ -42,6 +42,11 @@ class Project extends Model
             : null;
     }
 
+    public function seoImageUrl(): ?string
+    {
+        return $this->image ? url('storage/'.$this->image) : null;
+    }
+
     public function excerpt(int $words = 50): string
     {
         return str($this->description)->words($words);
