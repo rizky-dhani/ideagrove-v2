@@ -13,7 +13,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
+<body class="flex min-h-screen flex-col bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
 @php
     $segments = request()->segments();
     $hasLocalePrefix = count($segments) > 0 && in_array($segments[0], ['en', 'id']);
@@ -72,7 +72,7 @@
         </nav>
     </header>
 
-    <main class="flex min-h-[60vh] items-center justify-center px-6 py-24">
+    <main class="flex flex-1 items-center justify-center px-6 py-24">
         <div class="text-center">
             <p class="font-mono text-7xl font-bold tracking-tight text-brand/20 dark:text-brand/30 sm:text-9xl">{{ $code }}</p>
             <h1 class="mt-6 font-serif text-3xl text-charcoal sm:text-4xl">{{ $title }}</h1>
