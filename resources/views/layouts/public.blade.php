@@ -141,8 +141,8 @@
         {{-- Mobile menu --}}
         <nav x-show="open"
              x-cloak
-                <a href="{{ route('projects.index') }}" @click="open = false" {{ request()->routeIs('projects.*') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : '' }}">{{ __('layout.nav.work') }}</a>
-                <a href="{{ route('contact') }}" @click="open = false" {{ request()->routeIs('contact') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : '' }}">{{ __('layout.nav.contact') }}</a>
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
              x-transition:enter-end="opacity-100 translate-y-0"
              x-transition:leave="transition ease-in duration-200"
              x-transition:leave-start="opacity-100 translate-y-0"
