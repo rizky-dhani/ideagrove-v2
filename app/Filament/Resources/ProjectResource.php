@@ -39,6 +39,11 @@ class ProjectResource extends Resource
                 Textarea::make('description')
                     ->nullable()
                     ->columnSpanFull(),
+                Textarea::make('meta_description')
+                    ->nullable()
+                    ->maxLength(500)
+                    ->helperText('Override default meta description (auto-generated from description if left empty).')
+                    ->columnSpanFull(),
                 TextInput::make('web_url')
                     ->label('URL')
                     ->url()

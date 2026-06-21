@@ -16,7 +16,7 @@ class ShowProject extends Component
 
     public function render()
     {
-        $description = str($this->project->description)->limit(160);
+        $description = $this->project->meta_description ?? str($this->project->description)->limit(160);
 
         return view('livewire.show-project')
             ->layout('layouts.public', [

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-#[Fillable(['name', 'slug', 'client_name', 'description', 'image', 'web_url'])]
+#[Fillable(['name', 'slug', 'client_name', 'description', 'meta_description', 'image', 'web_url'])]
 class Project extends Model
 {
     /** @use HasFactory<ProjectFactory> */
@@ -19,6 +19,12 @@ class Project extends Model
         static::creating(function (Project $project) {
             if (! $project->slug) {
                 $project->slug = Str::slug($project->name);
+            }
+
+            $slug = $project->slug;
+            $n = 1;
+            while (static::withoutGlobalScopes()->where('slug', $project->slug)->exists()) {
+                $project->slug = $slug.'-'.(++$n);
             }
         });
     }
