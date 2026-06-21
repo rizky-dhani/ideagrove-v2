@@ -53,6 +53,8 @@ class WorkPage extends Component
                     'description' => __('layout.meta.work.description'),
                     'og_image' => asset('assets/images/Logo_Landscape.webp'),
                 ],
+                'prevUrl' => $projects->previousPageUrl(),
+                'nextUrl' => $projects->nextPageUrl(),
             ]);
     }
 }
