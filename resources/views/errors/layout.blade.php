@@ -13,14 +13,14 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased dark:bg-charcoal dark:text-cream">
+<body class="bg-warm-white text-charcoal font-sans leading-relaxed antialiased">
 @php
     $segments = request()->segments();
-    $localeUrl = fn ($locale) => count($segments) > 0
-        ? url('/' . $locale . '/' . implode('/', array_slice($segments, 1)))
-        : url('/' . $locale);
+    $hasLocalePrefix = count($segments) > 0 && in_array($segments[0], ['en', 'id']);
+    $pathSegments = $hasLocalePrefix ? array_slice($segments, 1) : $segments;
+    $localeUrl = fn ($locale) => url('/' . $locale . '/' . implode('/', $pathSegments));
 @endphp
-    <header x-data="{ open: false }" class="sticky top-0 z-50 border-b border-peach bg-warm-white/90 backdrop-blur-md dark:border-charcoal-soft/20 dark:bg-charcoal/90">
+    <header x-data="{ open: false }" class="sticky top-0 z-50 border-b border-peach bg-warm-white/90 backdrop-blur-md">
         <div class="relative mx-auto flex max-w-6xl items-center justify-between px-6 sm:px-8 lg:px-12">
             {{-- Logo (left) --}}
             <a href="{{ url('/' . app()->getLocale()) }}" class="block max-w-64">
@@ -29,17 +29,17 @@
 
             {{-- Centered desktop nav --}}
             <nav class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden items-center gap-6 text-sm font-medium sm:flex">
-                <a href="{{ url('/' . app()->getLocale() . '/work') }}" class="text-charcoal-soft transition-colors hover:text-brand dark:text-cream/60 dark:hover:text-brand">{{ __('layout.nav.work') }}</a>
-                <a href="{{ url('/' . app()->getLocale() . '/contact') }}" class="text-charcoal-soft transition-colors hover:text-brand dark:text-cream/60 dark:hover:text-brand">{{ __('layout.nav.contact') }}</a>
+                <a href="{{ url('/' . app()->getLocale() . '/work') }}" class="text-charcoal-soft transition-colors hover:text-brand">{{ __('layout.nav.work') }}</a>
+                <a href="{{ url('/' . app()->getLocale() . '/contact') }}" class="text-charcoal-soft transition-colors hover:text-brand">{{ __('layout.nav.contact') }}</a>
             </nav>
 
             {{-- Right controls: locale + dark toggle --}}
             <div class="hidden items-center gap-4 sm:flex">
-                <div class="flex items-center gap-0.5 rounded-full border border-peach p-0.5 text-xs font-semibold tracking-wider uppercase dark:border-charcoal-soft/20">
+                <div class="flex items-center gap-0.5 rounded-full border border-peach p-0.5 text-xs font-semibold tracking-wider uppercase dark:border-charcoal">
                     <a href="{{ $localeUrl('en') }}" class="rounded-full px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'en' ? 'bg-brand text-white dark:bg-brand dark:text-white' : 'text-warm-gray hover:text-charcoal dark:hover:text-white' }}" aria-label="English">EN</a>
                     <a href="{{ $localeUrl('id') }}" class="rounded-full px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'id' ? 'bg-brand text-white dark:bg-brand dark:text-white' : 'text-warm-gray hover:text-charcoal dark:hover:text-white' }}" aria-label="Bahasa Indonesia">ID</a>
                 </div>
-                <button @click="dark = !dark" class="flex size-8 items-center justify-center rounded-full border border-peach transition-colors hover:bg-peach dark:border-charcoal-soft/20 dark:hover:bg-charcoal-soft/10" aria-label="{{ __('layout.nav.toggle_dark_mode') }}">
+                <button @click="dark = !dark" class="flex size-8 items-center justify-center rounded-full border border-peach transition-colors hover:bg-peach dark:border-charcoal dark:hover:bg-charcoal/10" aria-label="{{ __('layout.nav.toggle_dark_mode') }}">
                     <svg x-show="!dark" class="size-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
                     <svg x-show="dark" x-cloak class="size-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
                 </button>
@@ -59,10 +59,10 @@
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 -translate-y-2"
              @click.outside="open = false"
-             class="border-t border-peach bg-warm-white px-6 pb-6 pt-4 sm:hidden dark:border-charcoal-soft/20 dark:bg-charcoal">
-            <div class="flex flex-col gap-4 text-base font-medium text-charcoal-soft dark:text-cream/60">
-                <a href="{{ url('/' . app()->getLocale() . '/work') }}" @click="open = false" class="transition-colors hover:text-brand dark:hover:text-brand">{{ __('layout.nav.work') }}</a>
-                <a href="{{ url('/' . app()->getLocale() . '/contact') }}" @click="open = false" class="transition-colors hover:text-brand dark:hover:text-brand">{{ __('layout.nav.contact') }}</a>
+             class="border-t border-peach bg-warm-white px-6 pb-6 pt-4 sm:hidden">
+            <div class="flex flex-col gap-4 text-base font-medium text-charcoal-soft">
+                <a href="{{ url('/' . app()->getLocale() . '/work') }}" @click="open = false" class="transition-colors hover:text-brand">{{ __('layout.nav.work') }}</a>
+                <a href="{{ url('/' . app()->getLocale() . '/contact') }}" @click="open = false" class="transition-colors hover:text-brand">{{ __('layout.nav.contact') }}</a>
                 <div class="flex items-center gap-2 pt-2">
                     <a href="{{ $localeUrl('en') }}" @click="open = false" class="text-sm transition-colors {{ app()->getLocale() === 'en' ? 'text-brand font-medium' : 'text-warm-gray hover:text-brand' }}">EN</a>
                     <span class="text-warm-gray/30">/</span>
@@ -75,8 +75,8 @@
     <main class="flex min-h-[60vh] items-center justify-center px-6 py-24">
         <div class="text-center">
             <p class="font-mono text-7xl font-bold tracking-tight text-brand/20 dark:text-brand/30 sm:text-9xl">{{ $code }}</p>
-            <h1 class="mt-6 font-serif text-3xl text-charcoal sm:text-4xl dark:text-cream">{{ $title }}</h1>
-            <p class="mx-auto mt-4 max-w-md text-base leading-relaxed text-warm-gray dark:text-cream/50">{{ $description }}</p>
+            <h1 class="mt-6 font-serif text-3xl text-charcoal sm:text-4xl">{{ $title }}</h1>
+            <p class="mx-auto mt-4 max-w-md text-base leading-relaxed text-warm-gray">{{ $description }}</p>
             <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <a href="{{ url('/' . app()->getLocale()) }}"
                    class="inline-flex items-center gap-2 rounded-full bg-charcoal px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-brand-dark dark:bg-brand dark:text-white dark:hover:bg-brand-dark">
@@ -87,7 +87,7 @@
                 </a>
                 @if ($code === 404)
                     <a href="{{ url('/' . app()->getLocale() . '/work') }}"
-                       class="inline-flex items-center gap-2 rounded-full border border-peach px-6 py-3 text-sm font-medium text-charcoal-soft transition-colors hover:bg-peach/50 dark:border-charcoal-soft/20 dark:text-cream/60 dark:hover:bg-charcoal-soft/10">
+                       class="inline-flex items-center gap-2 rounded-full border border-peach px-6 py-3 text-sm font-medium text-charcoal-soft transition-colors hover:bg-peach/50">
                         {{ __('layout.nav.work') }}
                     </a>
                 @endif
@@ -95,9 +95,9 @@
         </div>
     </main>
 
-    <footer class="border-t border-peach bg-cream dark:border-charcoal-soft/20 dark:bg-charcoal">
+    <footer class="border-t border-peach bg-cream">
         <div class="mx-auto max-w-6xl px-6 py-6 sm:px-8 lg:px-12">
-            <p class="text-center text-sm text-warm-gray dark:text-cream/40">© {{ date('Y') }} {{ config('app.name') }}. {{ app()->getLocale() === 'id' ? 'Berakar di Bali.' : 'Rooted in Bali.' }}</p>
+            <p class="text-center text-sm text-warm-gray">© {{ date('Y') }} {{ config('app.name') }}. {{ app()->getLocale() === 'id' ? 'Berakar di Bali.' : 'Rooted in Bali.' }}</p>
         </div>
     </footer>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
