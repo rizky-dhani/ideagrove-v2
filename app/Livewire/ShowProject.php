@@ -3,9 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Project;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Livewire\Component;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ShowProject extends Component
 {
@@ -13,20 +11,11 @@ class ShowProject extends Component
 
     public function mount(Project $project): void
     {
-        // Serve static file for projects with local web_url
-        if ($project->web_url && str_starts_with($project->web_url, '/')) {
-            throw new HttpResponseException(new RedirectResponse($project->web_url));
-        }
-
         $this->project = $project;
     }
 
     public function render()
     {
-        if (! isset($this->project)) {
-            return view('components.empty');
-        }
-
         $description = $this->project->meta_description ?? str($this->project->description)->limit(160);
 
         return view('livewire.show-project')
