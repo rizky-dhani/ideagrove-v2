@@ -23,6 +23,10 @@ Route::prefix('{locale}')
         Route::get('/work/sports-shop/products', fn () => view('portfolio.sports-shop.products', ['title' => 'STRIDE | All Products']));
         Route::get('/work/sports-shop/about', fn () => view('portfolio.sports-shop.about', ['title' => 'STRIDE | About']));
         Route::get('/work/sports-shop/contact', fn () => view('portfolio.sports-shop.contact', ['title' => 'STRIDE | Contact']));
+        Route::get('/work/gadget-shop', fn () => view('portfolio.gadget-shop.home', ['title' => 'PULSE | Premium Tech Devices']));
+        Route::get('/work/gadget-shop/products', fn () => view('portfolio.gadget-shop.products', ['title' => 'PULSE | All Products']));
+        Route::get('/work/gadget-shop/about', fn () => view('portfolio.gadget-shop.about', ['title' => 'PULSE | About']));
+        Route::get('/work/gadget-shop/contact', fn () => view('portfolio.gadget-shop.contact', ['title' => 'PULSE | Contact']));
         Route::get('/work/{project}', ShowProject::class)->name('projects.show');
     });
 

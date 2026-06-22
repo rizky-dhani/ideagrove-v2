@@ -35,6 +35,14 @@ class ProjectSeeder extends Seeder
                 'description' => 'A premium sports apparel e-commerce brand built for athletes who don\'t compromise. The site spans four pages — a full-bleed hero landing with asymmetric collection bento, an alternating editorial product showcase, an about page with brand story and team bios, and a clean contact form. Built with a light bone palette, forest green accent, Clash Display typography, and scroll-reveal motion. Every product line (Running, Training, Lifestyle, Recovery) gets its own category with curated photography. Tested on real roads, designed without shortcuts.',
                 'web_url' => '/en/work/sports-shop',
             ],
+            [
+                'name' => 'PULSE',
+                'client_name' => 'PULSE Gadgets',
+                'slug' => 'gadget-shop',
+                'description' => 'A premium consumer electronics e-commerce brand for tech-conscious buyers. The site spans four pages: a product-led hero landing with asymmetric category bento, an Alpine.js filtered product catalog with 12 devices across smartphones, tablets, laptops, and accessories, an editorial about page with brand story and values, and a clean contact form. Built with a white/frost palette, steel blue accent (#2563EB), Inter typography, and scroll-reveal motion. Apple-inspired product photography-first layouts with generous white space and spec-forward cards.',
+                'web_url' => '/en/work/gadget-shop',
+                'image' => 'projects/gadget-shop.png',
+            ],
         ];
 
         foreach ($projects as $data) {
