@@ -210,7 +210,7 @@
         <div class="product-card reveal" :class="active !== 'all' && active !== 'tablets' ? 'hidden' : ''">
           <div class="rounded-2xl overflow-hidden bg-mist">
             <div class="aspect-[4/3] img-lift">
-              <img src="https://images.unsplash.com/photo-1632882765546-31b8c0d0d6d3?w=500&q=80&auto=format&fit=crop" alt="Galaxy Tab S10" class="w-full h-full object-cover" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?w=500&q=80&auto=format&fit=crop" alt="Galaxy Tab S10" class="w-full h-full object-cover" loading="lazy">
             </div>
           </div>
           <div class="mt-4">
@@ -309,7 +309,7 @@
         <div class="product-card reveal" :class="active !== 'all' && active !== 'accessories' ? 'hidden' : ''">
           <div class="rounded-2xl overflow-hidden bg-mist">
             <div class="aspect-[4/3] img-lift">
-              <img src="https://images.unsplash.com/photo-1590658268037-6bf12f032f55?w=500&q=80&auto=format&fit=crop" alt="Apple Watch Ultra 3" class="w-full h-full object-cover" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80&auto=format&fit=crop" alt="Apple Watch Ultra 3" class="w-full h-full object-cover" loading="lazy">
             </div>
           </div>
           <div class="mt-4">
