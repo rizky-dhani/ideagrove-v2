@@ -18,7 +18,8 @@
                     <label for="sort" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">{{ __('work.controls.sort') }}</label>
                     <select id="sort"
                             wire:model.live="sort"
-                            class="rounded-lg border border-peach bg-warm-white px-4 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
+                            class="appearance-none rounded-lg border border-peach bg-warm-white bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat px-4 py-2 pr-10 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30"
+                            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239ca3af'%3E%3Cpath fill-rule='evenodd' d='M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E&quot;);">
                         <option value="latest">{{ __('work.controls.sort_latest') }}</option>
                         <option value="oldest">{{ __('work.controls.sort_oldest') }}</option>
                         <option value="name_asc">{{ __('work.controls.sort_name_asc') }}</option>
@@ -31,7 +32,8 @@
                     <label for="perPage" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">{{ __('work.controls.show') }}</label>
                     <select id="perPage"
                             wire:model.live="perPage"
-                            class="rounded-lg border border-peach bg-warm-white px-4 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
+                            class="appearance-none rounded-lg border border-peach bg-warm-white bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat px-4 py-2 pr-10 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30"
+                            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239ca3af'%3E%3Cpath fill-rule='evenodd' d='M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E&quot;);">
                         <option value="12">12</option>
                         <option value="24">24</option>
                         <option value="48">48</option>
