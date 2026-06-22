@@ -38,10 +38,9 @@ class ProjectSeeder extends Seeder
         ];
 
         foreach ($projects as $data) {
-            Project::firstOrCreate(
-                ['slug' => $data['slug']],
-                $data,
-            );
+            if (! Project::where('slug', $data['slug'])->exists()) {
+                Project::create($data);
+            }
         }
     }
 }
