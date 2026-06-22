@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Project;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Livewire\Component;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ShowProject extends Component
 {
@@ -14,7 +15,7 @@ class ShowProject extends Component
     {
         // Serve static file for projects with local web_url
         if ($project->web_url && str_starts_with($project->web_url, '/')) {
-            throw new HttpResponseException(redirect($project->web_url));
+            throw new HttpResponseException(new RedirectResponse($project->web_url));
         }
 
         $this->project = $project;
