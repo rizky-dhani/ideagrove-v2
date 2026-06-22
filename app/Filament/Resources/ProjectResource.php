@@ -46,8 +46,8 @@ class ProjectResource extends Resource
                     ->columnSpanFull(),
                 TextInput::make('web_url')
                     ->label('URL')
-                    ->url()
-                    ->maxLength(255)
+                    ->rules(['nullable', 'max:255'])
+                    ->helperText('External URL (https://...) or local path (e.g. /portfolio/barberhome.html)')
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image()

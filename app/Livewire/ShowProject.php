@@ -11,11 +11,22 @@ class ShowProject extends Component
 
     public function mount(Project $project): void
     {
+        // Serve static file for projects with local web_url
+        if ($project->web_url && str_starts_with($project->web_url, '/')) {
+            redirect($project->web_url)->send();
+
+            return;
+        }
+
         $this->project = $project;
     }
 
     public function render()
     {
+        if (! isset($this->project)) {
+            return view('components.empty');
+        }
+
         $description = $this->project->meta_description ?? str($this->project->description)->limit(160);
 
         return view('livewire.show-project')
