@@ -19,6 +19,7 @@ Route::prefix('{locale}')
         Route::get('/work', WorkPage::class)->name('projects.index');
         Route::get('/contact', ContactPage::class)->name('contact');
         Route::get('/work/{project}', ShowProject::class)->name('projects.show');
+        Route::get('/work/barberhome', fn () => response()->file(public_path('portfolio/barberhome.html')));
     });
 
 // SEO: XML Sitemap

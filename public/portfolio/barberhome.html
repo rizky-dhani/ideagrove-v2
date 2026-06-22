@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLK &amp; GOLD | Barbershop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Clash Display"', 'sans-serif'],
+            body: ['Satoshi', 'sans-serif'],
+          },
+          colors: {
+            surface: {
+              950: '#0a0a0a',
+              900: '#111111',
+              800: '#1a1a1a',
+              700: '#242424',
+            },
+            gold: {
+              400: '#d4a853',
+              500: '#c9952e',
+              600: '#b8841a',
+            },
+            cream: '#f5f0e8',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: 'Satoshi', sans-serif; }
+    .font-display { font-family: 'Clash Display', sans-serif; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Stagger children */
+    .stagger-children .reveal:nth-child(1) { transition-delay: 0s; }
+    .stagger-children .reveal:nth-child(2) { transition-delay: 0.08s; }
+    .stagger-children .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .stagger-children .reveal:nth-child(4) { transition-delay: 0.24s; }
+    .stagger-children .reveal:nth-child(5) { transition-delay: 0.32s; }
+
+    /* Button hover physics */
+    .btn-gold {
+      transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 149, 46, 0.25);
+    }
+    .btn-gold:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Ghost button */
+    .btn-ghost {
+      transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    /* Image hover */
+    .img-zoom {
+      overflow: hidden;
+    }
+    .img-zoom img {
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .img-zoom:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Grain overlay */
+    .grain::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* Service card double-bezel */
+    .service-card {
+      position: relative;
+      border-radius: 1.25rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 2px;
+    }
+    .service-card-inner {
+      border-radius: calc(1.25rem - 2px);
+      background: #111111;
+      padding: 2rem;
+      height: 100%;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* Nav pill */
+    .nav-pill {
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(10, 10, 10, 0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Horizontal rule accent */
+    .hr-gold {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c9952e, transparent);
+      border: none;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-surface-950 text-gray-300 font-body grain">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 pt-5 md:pt-6">
+    <div class="nav-pill rounded-full px-6 py-3 flex items-center gap-8">
+      <a href="#" class="font-display font-semibold text-white text-sm tracking-wide">BLK &amp; GOLD</a>
+      <div class="hidden md:flex items-center gap-6 text-[13px] text-gray-400">
+        <a href="#services" class="hover:text-white transition-colors duration-300">Services</a>
+        <a href="#gallery" class="hover:text-white transition-colors duration-300">Gallery</a>
+        <a href="#about" class="hover:text-white transition-colors duration-300">Story</a>
+        <a href="#contact" class="hover:text-white transition-colors duration-300">Find Us</a>
+      </div>
+      <a href="#contact" class="btn-gold bg-gold-500 text-surface-950 text-[13px] font-semibold px-5 py-2 rounded-full inline-block">
+        Book Now
+      </a>
+      <!-- Mobile menu button -->
+      <button id="menu-btn" class="md:hidden text-white ml-2" aria-label="Toggle menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <line x1="2" y1="5" x2="18" y2="5" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="2" y1="15" x2="18" y2="15" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-50 bg-surface-950/95 backdrop-blur-3xl hidden flex-col items-center justify-center gap-8 text-2xl font-display text-white">
+    <button id="menu-close" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+    <a href="#services" class="mobile-link hover:text-gold-400 transition-colors">Services</a>
+    <a href="#gallery" class="mobile-link hover:text-gold-400 transition-colors">Gallery</a>
+    <a href="#about" class="mobile-link hover:text-gold-400 transition-colors">Story</a>
+    <a href="#contact" class="mobile-link hover:text-gold-400 transition-colors">Find Us</a>
+    <a href="#contact" class="btn-gold bg-gold-500 text-surface-950 font-semibold px-8 py-3 rounded-full mt-4 mobile-link">Book Now</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="min-h-[100dvh] flex items-center relative overflow-hidden">
+    <!-- Background ambient glow -->
+    <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gold-500/5 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gold-600/3 blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-[1400px] mx-auto w-full px-6 md:px-12 pt-28 pb-16 md:pt-32 md:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-6 items-center">
+      <!-- Text side -->
+      <div class="lg:col-span-6 xl:col-span-5">
+        <div class="reveal">
+          <span class="inline-block text-[11px] uppercase tracking-[0.2em] text-gold-400 font-medium mb-6">Est. 2019 &mdash; Brooklyn, NY</span>
+        </div>
+        <h1 class="font-display font-bold text-white text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-tight mb-6 reveal reveal-delay-1">
+          Where craft<br>meets precision
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-[42ch] mb-10 reveal reveal-delay-2">
+          Sharp cuts. Clean lines. No shortcuts. Every chair, every fade, every detail done with intention.
+        </p>
+        <div class="flex flex-wrap gap-4 reveal reveal-delay-3">
+          <a href="#contact" class="btn-gold bg-gold-500 text-surface-950 font-semibold px-7 py-3.5 rounded-full text-sm inline-flex items-center gap-2">
+            Reserve a Chair
+            <span class="w-7 h-7 rounded-full bg-surface-950/10 flex items-center justify-center text-xs">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+          <a href="#services" class="btn-ghost border border-white/15 text-white font-medium px-7 py-3.5 rounded-full text-sm">
+            View Services
+          </a>
+        </div>
+      </div>
+
+      <!-- Image side -->
+      <div class="lg:col-span-6 xl:col-span-7 relative reveal reveal-delay-2">
+        <div class="relative rounded-[1.5rem] overflow-hidden aspect-[4/3] lg:aspect-[16/11]">
+          <img
+            src="https://images.unsplash.com/photo-1610475680335-dafab5475150?w=1200&q=80&auto=format&fit=crop"
+            alt="BLK and GOLD barbershop interior with warm lighting and leather chairs"
+            class="w-full h-full object-cover"
+            loading="eager"
+          >
+          <!-- Inner frame highlight -->
+          <div class="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+        </div>
+        <!-- Floating stat card -->
+        <div class="absolute -bottom-4 -left-4 md:bottom-8 md:-left-6 bg-surface-800 border border-white/8 rounded-2xl px-5 py-4 shadow-2xl">
+          <div class="font-display font-bold text-3xl text-white">2,400+</div>
+          <div class="text-gray-500 text-xs mt-1">cuts delivered this year</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee strip -->
+  <div class="border-y border-white/5 py-4 overflow-hidden">
+    <div class="flex gap-12 animate-marquee whitespace-nowrap text-[11px] uppercase tracking-[0.25em] text-gray-600 font-medium">
+      <span>Fade</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Taper</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Beard Sculpt</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Hot Towel Shave</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Razor Line-Up</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Skin Fade</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Fade</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Taper</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Beard Sculpt</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Hot Towel Shave</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Razor Line-Up</span><span class="text-gold-500/40">&#x2022;</span>
+      <span>Skin Fade</span>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section id="services" class="py-24 md:py-36">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+      <div class="max-w-2xl mb-16 md:mb-20">
+        <h2 class="font-display font-bold text-white text-3xl md:text-5xl tracking-tight leading-[1.1] reveal">
+          What we do
+        </h2>
+        <p class="text-gray-500 mt-4 text-base md:text-lg max-w-[50ch] reveal reveal-delay-1">
+          Every service is a fixed price, no surprises. Walk in or book ahead.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 stagger-children">
+        <!-- Service 1 -->
+        <div class="service-card reveal">
+          <div class="service-card-inner flex flex-col h-full">
+            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mb-5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9952e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18"/><path d="M18 3v18"/><path d="M6 8h12"/></svg>
+            </div>
+            <h3 class="font-display font-semibold text-white text-lg mb-2">Classic Cut</h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-1">Precision cut with clipper and scissor work. Wash included. 45 minutes of focused attention.</p>
+            <div class="mt-6 flex items-end justify-between">
+              <span class="font-display font-bold text-white text-2xl">$45</span>
+              <span class="text-gray-600 text-xs uppercase tracking-wider">45 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card reveal">
+          <div class="service-card-inner flex flex-col h-full">
+            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mb-5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9952e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </div>
+            <h3 class="font-display font-semibold text-white text-lg mb-2">Skin Fade</h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-1">Bald fade with seamless blend. Razor edge-up on neckline and temples. Sharp, clean, done right.</p>
+            <div class="mt-6 flex items-end justify-between">
+              <span class="font-display font-bold text-white text-2xl">$55</span>
+              <span class="text-gray-600 text-xs uppercase tracking-wider">50 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card reveal">
+          <div class="service-card-inner flex flex-col h-full">
+            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mb-5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9952e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3 class="font-display font-semibold text-white text-lg mb-2">Beard Sculpt</h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-1">Shape, trim, and detail your beard. Hot towel treatment, straight-edge finish, beard oil applied.</p>
+            <div class="mt-6 flex items-end justify-between">
+              <span class="font-display font-bold text-white text-2xl">$40</span>
+              <span class="text-gray-600 text-xs uppercase tracking-wider">35 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card reveal">
+          <div class="service-card-inner flex flex-col h-full">
+            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mb-5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9952e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+            </div>
+            <h3 class="font-display font-semibold text-white text-lg mb-2">Hot Towel Shave</h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-1">Straight-razor shave with hot towel prep. Clove oil finish. The kind of shave your grandfather got.</p>
+            <div class="mt-6 flex items-end justify-between">
+              <span class="font-display font-bold text-white text-2xl">$50</span>
+              <span class="text-gray-600 text-xs uppercase tracking-wider">40 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card reveal">
+          <div class="service-card-inner flex flex-col h-full">
+            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mb-5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9952e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            <h3 class="font-display font-semibold text-white text-lg mb-2">The Full Package</h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-1">Cut, fade, beard, shave, hot towel, the works. Our most popular service for a reason. 90 minutes.</p>
+            <div class="mt-6 flex items-end justify-between">
+              <span class="font-display font-bold text-white text-2xl">$85</span>
+              <span class="text-gray-600 text-xs uppercase tracking-wider">90 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 6 - Promo card -->
+        <div class="reveal">
+          <div class="rounded-2xl bg-gradient-to-br from-gold-500/10 to-gold-600/5 border border-gold-500/10 p-8 flex flex-col justify-between h-full min-h-[260px]">
+            <div>
+              <span class="text-gold-400 text-[11px] uppercase tracking-[0.18em] font-medium">New clients</span>
+              <h3 class="font-display font-bold text-white text-2xl mt-3 leading-tight">First cut<br>20% off</h3>
+            </div>
+            <a href="#contact" class="btn-gold bg-gold-500 text-surface-950 font-semibold px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2 w-fit mt-6">
+              Book your first
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-24 md:py-36">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16 md:mb-20">
+        <h2 class="font-display font-bold text-white text-3xl md:text-5xl tracking-tight leading-[1.1] reveal">
+          Recent work
+        </h2>
+        <a href="#" class="text-gold-400 text-sm font-medium flex items-center gap-2 hover:text-gold-300 transition-colors reveal reveal-delay-1">
+          See all on Instagram
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Bento grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 stagger-children">
+        <div class="col-span-2 row-span-2 img-zoom rounded-2xl reveal">
+          <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800&q=80&auto=format&fit=crop" alt="Fresh skin fade with razor line-up" class="w-full h-full object-cover rounded-2xl aspect-square" loading="lazy">
+        </div>
+        <div class="img-zoom rounded-2xl reveal">
+          <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&q=80&auto=format&fit=crop" alt="Beard sculpt with hot towel" class="w-full h-full object-cover rounded-2xl aspect-square" loading="lazy">
+        </div>
+        <div class="img-zoom rounded-2xl reveal">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&q=80&auto=format&fit=crop" alt="Barber tools laid out on counter" class="w-full h-full object-cover rounded-2xl aspect-square" loading="lazy">
+        </div>
+        <div class="img-zoom rounded-2xl reveal">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&q=80&auto=format&fit=crop" alt="Taper fade with textured top" class="w-full h-full object-cover rounded-2xl aspect-square" loading="lazy">
+        </div>
+        <div class="img-zoom rounded-2xl reveal">
+          <img src="https://images.unsplash.com/photo-1532710093739-9470acff878f?w=400&q=80&auto=format&fit=crop" alt="Hot towel straight-razor shave" class="w-full h-full object-cover rounded-2xl aspect-square" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Story -->
+  <section id="about" class="py-24 md:py-36 border-t border-white/5">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Image -->
+      <div class="lg:col-span-5 reveal">
+        <div class="rounded-[1.5rem] overflow-hidden aspect-[3/4] relative">
+          <img
+            src="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?w=600&q=80&auto=format&fit=crop"
+            alt="Founders Marcus and Dev inside the shop"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          >
+          <div class="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="lg:col-span-7">
+        <span class="inline-block text-[11px] uppercase tracking-[0.2em] text-gold-400 font-medium mb-6 reveal">Our story</span>
+        <h2 class="font-display font-bold text-white text-3xl md:text-5xl tracking-tight leading-[1.1] mb-8 reveal reveal-delay-1">
+          Built by barbers,<br>not investors
+        </h2>
+        <div class="space-y-5 text-gray-400 leading-relaxed max-w-[55ch]">
+          <p class="reveal reveal-delay-2">
+            BLK &amp; GOLD started in 2019 when two friends pooled their savings and a stubborn refusal to compromise. Marcus had 12 years behind the chair. Dev had the eye for space and atmosphere.
+          </p>
+          <p class="reveal reveal-delay-3">
+            We built the shop we wanted to work in. Good light, honest products, music that doesn't grate. No franchise playbook, no upsell. Just the craft, done well, every time.
+          </p>
+        </div>
+        <!-- Stats row -->
+        <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/5 reveal reveal-delay-4">
+          <div>
+            <div class="font-display font-bold text-white text-3xl">6</div>
+            <div class="text-gray-600 text-xs mt-1">years open</div>
+          </div>
+          <div>
+            <div class="font-display font-bold text-white text-3xl">3</div>
+            <div class="text-gray-600 text-xs mt-1">barbers on staff</div>
+          </div>
+          <div>
+            <div class="font-display font-bold text-white text-3xl">4.9</div>
+            <div class="text-gray-600 text-xs mt-1">Google rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="py-24 md:py-36 border-t border-white/5">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+      <div class="max-w-3xl mx-auto text-center reveal">
+        <svg class="mx-auto mb-8 text-gold-500/20" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M14 28c-4 0-6-3-6-6s3-6 6-6c-3 0-6-3-6-6h12v18H14zm20 0c-4 0-6-3-6-6s3-6 6-6c-3 0-6-3-6-6h12v18H34z" fill="currentColor"/>
+        </svg>
+        <blockquote class="font-display text-white text-xl md:text-3xl leading-snug tracking-tight mb-8">
+          "I've been going to barbershops for 30 years. This is the first one that actually feels like it's mine."
+        </blockquote>
+        <div class="flex items-center justify-center gap-3">
+          <div class="w-10 h-10 rounded-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&q=80&auto=format&fit=crop" alt="James R." class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="text-left">
+            <div class="text-white text-sm font-medium">James R.</div>
+            <div class="text-gray-600 text-xs">Regular since 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours & Contact -->
+  <section id="contact" class="py-24 md:py-36 border-t border-white/5">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <!-- Left: Info -->
+      <div class="lg:col-span-5">
+        <h2 class="font-display font-bold text-white text-3xl md:text-5xl tracking-tight leading-[1.1] mb-8 reveal">
+          Find us
+        </h2>
+        <div class="space-y-6">
+          <div class="reveal">
+            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Address</div>
+            <p class="text-white text-base">247 Atlantic Ave<br>Brooklyn, NY 11201</p>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Phone</div>
+            <a href="tel:+17185551234" class="text-white text-base hover:text-gold-400 transition-colors">(718) 555-1234</a>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Instagram</div>
+            <a href="#" class="text-white text-base hover:text-gold-400 transition-colors">@blkandgold.bk</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Hours -->
+      <div class="lg:col-span-7 lg:col-start-7">
+        <h3 class="font-display font-bold text-white text-xl mb-8 reveal">Hours</h3>
+        <div class="space-y-0">
+          <div class="flex justify-between items-center py-4 border-b border-white/5 reveal">
+            <span class="text-gray-300 text-sm">Monday - Friday</span>
+            <span class="text-white font-medium text-sm">9:00 AM - 7:00 PM</span>
+          </div>
+          <div class="flex justify-between items-center py-4 border-b border-white/5 reveal reveal-delay-1">
+            <span class="text-gray-300 text-sm">Saturday</span>
+            <span class="text-white font-medium text-sm">8:00 AM - 6:00 PM</span>
+          </div>
+          <div class="flex justify-between items-center py-4 border-b border-white/5 reveal reveal-delay-2">
+            <span class="text-gray-300 text-sm">Sunday</span>
+            <span class="text-white font-medium text-sm">10:00 AM - 4:00 PM</span>
+          </div>
+        </div>
+        <p class="text-gray-600 text-xs mt-6 reveal reveal-delay-3">Walk-ins welcome. Booking recommended for weekends.</p>
+
+        <a href="#" class="btn-gold bg-gold-500 text-surface-950 font-semibold px-8 py-3.5 rounded-full text-sm inline-flex items-center gap-2 mt-10 reveal reveal-delay-3">
+          Book Online
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-10">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="font-display font-semibold text-white text-sm tracking-wide">BLK &amp; GOLD</div>
+      <div class="text-gray-600 text-xs">&copy; 2025 BLK &amp; GOLD Barbershop. Brooklyn, NY.</div>
+    </div>
+  </footer>
+
+  <!-- Script: scroll reveal + mobile menu -->
+  <script>
+    // IntersectionObserver for scroll reveals
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.add('flex');
+    });
+
+    menuClose.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('flex');
+    });
+
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+
+    // Marquee animation via CSS (add keyframes)
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 20s linear infinite;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+</body>
+</html>
