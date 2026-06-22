@@ -18,7 +18,7 @@
                     <label for="sort" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">{{ __('work.controls.sort') }}</label>
                     <select id="sort"
                             wire:model.live="sort"
-                            class="rounded-lg border border-peach bg-warm-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
+                            class="rounded-lg border border-peach bg-warm-white px-4 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
                         <option value="latest">{{ __('work.controls.sort_latest') }}</option>
                         <option value="oldest">{{ __('work.controls.sort_oldest') }}</option>
                         <option value="name_asc">{{ __('work.controls.sort_name_asc') }}</option>
@@ -31,7 +31,7 @@
                     <label for="perPage" class="text-xs font-medium tracking-[0.1em] text-warm-gray uppercase">{{ __('work.controls.show') }}</label>
                     <select id="perPage"
                             wire:model.live="perPage"
-                            class="rounded-lg border border-peach bg-warm-white px-3 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
+                            class="rounded-lg border border-peach bg-warm-white px-4 py-2 text-sm text-charcoal focus:border-brand focus:ring-1 focus:ring-brand/30">
                         <option value="12">12</option>
                         <option value="24">24</option>
                         <option value="48">48</option>
