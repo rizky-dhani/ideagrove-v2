@@ -19,6 +19,10 @@ Route::prefix('{locale}')
         Route::get('/work', WorkPage::class)->name('projects.index');
         Route::get('/contact', ContactPage::class)->name('contact');
         Route::get('/work/barbershop', fn () => view('portfolio.barbershop', ['title' => 'BLK & GOLD Barbershop | IdeaGrove']));
+        Route::get('/work/sports-shop', fn () => view('portfolio.sports-shop.home', ['title' => 'STRIDE | Athletic Performance Gear']));
+        Route::get('/work/sports-shop/products', fn () => view('portfolio.sports-shop.products', ['title' => 'STRIDE | All Products']));
+        Route::get('/work/sports-shop/about', fn () => view('portfolio.sports-shop.about', ['title' => 'STRIDE | About']));
+        Route::get('/work/sports-shop/contact', fn () => view('portfolio.sports-shop.contact', ['title' => 'STRIDE | Contact']));
         Route::get('/work/{project}', ShowProject::class)->name('projects.show');
     });
 
