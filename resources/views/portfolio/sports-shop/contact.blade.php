@@ -17,16 +17,16 @@
             body: ['Satoshi', 'sans-serif'],
           },
           colors: {
-            surface: {
-              950: '#0a0a0a',
-              900: '#111111',
-              800: '#1a1a1a',
-              700: '#242424',
-            },
-            flame: {
-              400: '#FF6B35',
-              500: '#FF4500',
-              600: '#E03C00',
+            bone: '#FAFAF8',
+            mist: '#F0F0EC',
+            ink: '#1A1A1A',
+            sage: {
+              50: '#E8F0EB',
+              100: '#D1E1D6',
+              500: '#2D6A4F',
+              700: '#1B4332',
+              800: '#143328',
+              900: '#0D2219',
             },
           },
         },
@@ -39,242 +39,167 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
 
-    .btn-flame {
-      transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    .btn-flame:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(255, 69, 0, 0.25);
-    }
-    .btn-flame:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    .btn-ghost {
-      transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.3);
-    }
-
-    .grain::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      pointer-events: none;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-    }
-
-    .nav-pill {
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      background: rgba(10, 10, 10, 0.7);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* Form inputs */
     .form-input {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: white;
+      border: 1px solid rgba(26,26,26,0.1);
       border-radius: 0.75rem;
       padding: 0.875rem 1rem;
-      color: white;
+      color: #1A1A1A;
       font-size: 0.875rem;
       width: 100%;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
       outline: none;
     }
-    .form-input::placeholder {
-      color: #525252;
-    }
+    .form-input::placeholder { color: #999; }
     .form-input:focus {
-      border-color: #FF4500;
-      box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.1);
+      border-color: #2D6A4F;
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.08);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
-<body class="bg-surface-950 text-gray-300 font-body grain">
+<body class="bg-bone text-ink font-body">
 
   <!-- Nav -->
-  <nav class="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 pt-5 md:pt-6">
-    <div class="nav-pill rounded-full px-6 py-3 flex items-center gap-8">
-      <a href="{{ url('/en/work/sports-shop') }}" class="font-display font-bold text-white text-sm tracking-wider uppercase">STRIDE</a>
-      <div class="hidden md:flex items-center gap-6 text-[13px] text-gray-400">
-        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-white transition-colors duration-300">Home</a>
-        <a href="{{ url('/en/work/sports-shop/products') }}" class="hover:text-white transition-colors duration-300">Products</a>
-        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-white transition-colors duration-300">About</a>
-        <a href="{{ url('/en/work/sports-shop/contact') }}" class="text-white transition-colors duration-300">Contact</a>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-bone/80 backdrop-blur-md border-b border-ink/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 h-16 md:h-18">
+      <a href="{{ url('/en/work/sports-shop') }}" class="font-display font-bold text-ink text-lg tracking-tight">STRIDE</a>
+      <nav class="hidden md:flex items-center gap-8 text-[13px] font-medium text-ink/50">
+        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-ink transition-colors">Home</a>
+        <a href="{{ url('/en/work/sports-shop/products') }}" class="hover:text-ink transition-colors">Products</a>
+        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-ink transition-colors">About</a>
+        <a href="{{ url('/en/work/sports-shop/contact') }}" class="text-ink transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="{{ url('/en/work/sports-shop/products') }}" class="hidden sm:inline-flex items-center gap-2 bg-sage-700 text-white text-[13px] font-semibold px-5 py-2.5 rounded-full hover:bg-sage-800 transition-colors">Shop</a>
+        <button id="menu-btn" class="md:hidden text-ink" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
       </div>
-      <a href="{{ url('/en/work/sports-shop/products') }}" class="btn-flame bg-flame-500 text-white text-[13px] font-semibold px-5 py-2 rounded-full inline-block">
-        Shop Now
-      </a>
-      <button id="menu-btn" class="md:hidden text-white ml-2" aria-label="Toggle menu">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <line x1="2" y1="5" x2="18" y2="5" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="2" y1="15" x2="18" y2="15" stroke="currentColor" stroke-width="1.5"/>
-        </svg>
-      </button>
     </div>
-  </nav>
+  </header>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="fixed inset-0 z-50 bg-surface-950/95 backdrop-blur-3xl hidden flex-col items-center justify-center gap-8 text-2xl font-display text-white">
-    <button id="menu-close" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors" aria-label="Close menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5"/>
-        <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5"/>
-      </svg>
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bone hidden flex-col pt-20 px-8">
+    <button id="menu-close" class="absolute top-5 right-6 text-ink" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
-    <a href="{{ url('/en/work/sports-shop') }}" class="mobile-link hover:text-flame-400 transition-colors">Home</a>
-    <a href="{{ url('/en/work/sports-shop/products') }}" class="mobile-link hover:text-flame-400 transition-colors">Products</a>
-    <a href="{{ url('/en/work/sports-shop/about') }}" class="mobile-link hover:text-flame-400 transition-colors">About</a>
-    <a href="{{ url('/en/work/sports-shop/contact') }}" class="mobile-link hover:text-flame-400 transition-colors">Contact</a>
+    <nav class="flex flex-col gap-6 text-3xl font-display font-semibold text-ink">
+      <a href="{{ url('/en/work/sports-shop') }}" class="mobile-link">Home</a>
+      <a href="{{ url('/en/work/sports-shop/products') }}" class="mobile-link">Products</a>
+      <a href="{{ url('/en/work/sports-shop/about') }}" class="mobile-link">About</a>
+      <a href="{{ url('/en/work/sports-shop/contact') }}" class="mobile-link">Contact</a>
+    </nav>
   </div>
 
-  <!-- Hero -->
-  <section class="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-    <div class="absolute top-0 left-1/3 w-[400px] h-[400px] rounded-full bg-flame-500/5 blur-[100px] pointer-events-none"></div>
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
-      <div class="max-w-2xl">
-        <span class="inline-block text-[11px] uppercase tracking-[0.2em] text-flame-400 font-medium mb-4 reveal">Contact</span>
-        <h1 class="font-display font-bold text-white text-4xl md:text-6xl tracking-tight leading-[1.05] mb-4 reveal reveal-delay-1">
-          Get in touch
-        </h1>
-        <p class="text-gray-400 text-lg leading-relaxed max-w-[50ch] reveal reveal-delay-2">
-          Questions about gear, orders, or partnerships? We're here.
-        </p>
-      </div>
+  <!-- Header -->
+  <section class="pt-28 pb-10 md:pt-36 md:pb-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <h1 class="font-display font-bold text-ink text-4xl md:text-6xl tracking-tight leading-[1.05] reveal">Get in touch</h1>
+      <p class="text-ink/45 text-lg mt-3 max-w-[45ch] reveal reveal-delay-1">Questions about gear, orders, or partnerships? We're here.</p>
     </div>
   </section>
 
-  <!-- Contact Grid -->
+  <!-- Contact grid -->
   <section class="pb-24 md:pb-36">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16">
-      <!-- Left: Form -->
+    <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <!-- Form -->
       <div class="lg:col-span-7">
         <form class="space-y-6 reveal" x-data="{ sending: false }" @submit.prevent="sending = true; setTimeout(() => sending = false, 2000)">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label for="name" class="block text-[11px] uppercase tracking-[0.15em] text-gray-500 mb-2">Name</label>
+              <label for="name" class="block text-[11px] uppercase tracking-[0.15em] text-ink/40 mb-2 font-medium">Name</label>
               <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
             </div>
             <div>
-              <label for="email" class="block text-[11px] uppercase tracking-[0.15em] text-gray-500 mb-2">Email</label>
+              <label for="email" class="block text-[11px] uppercase tracking-[0.15em] text-ink/40 mb-2 font-medium">Email</label>
               <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
             </div>
           </div>
           <div>
-            <label for="subject" class="block text-[11px] uppercase tracking-[0.15em] text-gray-500 mb-2">Subject</label>
+            <label for="subject" class="block text-[11px] uppercase tracking-[0.15em] text-ink/40 mb-2 font-medium">Subject</label>
             <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help?">
           </div>
           <div>
-            <label for="message" class="block text-[11px] uppercase tracking-[0.15em] text-gray-500 mb-2">Message</label>
+            <label for="message" class="block text-[11px] uppercase tracking-[0.15em] text-ink/40 mb-2 font-medium">Message</label>
             <textarea id="message" name="message" rows="5" class="form-input resize-none" placeholder="Tell us what you need" required></textarea>
           </div>
-          <button type="submit" class="btn-flame bg-flame-500 text-white font-semibold px-8 py-3.5 rounded-full text-sm inline-flex items-center gap-2" :class="sending ? 'opacity-60 pointer-events-none' : ''">
+          <button type="submit" class="inline-flex items-center gap-2 bg-sage-700 text-white font-semibold px-8 py-3.5 rounded-full text-sm hover:bg-sage-800 transition-colors" :class="sending ? 'opacity-60 pointer-events-none' : ''">
             <span x-text="sending ? 'Sending...' : 'Send Message'">Send Message</span>
             <svg x-show="!sending" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </form>
       </div>
 
-      <!-- Right: Info -->
+      <!-- Info -->
       <div class="lg:col-span-5">
         <div class="space-y-8">
           <div class="reveal">
-            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Email</div>
-            <a href="mailto:hello@striderun.com" class="text-white text-base hover:text-flame-400 transition-colors">hello@striderun.com</a>
+            <div class="text-ink/35 text-xs uppercase tracking-wider mb-2 font-medium">Email</div>
+            <a href="mailto:hello@striderun.com" class="text-ink text-base hover:text-sage-500 transition-colors">hello@striderun.com</a>
           </div>
           <div class="reveal reveal-delay-1">
-            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Phone</div>
-            <a href="tel:+15035551234" class="text-white text-base hover:text-flame-400 transition-colors">(503) 555-1234</a>
+            <div class="text-ink/35 text-xs uppercase tracking-wider mb-2 font-medium">Phone</div>
+            <a href="tel:+15035551234" class="text-ink text-base hover:text-sage-500 transition-colors">(503) 555-1234</a>
           </div>
           <div class="reveal reveal-delay-2">
-            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Location</div>
-            <p class="text-white text-base">Portland, OR</p>
-            <p class="text-gray-500 text-sm mt-1">Open to visits by appointment</p>
+            <div class="text-ink/35 text-xs uppercase tracking-wider mb-2 font-medium">Location</div>
+            <p class="text-ink text-base">Portland, OR</p>
+            <p class="text-ink/40 text-sm mt-1">Open to visits by appointment</p>
           </div>
           <div class="reveal reveal-delay-3">
-            <div class="text-gray-600 text-xs uppercase tracking-wider mb-2">Social</div>
+            <div class="text-ink/35 text-xs uppercase tracking-wider mb-2 font-medium">Social</div>
             <div class="flex gap-4">
-              <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Instagram</a>
-              <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Twitter</a>
-              <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">YouTube</a>
+              <a href="#" class="text-ink/40 hover:text-ink transition-colors text-sm">Instagram</a>
+              <a href="#" class="text-ink/40 hover:text-ink transition-colors text-sm">Twitter</a>
+              <a href="#" class="text-ink/40 hover:text-ink transition-colors text-sm">YouTube</a>
             </div>
           </div>
         </div>
 
-        <!-- Store image -->
-        <div class="mt-12 rounded-[1.5rem] overflow-hidden aspect-[4/3] relative reveal">
-          <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80&auto=format&fit=crop"
-            alt="STRIDE retail space in Portland"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          >
-          <div class="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+        <div class="mt-12 rounded-2xl overflow-hidden aspect-[4/3] reveal">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80&auto=format&fit=crop" alt="STRIDE retail space" class="w-full h-full object-cover" loading="lazy">
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-white/5 py-10">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="font-display font-bold text-white text-sm tracking-wider uppercase">STRIDE</div>
-      <div class="flex items-center gap-6 text-[13px] text-gray-500">
-        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-white transition-colors">Home</a>
-        <a href="{{ url('/en/work/sports-shop/products') }}" class="hover:text-white transition-colors">Products</a>
-        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-white transition-colors">About</a>
-        <a href="{{ url('/en/work/sports-shop/contact') }}" class="hover:text-white transition-colors">Contact</a>
+  <footer class="border-t border-ink/8 py-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="font-display font-bold text-ink text-sm tracking-tight">STRIDE</div>
+      <div class="flex items-center gap-6 text-[13px] text-ink/40">
+        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-ink transition-colors">Home</a>
+        <a href="{{ url('/en/work/sports-shop/products') }}" class="hover:text-ink transition-colors">Products</a>
+        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-ink transition-colors">About</a>
+        <a href="{{ url('/en/work/sports-shop/contact') }}" class="hover:text-ink transition-colors">Contact</a>
       </div>
-      <div class="text-gray-600 text-xs">&copy; 2025 STRIDE. All rights reserved.</div>
+      <div class="text-ink/30 text-xs">&copy; 2025 STRIDE</div>
     </div>
   </footer>
 
   <script>
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
     const menuBtn = document.getElementById('menu-btn');
     const menuClose = document.getElementById('menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
     menuBtn.addEventListener('click', () => { mobileMenu.classList.remove('hidden'); mobileMenu.classList.add('flex'); });
     menuClose.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); });
-    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); });
-    });
+    mobileMenu.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); }));
   </script>
 
 </body>

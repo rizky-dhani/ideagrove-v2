@@ -17,16 +17,16 @@
             body: ['Satoshi', 'sans-serif'],
           },
           colors: {
-            surface: {
-              950: '#0a0a0a',
-              900: '#111111',
-              800: '#1a1a1a',
-              700: '#242424',
-            },
-            flame: {
-              400: '#FF6B35',
-              500: '#FF4500',
-              600: '#E03C00',
+            bone: '#FAFAF8',
+            mist: '#F0F0EC',
+            ink: '#1A1A1A',
+            sage: {
+              50: '#E8F0EB',
+              100: '#D1E1D6',
+              500: '#2D6A4F',
+              700: '#1B4332',
+              800: '#143328',
+              900: '#0D2219',
             },
           },
         },
@@ -39,379 +39,272 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
 
     .stagger-children .reveal:nth-child(1) { transition-delay: 0s; }
-    .stagger-children .reveal:nth-child(2) { transition-delay: 0.06s; }
-    .stagger-children .reveal:nth-child(3) { transition-delay: 0.12s; }
-    .stagger-children .reveal:nth-child(4) { transition-delay: 0.18s; }
-    .stagger-children .reveal:nth-child(5) { transition-delay: 0.24s; }
-    .stagger-children .reveal:nth-child(6) { transition-delay: 0.3s; }
-    .stagger-children .reveal:nth-child(7) { transition-delay: 0.36s; }
-    .stagger-children .reveal:nth-child(8) { transition-delay: 0.42s; }
+    .stagger-children .reveal:nth-child(2) { transition-delay: 0.05s; }
+    .stagger-children .reveal:nth-child(3) { transition-delay: 0.1s; }
+    .stagger-children .reveal:nth-child(4) { transition-delay: 0.15s; }
+    .stagger-children .reveal:nth-child(5) { transition-delay: 0.2s; }
+    .stagger-children .reveal:nth-child(6) { transition-delay: 0.25s; }
+    .stagger-children .reveal:nth-child(7) { transition-delay: 0.3s; }
+    .stagger-children .reveal:nth-child(8) { transition-delay: 0.35s; }
 
-    .btn-flame {
-      transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    .btn-flame:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(255, 69, 0, 0.25);
-    }
-    .btn-flame:active {
-      transform: translateY(0) scale(0.98);
-    }
+    .img-lift { overflow: hidden; }
+    .img-lift img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .img-lift:hover img { transform: scale(1.04); }
 
-    .btn-ghost {
-      transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    .filter-btn {
+      transition: all 0.25s ease;
     }
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.3);
+    .filter-btn:hover {
+      background: #1A1A1A;
+      color: white;
     }
-
-    .img-zoom {
-      overflow: hidden;
-    }
-    .img-zoom img {
-      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .img-zoom:hover img {
-      transform: scale(1.05);
-    }
-
-    .grain::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      pointer-events: none;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
+    .filter-btn.active {
+      background: #1B4332;
+      color: white;
+      border-color: #1B4332;
     }
 
     .product-card {
-      position: relative;
-      border-radius: 1.25rem;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 2px;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .product-card:hover {
       transform: translateY(-4px);
     }
-    .product-card-inner {
-      border-radius: calc(1.25rem - 2px);
-      background: #111111;
-      height: 100%;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-      overflow: hidden;
-    }
-
-    .nav-pill {
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      background: rgba(10, 10, 10, 0.7);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* Filter pills */
-    .filter-pill {
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .filter-pill:hover {
-      background: rgba(255,255,255,0.08);
-    }
-    .filter-pill.active {
-      background: #FF4500;
-      color: white;
-    }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-      .product-card:hover {
-        transform: none;
-      }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .product-card:hover { transform: none; }
     }
   </style>
 </head>
-<body class="bg-surface-950 text-gray-300 font-body grain">
+<body class="bg-bone text-ink font-body">
 
   <!-- Nav -->
-  <nav class="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 pt-5 md:pt-6">
-    <div class="nav-pill rounded-full px-6 py-3 flex items-center gap-8">
-      <a href="{{ url('/en/work/sports-shop') }}" class="font-display font-bold text-white text-sm tracking-wider uppercase">STRIDE</a>
-      <div class="hidden md:flex items-center gap-6 text-[13px] text-gray-400">
-        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-white transition-colors duration-300">Home</a>
-        <a href="{{ url('/en/work/sports-shop/products') }}" class="text-white transition-colors duration-300">Products</a>
-        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-white transition-colors duration-300">About</a>
-        <a href="{{ url('/en/work/sports-shop/contact') }}" class="hover:text-white transition-colors duration-300">Contact</a>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-bone/80 backdrop-blur-md border-b border-ink/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 h-16 md:h-18">
+      <a href="{{ url('/en/work/sports-shop') }}" class="font-display font-bold text-ink text-lg tracking-tight">STRIDE</a>
+      <nav class="hidden md:flex items-center gap-8 text-[13px] font-medium text-ink/50">
+        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-ink transition-colors">Home</a>
+        <a href="{{ url('/en/work/sports-shop/products') }}" class="text-ink transition-colors">Products</a>
+        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-ink transition-colors">About</a>
+        <a href="{{ url('/en/work/sports-shop/contact') }}" class="hover:text-ink transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <span class="text-[13px] text-ink/40 font-medium">Cart (0)</span>
+        <button id="menu-btn" class="md:hidden text-ink" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
       </div>
-      <a href="#" class="btn-flame bg-flame-500 text-white text-[13px] font-semibold px-5 py-2 rounded-full inline-block">
-        Cart (0)
-      </a>
-      <button id="menu-btn" class="md:hidden text-white ml-2" aria-label="Toggle menu">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <line x1="2" y1="5" x2="18" y2="5" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="2" y1="15" x2="18" y2="15" stroke="currentColor" stroke-width="1.5"/>
-        </svg>
-      </button>
     </div>
-  </nav>
+  </header>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="fixed inset-0 z-50 bg-surface-950/95 backdrop-blur-3xl hidden flex-col items-center justify-center gap-8 text-2xl font-display text-white">
-    <button id="menu-close" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors" aria-label="Close menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5"/>
-        <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5"/>
-      </svg>
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bone hidden flex-col pt-20 px-8">
+    <button id="menu-close" class="absolute top-5 right-6 text-ink" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
-    <a href="{{ url('/en/work/sports-shop') }}" class="mobile-link hover:text-flame-400 transition-colors">Home</a>
-    <a href="{{ url('/en/work/sports-shop/products') }}" class="mobile-link hover:text-flame-400 transition-colors">Products</a>
-    <a href="{{ url('/en/work/sports-shop/about') }}" class="mobile-link hover:text-flame-400 transition-colors">About</a>
-    <a href="{{ url('/en/work/sports-shop/contact') }}" class="mobile-link hover:text-flame-400 transition-colors">Contact</a>
+    <nav class="flex flex-col gap-6 text-3xl font-display font-semibold text-ink">
+      <a href="{{ url('/en/work/sports-shop') }}" class="mobile-link">Home</a>
+      <a href="{{ url('/en/work/sports-shop/products') }}" class="mobile-link">Products</a>
+      <a href="{{ url('/en/work/sports-shop/about') }}" class="mobile-link">About</a>
+      <a href="{{ url('/en/work/sports-shop/contact') }}" class="mobile-link">Contact</a>
+    </nav>
   </div>
 
-  <!-- Hero -->
-  <section class="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-flame-500/5 blur-[100px] pointer-events-none"></div>
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
-      <div class="max-w-2xl">
-        <span class="inline-block text-[11px] uppercase tracking-[0.2em] text-flame-400 font-medium mb-4 reveal">All Products</span>
-        <h1 class="font-display font-bold text-white text-4xl md:text-6xl tracking-tight leading-[1.05] mb-4 reveal reveal-delay-1">
-          The full line
-        </h1>
-        <p class="text-gray-400 text-lg leading-relaxed max-w-[50ch] reveal reveal-delay-2">
-          Every piece, tested on real runs, refined through real movement. Filter by category to find what fits your training.
-        </p>
-      </div>
+  <!-- Header -->
+  <section class="pt-28 pb-10 md:pt-36 md:pb-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <h1 class="font-display font-bold text-ink text-4xl md:text-6xl tracking-tight leading-[1.05] reveal">All Products</h1>
+      <p class="text-ink/45 text-lg mt-3 max-w-[45ch] reveal reveal-delay-1">Every piece, tested on real runs, refined through real movement.</p>
     </div>
   </section>
 
   <!-- Filters -->
-  <section class="pb-12 md:pb-16">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
-      <div class="flex flex-wrap gap-3 reveal" x-data="{ active: 'all' }">
-        <button @click="active = 'all'" :class="active === 'all' ? 'active' : ''" class="filter-pill px-5 py-2 rounded-full text-[13px] font-medium border border-white/10 text-gray-400">All</button>
-        <button @click="active = 'running'" :class="active === 'running' ? 'active' : ''" class="filter-pill px-5 py-2 rounded-full text-[13px] font-medium border border-white/10 text-gray-400">Running</button>
-        <button @click="active = 'training'" :class="active === 'training' ? 'active' : ''" class="filter-pill px-5 py-2 rounded-full text-[13px] font-medium border border-white/10 text-gray-400">Training</button>
-        <button @click="active = 'lifestyle'" :class="active === 'lifestyle' ? 'active' : ''" class="filter-pill px-5 py-2 rounded-full text-[13px] font-medium border border-white/10 text-gray-400">Lifestyle</button>
-        <button @click="active = 'recovery'" :class="active === 'recovery' ? 'active' : ''" class="filter-pill px-5 py-2 rounded-full text-[13px] font-medium border border-white/10 text-gray-400">Recovery</button>
+  <section class="pb-10 md:pb-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="flex flex-wrap gap-2.5 reveal" x-data="{ active: 'all' }">
+        <button @click="active = 'all'" :class="active === 'all' ? 'active' : ''" class="filter-btn px-4 py-2 rounded-full text-[13px] font-medium border border-ink/10 text-ink/50">All</button>
+        <button @click="active = 'running'" :class="active === 'running' ? 'active' : ''" class="filter-btn px-4 py-2 rounded-full text-[13px] font-medium border border-ink/10 text-ink/50">Running</button>
+        <button @click="active = 'training'" :class="active === 'training' ? 'active' : ''" class="filter-btn px-4 py-2 rounded-full text-[13px] font-medium border border-ink/10 text-ink/50">Training</button>
+        <button @click="active = 'lifestyle'" :class="active === 'lifestyle' ? 'active' : ''" class="filter-btn px-4 py-2 rounded-full text-[13px] font-medium border border-ink/10 text-ink/50">Lifestyle</button>
+        <button @click="active = 'recovery'" :class="active === 'recovery' ? 'active' : ''" class="filter-btn px-4 py-2 rounded-full text-[13px] font-medium border border-ink/10 text-ink/50">Recovery</button>
       </div>
     </div>
   </section>
 
-  <!-- Products Grid -->
+  <!-- Products -->
   <section class="pb-24 md:pb-36">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children" x-data="{ active: 'all' }">
-        <!-- Product 1 -->
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children" x-data="{ active: 'all' }">
+
         <div class="product-card reveal" :class="active !== 'all' && active !== 'running' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80&auto=format&fit=crop" alt="Aero Runner" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80&auto=format&fit=crop" alt="Aero Runner" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Running</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Aero Runner</h3>
-              <p class="text-gray-500 text-xs mb-3">Lightweight racer with carbon plate</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$145</span>
-                <span class="text-flame-400 text-xs font-medium">New</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Running</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Aero Runner</h3>
+            <p class="text-ink/40 text-xs mt-1">Carbon plate racer</p>
+            <div class="flex items-center gap-3 mt-2">
+              <span class="font-display font-bold text-ink">$145</span>
+              <span class="text-sage-500 text-[11px] font-medium bg-sage-50 px-2 py-0.5 rounded-full">New</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 2 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'training' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&q=80&auto=format&fit=crop" alt="Training Pro" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=500&q=80&auto=format&fit=crop" alt="Training Pro" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Training</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Training Pro</h3>
-              <p class="text-gray-500 text-xs mb-3">Stable base for heavy lifts</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$120</span>
-                <span class="text-gray-600 text-xs">In stock</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Training</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Training Pro</h3>
+            <p class="text-ink/40 text-xs mt-1">Stable base for lifts</p>
+            <div class="mt-2">
+              <span class="font-display font-bold text-ink">$120</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 3 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'recovery' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80&auto=format&fit=crop" alt="Recovery Slide" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&q=80&auto=format&fit=crop" alt="Recovery Slide" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Recovery</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Recovery Slide</h3>
-              <p class="text-gray-500 text-xs mb-3">Post-run cushion and support</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$65</span>
-                <span class="text-gray-600 text-xs">In stock</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Recovery</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Recovery Slide</h3>
+            <p class="text-ink/40 text-xs mt-1">Post-run cushion</p>
+            <div class="mt-2">
+              <span class="font-display font-bold text-ink">$65</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 4 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'running' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80&auto=format&fit=crop" alt="Endurance X" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&q=80&auto=format&fit=crop" alt="Endurance X" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Running</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Endurance X</h3>
-              <p class="text-gray-500 text-xs mb-3">Max cushion for long distances</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$165</span>
-                <span class="text-flame-400 text-xs font-medium">Limited</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Running</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Endurance X</h3>
+            <p class="text-ink/40 text-xs mt-1">Max cushion, long distance</p>
+            <div class="flex items-center gap-3 mt-2">
+              <span class="font-display font-bold text-ink">$165</span>
+              <span class="text-sage-500 text-[11px] font-medium bg-sage-50 px-2 py-0.5 rounded-full">Limited</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 5 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'lifestyle' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80&auto=format&fit=crop" alt="Everyday Tee" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80&auto=format&fit=crop" alt="Everyday Tee" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Lifestyle</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Everyday Tee</h3>
-              <p class="text-gray-500 text-xs mb-3">Merino blend, gym to street</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$48</span>
-                <span class="text-gray-600 text-xs">In stock</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Lifestyle</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Everyday Tee</h3>
+            <p class="text-ink/40 text-xs mt-1">Merino blend</p>
+            <div class="mt-2">
+              <span class="font-display font-bold text-ink">$48</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 6 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'training' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80&auto=format&fit=crop" alt="Lift Short" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80&auto=format&fit=crop" alt="Lift Short" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Training</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Lift Short</h3>
-              <p class="text-gray-500 text-xs mb-3">4-way stretch, built to squat</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$55</span>
-                <span class="text-gray-600 text-xs">In stock</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Training</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Lift Short</h3>
+            <p class="text-ink/40 text-xs mt-1">4-way stretch, squat-proof</p>
+            <div class="mt-2">
+              <span class="font-display font-bold text-ink">$55</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 7 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'running' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&q=80&auto=format&fit=crop&sat=-100" alt="Stride Sock" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1586350977771-b3b0abd50c87?w=500&q=80&auto=format&fit=crop" alt="Stride Sock 3-pack" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Running</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Stride Sock</h3>
-              <p class="text-gray-500 text-xs mb-3">Cushioned tabi, zero blisters</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$18</span>
-                <span class="text-gray-600 text-xs">3-pack</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Running</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Stride Sock</h3>
+            <p class="text-ink/40 text-xs mt-1">Cushioned tabi, 3-pack</p>
+            <div class="mt-2">
+              <span class="font-display font-bold text-ink">$18</span>
             </div>
           </div>
         </div>
 
-        <!-- Product 8 -->
         <div class="product-card reveal" :class="active !== 'all' && active !== 'lifestyle' ? 'hidden' : ''">
-          <div class="product-card-inner">
-            <div class="aspect-square overflow-hidden rounded-t-[calc(1.25rem-2px)] img-zoom">
-              <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&q=80&auto=format&fit=crop" alt="Wind Shell" class="w-full h-full object-cover" loading="lazy">
+          <div class="rounded-2xl overflow-hidden bg-mist">
+            <div class="aspect-square img-lift">
+              <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80&auto=format&fit=crop" alt="Wind Shell" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="p-5">
-              <div class="text-[11px] uppercase tracking-[0.15em] text-gray-600 mb-1">Lifestyle</div>
-              <h3 class="font-display font-semibold text-white text-sm mb-1">Wind Shell</h3>
-              <p class="text-gray-500 text-xs mb-3">Packable windbreaker, 85g</p>
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-white">$95</span>
-                <span class="text-gray-600 text-xs">In stock</span>
-              </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] uppercase tracking-[0.15em] text-ink/35 font-medium">Lifestyle</div>
+            <h3 class="font-display font-semibold text-ink text-sm mt-1">Wind Shell</h3>
+            <p class="text-ink/40 text-xs mt-1">Packable, 85g</p>
+            <div class="mt-2">
+              <span class="font-display font-bold text-ink">$95</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-white/5 py-10">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="font-display font-bold text-white text-sm tracking-wider uppercase">STRIDE</div>
-      <div class="flex items-center gap-6 text-[13px] text-gray-500">
-        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-white transition-colors">Home</a>
-        <a href="{{ url('/en/work/sports-shop/products') }}" class="hover:text-white transition-colors">Products</a>
-        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-white transition-colors">About</a>
-        <a href="{{ url('/en/work/sports-shop/contact') }}" class="hover:text-white transition-colors">Contact</a>
+  <footer class="border-t border-ink/8 py-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="font-display font-bold text-ink text-sm tracking-tight">STRIDE</div>
+      <div class="flex items-center gap-6 text-[13px] text-ink/40">
+        <a href="{{ url('/en/work/sports-shop') }}" class="hover:text-ink transition-colors">Home</a>
+        <a href="{{ url('/en/work/sports-shop/products') }}" class="hover:text-ink transition-colors">Products</a>
+        <a href="{{ url('/en/work/sports-shop/about') }}" class="hover:text-ink transition-colors">About</a>
+        <a href="{{ url('/en/work/sports-shop/contact') }}" class="hover:text-ink transition-colors">Contact</a>
       </div>
-      <div class="text-gray-600 text-xs">&copy; 2025 STRIDE. All rights reserved.</div>
+      <div class="text-ink/30 text-xs">&copy; 2025 STRIDE</div>
     </div>
   </footer>
 
   <script>
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
     const menuBtn = document.getElementById('menu-btn');
     const menuClose = document.getElementById('menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
-
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.remove('hidden');
-      mobileMenu.classList.add('flex');
-    });
-    menuClose.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      mobileMenu.classList.remove('flex');
-    });
-    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        mobileMenu.classList.remove('flex');
-      });
-    });
+    menuBtn.addEventListener('click', () => { mobileMenu.classList.remove('hidden'); mobileMenu.classList.add('flex'); });
+    menuClose.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); });
+    mobileMenu.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); }));
   </script>
 
 </body>
