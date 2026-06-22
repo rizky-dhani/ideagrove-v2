@@ -18,6 +18,7 @@ Route::prefix('{locale}')
         Route::get('/', HomePage::class)->name('home');
         Route::get('/work', WorkPage::class)->name('projects.index');
         Route::get('/contact', ContactPage::class)->name('contact');
+        Route::get('/work/barbershop', fn () => view('portfolio.barbershop', ['title' => 'BLK & GOLD Barbershop | IdeaGrove']));
         Route::get('/work/{project}', ShowProject::class)->name('projects.show');
     });
 
