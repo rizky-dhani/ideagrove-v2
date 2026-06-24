@@ -40,3 +40,5 @@ Route::get('/sitemap.xml', function () {
         ->view('sitemap', compact('projects', 'locales', 'lastModified'))
         ->header('Content-Type', 'application/xml');
 })->name('sitemap');
+// GA Setup Guide
+Route::get('/ga-setup-guide', fn () => view('ga-setup-guide'))->name('ga-setup-guide');

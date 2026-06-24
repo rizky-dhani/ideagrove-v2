@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SiteSettings\Schemas;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\HtmlString;
 
 class SiteSettingForm
 {
@@ -38,6 +39,12 @@ class SiteSettingForm
                     ->rows(3)
                     ->nullable()
                     ->columnSpanFull(),
+                TextInput::make('ga_property_id')
+                    ->label('Google Analytics Property ID')
+                    ->placeholder('G-XXXXXXXXXX')
+                    ->maxLength(50)
+                    ->nullable()
+                    ->helperText(fn () => new HtmlString('Format: G-XXXXXXXXXX (for GA4). Find yours in Google Analytics → Admin → Data Streams. <a href="'.route('ga-setup-guide').'" target="_blank" class="underline text-primary-500 hover:text-primary-600">Setup Guide</a>')),
             ]);
     }
 }

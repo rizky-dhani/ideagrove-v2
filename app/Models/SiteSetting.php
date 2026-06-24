@@ -13,5 +13,6 @@ class SiteSetting extends Model
         'app_name',
         'address',
         'office_hours',
+        'ga_property_id',
     ];
 }
