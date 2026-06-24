@@ -44,7 +44,7 @@ class SiteSettingForm
                     ->placeholder('G-XXXXXXXXXX')
                     ->maxLength(50)
                     ->nullable()
-                    ->helperText(fn () => new HtmlString('Format: G-XXXXXXXXXX (for GA4). Find yours in Google Analytics → Admin → Data Streams. <a href="'.route('ga-setup-guide').'" target="_blank" class="underline text-primary-500 hover:text-primary-600">Setup Guide</a>')),
+                    ->helperText(fn () => new HtmlString('Measurement ID (<code>G-XXXXXXXXXX</code>) for the front-end GA4 tracking snippet. Find it in Google Analytics &rarr; Admin &rarr; Data Streams. <a href="'.route('ga-setup-guide').'" target="_blank" class="underline text-primary-500 hover:text-primary-600">Setup Guide</a>. For the server-side admin dashboard widgets, set <code>ANALYTICS_PROPERTY_ID</code> in <code>.env</code> instead (see guide).')),
             ]);
     }
 }
