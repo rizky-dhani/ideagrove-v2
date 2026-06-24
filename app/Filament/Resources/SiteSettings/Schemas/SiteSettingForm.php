@@ -40,7 +40,7 @@ class SiteSettingForm
                     ->nullable()
                     ->columnSpanFull(),
                 TextInput::make('ga_property_id')
-                    ->label('Google Analytics Property ID')
+                    ->label('Google Analytics Measurement ID')
                     ->placeholder('G-XXXXXXXXXX')
                     ->maxLength(50)
                     ->nullable()
