@@ -62,13 +62,13 @@
     <link rel="icon" type="image/webp" href="{{ asset('assets/images/Logo_Square.webp') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @if (config('services.analytics.property_id'))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.analytics.property_id') }}"></script>
+    @if ($siteSetting?->ga_property_id)
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $siteSetting->ga_property_id }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '{{ config('services.analytics.property_id') }}');
+            gtag('config', '{{ $siteSetting->ga_property_id }}');
         </script>
     @endif
     @livewireStyles
