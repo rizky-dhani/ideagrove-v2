@@ -3,6 +3,7 @@
 return [
     'nav' => [
         'work' => 'Karya',
+        'pricing' => 'Harga',
         'contact' => 'Kontak',
         'skip_to_content' => 'Langsung ke konten',
         'toggle_dark_mode' => 'Mode gelap',
@@ -17,19 +18,19 @@ return [
     ],
     'meta' => [
         'home' => [
-            'title' => 'The Idea Grove Studio — Digital Agency, Bali',
-            'description' => 'The Idea Grove Studio — agency digital dari Bali, bikin pengalaman digital yang berbekas.',
+            'title' => 'The Idea Grove Studio, Digital Agency, Bali',
+            'description' => 'The Idea Grove Studio, agency digital dari Bali, bikin pengalaman digital yang berbekas.',
         ],
         'work' => [
-            'title' => 'Karya — The Idea Grove Studio',
-            'description' => 'Karya pilihan kami — identitas merek, situs web, dan aplikasi buat yang serius sama karyanya.',
+            'title' => 'Karya, The Idea Grove Studio',
+            'description' => 'Karya pilihan kami: identitas merek, situs web, dan aplikasi buat yang serius sama karyanya.',
         ],
         'contact' => [
-            'title' => 'Kontak — The Idea Grove Studio',
-            'description' => 'Hubungi The Idea Grove Studio. Cerita aja tentang proyekmu — identitas merek, situs web, aplikasi buat yang serius sama karyanya.',
+            'title' => 'Kontak, The Idea Grove Studio',
+            'description' => 'Hubungi The Idea Grove Studio. Cerita aja tentang proyekmu: identitas merek, situs web, aplikasi buat yang serius sama karyanya.',
         ],
         'project' => [
-            'title' => ':project — The Idea Grove Studio',
+            'title' => ':project, The Idea Grove Studio',
         ],
     ],
     'back_to_top' => [

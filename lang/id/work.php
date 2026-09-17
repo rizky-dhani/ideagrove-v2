@@ -4,7 +4,7 @@ return [
     'hero' => [
         'section_label' => '/karya',
         'heading' => 'Karya kami',
-        'subtitle' => 'Karya pilihan yang udah selesai kami garap. Identitas merek, situs web, aplikasi — buat yang serius sama karyanya.',
+        'subtitle' => 'Karya pilihan yang udah selesai kami garap. Identitas merek, situs web, aplikasi, buat yang serius sama karyanya.',
     ],
     'controls' => [
         'sort' => 'Urut',

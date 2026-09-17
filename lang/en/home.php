@@ -57,6 +57,53 @@ return [
         'technology' => 'Technology',
         'more' => 'And more…',
     ],
+    'pricing' => [
+        'section_label' => '/pricing',
+        'heading' => 'Transparent pricing',
+        'subtitle' => 'Clear scope, clear price. Every build includes domain, hosting and SSL for the first year, with no hidden fees.',
+        'popular' => 'Most chosen',
+        'tiers' => [
+            ['name' => 'Essential', 'desc' => 'A focused, fast launch.'],
+            ['name' => 'Professional', 'desc' => 'The considered, complete build.'],
+            ['name' => 'Signature', 'desc' => 'Bespoke, end to end.'],
+        ],
+        'sow' => [
+            'landing' => [
+                'name' => 'Landing page',
+                'desc' => 'One page, one goal, built to convert.',
+                'prices' => ['Rp 2.500.000', 'Rp 4.500.000', 'Rp 7.000.000'],
+            ],
+            'profile' => [
+                'name' => 'Company profile',
+                'desc' => 'A multi-page site that tells the whole story.',
+                'prices' => ['Rp 5.000.000', 'Rp 12.000.000', 'Rp 18.000.000'],
+            ],
+            'hospitality' => [
+                'name' => 'Hospitality site',
+                'desc' => 'Villas, hotels and restaurants, built for direct bookings.',
+                'prices' => ['Rp 8.000.000', 'Rp 15.000.000', 'Rp 28.000.000'],
+            ],
+            'ecommerce' => [
+                'name' => 'E-commerce',
+                'desc' => 'Catalog, cart and payments, ready to sell.',
+                'prices' => ['Rp 6.000.000', 'Rp 12.000.000', 'Rp 25.000.000'],
+            ],
+            'redesign' => [
+                'name' => 'Redesign & optimization',
+                'desc' => 'Faster, sharper, better ranked, on your existing site.',
+                'prices' => ['Rp 3.000.000', 'Rp 6.000.000', 'Rp 12.000.000'],
+            ],
+        ],
+        'care_heading' => 'Ongoing care',
+        'care_body' => 'After launch we stay close: updates, security, backups and steady improvement.',
+        'care' => [
+            ['name' => 'Care Basic', 'price' => 'Rp 350.000', 'unit' => '/mo', 'desc' => 'Updates, backups, uptime monitoring and security.'],
+            ['name' => 'Care Pro', 'price' => 'Rp 750.000', 'unit' => '/mo', 'desc' => 'Everything in Basic, plus content edits, speed and SEO monitoring.'],
+            ['name' => 'Growth', 'price' => 'Rp 2.500.000+', 'unit' => '/mo', 'desc' => 'SEO, content and campaign support for compounding growth.'],
+        ],
+        'note' => 'Prices exclude VAT and third-party costs (payment gateways, booking engines, premium plugins). Annual prepay saves two months.',
+        'cta' => 'Request a quote',
+    ],
     'contact' => [
         'section_label' => '/contact',
         'heading' => 'Have a project in mind?',

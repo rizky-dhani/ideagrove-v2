@@ -215,6 +215,102 @@
         </div>
     </section>
 
+    {{-- Pricing: SOW × Tier --}}
+    <section id="pricing" class="scroll-reveal border-y border-peach-medium/40 bg-cream px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
+        <div class="mx-auto max-w-6xl">
+            <div class="max-w-2xl">
+                <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand uppercase">{{ __('home.pricing.section_label') }}</span>
+                <h2 class="mt-4 font-serif text-3xl text-charcoal sm:text-4xl">{{ __('home.pricing.heading') }}</h2>
+                <p class="mt-4 text-base leading-relaxed text-warm-gray">{{ __('home.pricing.subtitle') }}</p>
+            </div>
+
+            {{-- Desktop: SOW rows × tier columns --}}
+            <div class="mt-14 hidden lg:block">
+                <div class="overflow-hidden rounded-2xl border border-peach-medium/50 bg-warm-white">
+                    {{-- Tier header --}}
+                    <div class="grid grid-cols-[1.4fr_repeat(3,1fr)] border-b border-peach-medium/50 bg-peach/30">
+                        <div class="p-6"></div>
+                        @foreach (__('home.pricing.tiers') as $i => $tier)
+                            <div class="relative border-l border-peach-medium/50 p-6 {{ $i === 1 ? 'bg-peach/50' : '' }}">
+                                @if ($i === 1)
+                                    <span class="absolute top-6 right-6 rounded-full bg-brand px-2.5 py-1 text-[10px] font-semibold tracking-wider text-white uppercase">{{ __('home.pricing.popular') }}</span>
+                                @endif
+                                <h3 class="font-serif text-xl text-charcoal">{{ $tier['name'] }}</h3>
+                                <p class="mt-1 text-xs leading-relaxed text-warm-gray">{{ $tier['desc'] }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- SOW rows --}}
+                    @foreach (__('home.pricing.sow') as $sow)
+                        <div class="grid grid-cols-[1.4fr_repeat(3,1fr)] border-b border-peach-medium/50 last:border-b-0">
+                            <div class="p-6">
+                                <h4 class="font-serif text-lg text-charcoal">{{ $sow['name'] }}</h4>
+                                <p class="mt-1 max-w-xs text-xs leading-relaxed text-warm-gray">{{ $sow['desc'] }}</p>
+                            </div>
+                            @foreach ($sow['prices'] as $i => $price)
+                                <div class="flex items-center border-l border-peach-medium/50 p-6 {{ $i === 1 ? 'bg-peach/20' : '' }}">
+                                    <span class="font-serif text-xl {{ $i === 1 ? 'text-brand-dark' : 'text-charcoal' }}">{{ $price }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Mobile: per-SOW cards --}}
+            <div class="scroll-reveal-group mt-12 grid gap-6 lg:hidden">
+                @foreach (__('home.pricing.sow') as $sow)
+                    <div class="overflow-hidden rounded-2xl border border-peach-medium/50 bg-warm-white">
+                        <div class="bg-peach/30 p-6">
+                            <h4 class="font-serif text-lg text-charcoal">{{ $sow['name'] }}</h4>
+                            <p class="mt-1 text-xs leading-relaxed text-warm-gray">{{ $sow['desc'] }}</p>
+                        </div>
+                        <div class="divide-y divide-peach-medium/40">
+                            @foreach (__('home.pricing.tiers') as $i => $tier)
+                                <div class="flex items-center justify-between gap-4 p-4 {{ $i === 1 ? 'bg-peach/20' : '' }}">
+                                    <span class="text-sm text-warm-gray">{{ $tier['name'] }}</span>
+                                    <span class="font-serif text-base {{ $i === 1 ? 'text-brand-dark' : 'text-charcoal' }}">{{ $sow['prices'][$i] }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Care plans --}}
+            <div class="mt-20 grid gap-12 lg:grid-cols-12">
+                <div class="lg:col-span-4">
+                    <h3 class="font-serif text-2xl text-charcoal sm:text-3xl">{{ __('home.pricing.care_heading') }}</h3>
+                    <p class="mt-4 max-w-sm text-sm leading-relaxed text-warm-gray">{{ __('home.pricing.care_body') }}</p>
+                </div>
+                <div class="scroll-reveal-group grid gap-px overflow-hidden rounded-2xl border border-peach-medium/50 bg-peach-medium/50 sm:grid-cols-3 lg:col-span-8">
+                    @foreach (__('home.pricing.care') as $plan)
+                        <article class="bg-warm-white p-6">
+                            <h4 class="font-serif text-lg text-charcoal">{{ $plan['name'] }}</h4>
+                            <p class="mt-3 flex items-baseline gap-1">
+                                <span class="font-serif text-2xl text-brand-dark">{{ $plan['price'] }}</span>
+                                <span class="text-xs text-warm-gray">{{ $plan['unit'] }}</span>
+                            </p>
+                            <p class="mt-3 text-xs leading-relaxed text-warm-gray">{{ $plan['desc'] }}</p>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Note + CTA --}}
+            <div class="mt-12 flex flex-col gap-6 border-t border-peach-medium/50 pt-8 sm:flex-row sm:items-center sm:justify-between">
+                <p class="max-w-2xl text-xs leading-relaxed text-warm-gray">{{ __('home.pricing.note') }}</p>
+                <a href="#contact" class="inline-flex shrink-0 items-center gap-2 rounded-full bg-charcoal px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-brand-dark">
+                    {{ __('home.pricing.cta') }}
+                    <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
     {{-- Sectors / clients --}}
     <section class="scroll-reveal border-t border-peach-medium/40 bg-warm-white px-6 py-20 sm:px-8 lg:px-12">
         <div class="mx-auto max-w-6xl">

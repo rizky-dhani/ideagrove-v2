@@ -42,3 +42,10 @@ Route::get('/sitemap.xml', function () {
 })->name('sitemap');
 // GA Setup Guide
 Route::get('/ga-setup-guide', fn () => view('ga-setup-guide'))->name('ga-setup-guide');
+
+// Redesign concepts (preview only)
+Route::prefix('redesign')->group(function () {
+    Route::get('/sawah-digital', fn () => view('redesign.sawah-digital'))->name('redesign.sawah');
+    Route::get('/segara-glow', fn () => view('redesign.segara-glow'))->name('redesign.segara');
+    Route::get('/banjar', fn () => view('redesign.banjar'))->name('redesign.banjar');
+});
