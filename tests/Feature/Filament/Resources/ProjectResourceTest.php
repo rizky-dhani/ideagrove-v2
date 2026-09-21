@@ -55,7 +55,7 @@ class ProjectResourceTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        Livewire::test(ProjectResource\Pages\EditProject::class, ['record' => $project->id])
+        Livewire::test(ProjectResource\Pages\EditProject::class, ['record' => $project->slug])
             ->fillForm([
                 'name' => 'Updated Name',
                 'client_name' => 'Updated Client',

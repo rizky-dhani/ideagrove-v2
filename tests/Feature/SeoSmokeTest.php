@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Tests\TestCase;
 
 class SeoSmokeTest extends TestCase
 {
+    use LazilyRefreshDatabase;
+
     public function test_home_page_has_canonical_and_hreflang(): void
     {
         $response = $this->get('/en');
