@@ -74,7 +74,8 @@ class PostsPage extends Component
                 fn ($query) => $query->orderBy('published_at'),
                 fn ($query) => $query->orderByDesc('published_at')
             )
-            ->paginate($this->perPage);
+            ->paginate($this->perPage)
+            ->withQueryString();
 
         return view('livewire.posts-page', [
             'posts' => $posts,

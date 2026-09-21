@@ -3,7 +3,7 @@
     <section class="relative overflow-hidden bg-cream px-6 pt-24 pb-20 sm:px-8 lg:px-12">
         <div class="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
         <div class="mx-auto max-w-6xl">
-            <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand-light uppercase">{{ __('posts.hero.section_label') }}</span>
+            <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand-dark uppercase">{{ __('posts.hero.section_label') }}</span>
             <h1 class="mt-4 font-serif text-3xl leading-tight text-charcoal sm:text-4xl lg:text-5xl">{{ __('posts.hero.heading') }}</h1>
             <p class="mt-4 max-w-xl text-base leading-relaxed text-warm-gray">{{ __('posts.hero.subtitle') }}</p>
         </div>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="mt-5">
                                 @if ($post->category)
-                                    <p class="text-xs font-medium tracking-[0.15em] text-brand-light uppercase">{{ $post->category->name }}</p>
+                                    <p class="text-xs font-medium tracking-[0.15em] text-brand-dark uppercase">{{ $post->category->name }}</p>
                                 @endif
                                 <h2 class="mt-2 font-serif text-lg text-charcoal transition-colors group-hover:text-brand-dark">{{ $post->title }}</h2>
                                 <p class="mt-3 text-sm leading-relaxed text-warm-gray">{{ $post->excerpt(24) }}</p>

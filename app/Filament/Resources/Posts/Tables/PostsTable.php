@@ -34,6 +34,15 @@ class PostsTable
                     ->label('Category')
                     ->sortable()
                     ->toggleable(),
+                TextColumn::make('tags.name')
+                    ->label('Tags')
+                    ->badge()
+                    ->separator(',')
+                    ->toggleable(),
+                TextColumn::make('author.name')
+                    ->label('Author')
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
                     ->state(fn (Post $record): string => $record->isScheduled() ? 'scheduled' : $record->status)

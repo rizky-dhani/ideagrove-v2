@@ -11,7 +11,7 @@
             </a>
 
             @if ($post->category)
-                <p class="mt-8 text-xs font-medium tracking-[0.2em] text-brand-light uppercase">{{ $post->category->name }}</p>
+                <a href="{{ route('posts.index', ['category' => $post->category->slug]) }}" class="mt-8 inline-block text-xs font-medium tracking-[0.2em] text-brand-dark uppercase transition-colors hover:text-brand">{{ $post->category->name }}</a>
             @endif
             <h1 class="mt-4 font-serif text-3xl leading-tight text-charcoal sm:text-4xl lg:text-5xl">{{ $post->title }}</h1>
 
@@ -35,7 +35,7 @@
     {{-- Body --}}
     <section class="px-6 py-16 sm:px-8 lg:px-12">
         <article class="prose prose-lg mx-auto max-w-3xl text-base leading-relaxed text-charcoal-soft">
-            {!! $post->body !!}
+            {!! \Illuminate\Support\Str::sanitizeHtml($post->body) !!}
         </article>
 
         @if ($post->tags->isNotEmpty())
