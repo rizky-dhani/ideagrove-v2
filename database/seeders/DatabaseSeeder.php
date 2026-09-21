@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ProjectSeeder::class);
 
+        $this->call(PostSeeder::class);
+
         SocialLink::factory()->createMany([
             ['platform' => 'Instagram', 'url' => 'https://instagram.com/ideagrove', 'icon' => 'phosphor-instagram-logo', 'sort_order' => 1],
             ['platform' => 'Dribbble', 'url' => 'https://dribbble.com/ideagrove', 'icon' => 'phosphor-dribbble-logo', 'sort_order' => 2],

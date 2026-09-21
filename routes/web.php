@@ -38,11 +38,15 @@ Route::prefix('{locale}')
 // SEO: XML Sitemap
 Route::get('/sitemap.xml', function () {
     $projects = Project::all();
+    $posts = Post::published()->orderByDesc('published_at')->get();
     $locales = ['en', 'id'];
-    $lastModified = $projects->max('updated_at')?->format('Y-m-d\TH:i:sP') ?? now()->format('Y-m-d\TH:i:sP');
+    $lastModified = collect([
+        $projects->max('updated_at'),
+        $posts->max('updated_at'),
+    ])->filter()->max()?->format('Y-m-d\TH:i:sP') ?? now()->format('Y-m-d\TH:i:sP');
 
     return response()
-        ->view('sitemap', compact('projects', 'locales', 'lastModified'))
+        ->view('sitemap', compact('projects', 'posts', 'locales', 'lastModified'))
         ->header('Content-Type', 'application/xml');
 })->name('sitemap');
 // GA Setup Guide

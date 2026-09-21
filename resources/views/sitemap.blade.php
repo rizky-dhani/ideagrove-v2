@@ -58,4 +58,33 @@
             </url>
         @endforeach
     @endforeach
+    {{-- Blog index --}}
+    @foreach ($locales as $locale)
+        <url>
+            <loc>{{ url('/' . $locale . '/blog') }}</loc>
+            <lastmod>{{ $lastModified }}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.8</priority>
+            @foreach ($locales as $alt)
+                <xhtml:link rel="alternate" hreflang="{{ $alt }}" href="{{ url('/' . $alt . '/blog') }}" />
+            @endforeach
+            <xhtml:link rel="alternate" hreflang="x-default" href="{{ url('/en/blog') }}" />
+        </url>
+    @endforeach
+
+    {{-- Blog posts --}}
+    @foreach ($posts as $post)
+        @foreach ($locales as $locale)
+            <url>
+                <loc>{{ url('/' . $locale . '/blog/' . $post->slug) }}</loc>
+                <lastmod>{{ $post->updated_at->format('Y-m-d\TH:i:sP') }}</lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>0.7</priority>
+                @foreach ($locales as $alt)
+                    <xhtml:link rel="alternate" hreflang="{{ $alt }}" href="{{ url('/' . $alt . '/blog/' . $post->slug) }}" />
+                @endforeach
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ url('/en/blog/' . $post->slug) }}" />
+            </url>
+        @endforeach
+    @endforeach
 </urlset>
