@@ -17,9 +17,13 @@ class PostCategoryResource extends Resource
 {
     protected static ?string $model = PostCategory::class;
 
+    protected static ?string $slug = 'posts/categories';
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-tag';
 
     protected static ?string $navigationLabel = 'Categories';
+
+    protected static ?string $navigationParentItem = 'Posts';
 
     protected static ?string $modelLabel = 'category';
 

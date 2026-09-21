@@ -17,9 +17,13 @@ class PostTagResource extends Resource
 {
     protected static ?string $model = PostTag::class;
 
+    protected static ?string $slug = 'posts/tags';
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-hashtag';
 
     protected static ?string $navigationLabel = 'Tags';
+
+    protected static ?string $navigationParentItem = 'Posts';
 
     public static function form(Schema $schema): Schema
     {

@@ -86,4 +86,16 @@ class PostTaxonomyResourceTest extends TestCase
             ->call('create')
             ->assertHasFormErrors(['name' => 'required']);
     }
+
+    public function test_category_routes_are_nested_under_posts(): void
+    {
+        $this->assertStringEndsWith('/admin/posts/categories', PostCategoryResource::getUrl('index'));
+        $this->assertStringEndsWith('/admin/posts/categories/create', PostCategoryResource::getUrl('create'));
+    }
+
+    public function test_tag_routes_are_nested_under_posts(): void
+    {
+        $this->assertStringEndsWith('/admin/posts/tags', PostTagResource::getUrl('index'));
+        $this->assertStringEndsWith('/admin/posts/tags/create', PostTagResource::getUrl('create'));
+    }
 }
