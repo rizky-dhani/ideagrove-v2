@@ -3,12 +3,14 @@
     <section class="relative overflow-hidden bg-cream px-6 pt-16 pb-12 sm:px-8 lg:px-12">
         <div class="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
         <div class="mx-auto max-w-3xl">
-            <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2 text-sm text-warm-gray transition-colors hover:text-charcoal">
-                <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
-                </svg>
-                {{ __('posts.show.back') }}
-            </a>
+            <div class="pt-6 sm:pt-8">
+                <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2 text-sm text-warm-gray transition-colors hover:text-charcoal">
+                    <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+                    </svg>
+                    {{ __('posts.show.back') }}
+                </a>
+            </div>
 
             @if ($post->category)
                 <a href="{{ route('posts.index', ['category' => $post->category->slug]) }}" class="mt-8 inline-block text-xs font-medium tracking-[0.2em] text-brand-dark uppercase transition-colors hover:text-brand">{{ $post->category->name }}</a>
