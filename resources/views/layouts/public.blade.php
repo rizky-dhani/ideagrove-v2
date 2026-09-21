@@ -97,6 +97,7 @@
             {{-- Centered desktop nav --}}
             <nav class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden items-center gap-6 text-sm font-medium sm:flex">
                 <a href="{{ route('projects.index') }}" {{ request()->routeIs('projects.*') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.work') }}</a>
+                <a href="{{ route('posts.index') }}" {{ request()->routeIs('posts.*') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('posts.*') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.blog') }}</a>
                 <a href="{{ route('home') }}#pricing" class="transition-colors hover:text-brand text-charcoal-soft">{{ __('layout.nav.pricing') }}</a>
                 <a href="{{ route('contact') }}" {{ request()->routeIs('contact') ? 'aria-current="page"' : '' }} class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : 'text-charcoal-soft' }}">{{ __('layout.nav.contact') }}</a>
             </nav>
@@ -152,6 +153,7 @@
              class="border-t border-peach bg-warm-white px-6 pb-6 pt-4 sm:hidden">
             <div class="flex flex-col gap-4 text-base font-medium text-charcoal-soft">
                 <a href="{{ route('projects.index') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('projects.*') ? 'text-brand' : '' }}">{{ __('layout.nav.work') }}</a>
+                <a href="{{ route('posts.index') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('posts.*') ? 'text-brand' : '' }}">{{ __('layout.nav.blog') }}</a>
                 <a href="{{ route('home') }}#pricing" @click="open = false" class="transition-colors hover:text-brand">{{ __('layout.nav.pricing') }}</a>
                 <a href="{{ route('contact') }}" @click="open = false" class="transition-colors hover:text-brand {{ request()->routeIs('contact') ? 'text-brand' : '' }}">{{ __('layout.nav.contact') }}</a>
                 <div class="flex items-center gap-2 pt-2">
@@ -200,6 +202,7 @@
                     <h4 class="text-xs font-medium tracking-[0.2em] text-warm-gray uppercase">{{ __('layout.footer.links') }}</h4>
                     <nav class="mt-4 flex flex-col gap-2">
                         <a href="{{ route('projects.index') }}" class="text-sm text-warm-gray transition-colors hover:text-brand">{{ __('layout.nav.work') }}</a>
+                        <a href="{{ route('posts.index') }}" class="text-sm text-warm-gray transition-colors hover:text-brand">{{ __('layout.nav.blog') }}</a>
                         <a href="{{ route('home') }}#pricing" class="text-sm text-warm-gray transition-colors hover:text-brand">{{ __('layout.nav.pricing') }}</a>
                         <a href="{{ route('contact') }}" class="text-sm text-warm-gray transition-colors hover:text-brand">{{ __('layout.nav.contact') }}</a>
                     </nav>

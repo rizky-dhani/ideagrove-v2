@@ -2,8 +2,11 @@
 
 use App\Livewire\ContactPage;
 use App\Livewire\HomePage;
+use App\Livewire\PostsPage;
+use App\Livewire\ShowPost;
 use App\Livewire\ShowProject;
 use App\Livewire\WorkPage;
+use App\Models\Post;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +21,8 @@ Route::prefix('{locale}')
         Route::get('/', HomePage::class)->name('home');
         Route::get('/work', WorkPage::class)->name('projects.index');
         Route::get('/contact', ContactPage::class)->name('contact');
+        Route::get('/blog', PostsPage::class)->name('posts.index');
+        Route::get('/blog/{slug}', ShowPost::class)->name('posts.show');
         Route::get('/work/barbershop', fn () => view('portfolio.barbershop', ['title' => 'BLK & GOLD Barbershop | IdeaGrove']));
         Route::get('/work/sports-shop', fn () => view('portfolio.sports-shop.home', ['title' => 'STRIDE | Athletic Performance Gear']));
         Route::get('/work/sports-shop/products', fn () => view('portfolio.sports-shop.products', ['title' => 'STRIDE | All Products']));

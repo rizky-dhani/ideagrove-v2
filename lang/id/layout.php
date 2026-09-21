@@ -6,6 +6,7 @@ return [
         'pricing' => 'Harga',
         'contact' => 'Kontak',
         'team' => 'Tim',
+        'blog' => 'Blog',
         'skip_to_content' => 'Langsung ke konten',
         'toggle_dark_mode' => 'Mode gelap',
         'toggle_menu' => 'Buka menu',
@@ -32,6 +33,15 @@ return [
         ],
         'project' => [
             'title' => ':project, The Idea Grove Studio',
+        ],
+        'posts' => [
+            'index' => [
+                'title' => 'Catatan lapangan, The Idea Grove Studio',
+                'description' => 'Tulisan tentang keahlian, proses, dan kerja di balik pekerjaan. Catatan pendek dari The Idea Grove Studio.',
+            ],
+            'show' => [
+                'title' => ':post, The Idea Grove Studio',
+            ],
         ],
     ],
     'back_to_top' => [

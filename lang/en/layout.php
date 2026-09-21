@@ -6,6 +6,7 @@ return [
         'pricing' => 'Pricing',
         'contact' => 'Contact',
         'team' => 'Team',
+        'blog' => 'Blog',
         'skip_to_content' => 'Skip to content',
         'toggle_dark_mode' => 'Toggle dark mode',
         'toggle_menu' => 'Toggle menu',
@@ -32,6 +33,15 @@ return [
         ],
         'project' => [
             'title' => ':project, The Idea Grove Studio',
+        ],
+        'posts' => [
+            'index' => [
+                'title' => 'Field notes, The Idea Grove Studio',
+                'description' => 'Writing on craft, process, and the work behind the work. Short pieces from The Idea Grove Studio.',
+            ],
+            'show' => [
+                'title' => ':post, The Idea Grove Studio',
+            ],
         ],
     ],
     'back_to_top' => [
