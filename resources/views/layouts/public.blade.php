@@ -25,7 +25,7 @@
     <link rel="alternate" hreflang="en" href="{{ url('/en' . $path) }}">
     <link rel="alternate" hreflang="id" href="{{ url('/id' . $path) }}">
     <link rel="alternate" hreflang="x-default" href="{{ url('/en' . $path) }}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
     <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:title" content="{{ $ogTitle }}">
@@ -55,6 +55,12 @@
         ],
     ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
     </script>
+
+    @if (! empty($seo['json_ld']))
+        <script type="application/ld+json">
+        {!! json_encode($seo['json_ld'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    @endif
 
     <title>{{ $seoTitle }}</title>
     <meta name="description" content="{{ $seoDescription }}">
