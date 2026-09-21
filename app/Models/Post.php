@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 #[Fillable([
-    'title', 'slug', 'excerpt', 'body', 'cover_image', 'posts_category_id',
+    'title', 'slug', 'excerpt', 'body', 'cover_image', 'category_id',
     'author_id', 'status', 'published_at', 'is_featured', 'meta_description',
 ])]
 class Post extends Model
@@ -54,7 +54,7 @@ class Post extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(PostCategory::class, 'posts_category_id');
+        return $this->belongsTo(PostCategory::class);
     }
 
     public function author(): BelongsTo
@@ -64,7 +64,7 @@ class Post extends Model
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(PostTag::class, 'posts_tags_pivot', 'post_id', 'tag_id');
+        return $this->belongsToMany(PostTag::class);
     }
 
     public function scopePublished(Builder $query): Builder

@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'published_at' => now()->subDay(),
             'is_featured' => false,
             'author_id' => User::factory(),
-            'posts_category_id' => PostCategory::factory(),
+            'category_id' => PostCategory::factory(),
         ];
     }
 

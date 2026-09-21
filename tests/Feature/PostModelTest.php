@@ -87,7 +87,7 @@ class PostModelTest extends TestCase
     {
         $category = PostCategory::factory()->create(['name' => 'Craft']);
         $tag = PostTag::factory()->create(['name' => 'Process']);
-        $post = Post::factory()->create(['posts_category_id' => $category->id]);
+        $post = Post::factory()->create(['category_id' => $category->id]);
         $post->tags()->attach($tag->id);
 
         $this->assertSame('Craft', $post->fresh()->category->name);
@@ -97,11 +97,11 @@ class PostModelTest extends TestCase
     public function test_deleting_category_keeps_its_posts(): void
     {
         $category = PostCategory::factory()->create();
-        $post = Post::factory()->create(['posts_category_id' => $category->id]);
+        $post = Post::factory()->create(['category_id' => $category->id]);
 
         $category->delete();
 
         $this->assertModelExists($post);
-        $this->assertNull($post->fresh()->posts_category_id);
+        $this->assertNull($post->fresh()->category_id);
     }
 }

@@ -8,16 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('posts_tags_pivot', function (Blueprint $table) {
+        Schema::create('post_post_tag', function (Blueprint $table) {
             $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete();
-            $table->foreignId('tag_id')->constrained('posts_tags')->cascadeOnDelete();
+            $table->foreignId('post_tag_id')->constrained('post_tags')->cascadeOnDelete();
 
-            $table->primary(['post_id', 'tag_id']);
+            $table->primary(['post_id', 'post_tag_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('posts_tags_pivot');
+        Schema::dropIfExists('post_post_tag');
     }
 };

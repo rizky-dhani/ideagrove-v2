@@ -15,8 +15,6 @@ class PostTag extends Model
     /** @use HasFactory<PostTagFactory> */
     use HasFactory;
 
-    protected $table = 'posts_tags';
-
     protected static function booted(): void
     {
         static::creating(function (PostTag $tag) {
@@ -39,6 +37,6 @@ class PostTag extends Model
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'posts_tags_pivot', 'tag_id', 'post_id');
+        return $this->belongsToMany(Post::class);
     }
 }

@@ -15,8 +15,6 @@ class PostCategory extends Model
     /** @use HasFactory<PostCategoryFactory> */
     use HasFactory;
 
-    protected $table = 'posts_categories';
-
     protected static function booted(): void
     {
         static::creating(function (PostCategory $category) {
@@ -39,6 +37,6 @@ class PostCategory extends Model
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'posts_category_id');
+        return $this->hasMany(Post::class, 'category_id');
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->longText('body');
             $table->string('cover_image')->nullable();
-            $table->foreignId('posts_category_id')->nullable()->constrained('posts_categories')->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('post_categories')->nullOnDelete();
             $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('status')->default('draft');
             $table->timestamp('published_at')->nullable();

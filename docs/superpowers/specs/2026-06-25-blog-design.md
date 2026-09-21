@@ -24,9 +24,9 @@ labels come from the lang files.
 
 ## Data model
 
-Four tables. Prefix is `posts_*` for the taxonomy tables, `posts` for the post.
+Four tables, named by Eloquent convention: `posts`, `post_categories`, `post_tags`, `post_post_tag`.
 
-### `posts_categories`
+### `post_categories`
 
 | column | type | notes |
 | --- | --- | --- |
@@ -36,7 +36,7 @@ Four tables. Prefix is `posts_*` for the taxonomy tables, `posts` for the post.
 | `description` | text, nullable | |
 | `timestamps` | | |
 
-### `posts_tags`
+### `post_tags`
 
 | column | type | notes |
 | --- | --- | --- |
@@ -55,7 +55,7 @@ Four tables. Prefix is `posts_*` for the taxonomy tables, `posts` for the post.
 | `excerpt` | text, nullable | falls back to first 40 words of body |
 | `body` | longText | HTML from Filament RichEditor |
 | `cover_image` | string, nullable | `storage/posts`, 5 MB, slug-based filename |
-| `posts_category_id` | FK `posts_categories`, nullable | `nullOnDelete`; one category per post |
+| `category_id` | FK `post_categories`, nullable | `nullOnDelete`; one category per post |
 | `author_id` | FK `users`, nullable | `nullOnDelete` |
 | `status` | string | `draft` \| `published`, default `draft` |
 | `published_at` | timestamp, nullable | future date plus `published` status means scheduled |
@@ -63,7 +63,7 @@ Four tables. Prefix is `posts_*` for the taxonomy tables, `posts` for the post.
 | `meta_description` | text, nullable | |
 | `timestamps` | | |
 
-### `posts_tags_pivot`
+### `post_post_tag`
 
 `post_id` FK cascade on delete, `tag_id` FK cascade on delete, composite unique on
 the pair.
@@ -72,7 +72,7 @@ the pair.
 
 - `Post::category()` belongsTo `PostCategory`
 - `Post::author()` belongsTo `User`
-- `Post::tags()` belongsToMany `PostTag` via `posts_tags_pivot`
+- `Post::tags()` belongsToMany `PostTag` via `post_post_tag`
 - `PostCategory::posts()` hasMany
 - `PostTag::posts()` belongsToMany
 
@@ -108,7 +108,7 @@ Form:
 - `body` — RichEditor, required
 - `cover_image` — FileUpload to `posts` disk, 5 MB, slug-based filename (mirrors
   `ProjectResource`)
-- `posts_category_id` — Select relationship, nullable
+- `category_id` — Select relationship, nullable
 - `tags` — Select multiple relationship, `createOptionForm` inline
 - `author_id` — Select relationship, default `auth()->id()`
 - `status` — Select draft/published, required, default draft
