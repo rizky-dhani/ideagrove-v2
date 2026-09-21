@@ -5,6 +5,7 @@ return [
         'work' => 'Karya',
         'pricing' => 'Harga',
         'contact' => 'Kontak',
+        'team' => 'Tim',
         'skip_to_content' => 'Langsung ke konten',
         'toggle_dark_mode' => 'Mode gelap',
         'toggle_menu' => 'Buka menu',

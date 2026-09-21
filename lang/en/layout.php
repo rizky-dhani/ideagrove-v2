@@ -5,6 +5,7 @@ return [
         'work' => 'Work',
         'pricing' => 'Pricing',
         'contact' => 'Contact',
+        'team' => 'Team',
         'skip_to_content' => 'Skip to content',
         'toggle_dark_mode' => 'Toggle dark mode',
         'toggle_menu' => 'Toggle menu',
