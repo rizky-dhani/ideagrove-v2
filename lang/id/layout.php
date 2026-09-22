@@ -21,15 +21,15 @@ return [
     'meta' => [
         'home' => [
             'title' => 'The Idea Grove Studio, Digital Agency, Bali',
-            'description' => 'The Idea Grove Studio, agency digital dari Bali, bikin pengalaman digital yang berbekas.',
+            'description' => 'Studio dua orang di Bali yang bikin identitas merek, situs web, dan aplikasi buat yang peduli sama cara sesuatu dikerjakan.',
         ],
         'work' => [
             'title' => 'Karya, The Idea Grove Studio',
-            'description' => 'Karya pilihan kami: identitas merek, situs web, dan aplikasi buat yang serius sama karyanya.',
+            'description' => 'Proyek yang sudah kami kirim: identitas merek, situs web, dan aplikasi buat yang serius sama karyanya.',
         ],
         'contact' => [
             'title' => 'Kontak, The Idea Grove Studio',
-            'description' => 'Hubungi The Idea Grove Studio. Cerita aja tentang proyekmu: identitas merek, situs web, aplikasi buat yang serius sama karyanya.',
+            'description' => 'Ceritakan yang sedang kamu bangun. Studio dua orang di Bali, kerja di identitas merek, situs web, dan aplikasi.',
         ],
         'project' => [
             'title' => ':project, The Idea Grove Studio',
@@ -37,7 +37,7 @@ return [
         'posts' => [
             'index' => [
                 'title' => 'Catatan lapangan, The Idea Grove Studio',
-                'description' => 'Tulisan tentang keahlian, proses, dan kerja di balik pekerjaan. Catatan pendek dari The Idea Grove Studio.',
+                'description' => 'Catatan soal cara kerja, proses, dan bagian yang tidak kelihatan dari luar. Tulisan pendek dari The Idea Grove Studio.',
             ],
             'show' => [
                 'title' => ':post, The Idea Grove Studio',

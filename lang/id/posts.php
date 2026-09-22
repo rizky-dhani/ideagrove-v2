@@ -4,7 +4,7 @@ return [
     'hero' => [
         'section_label' => '/blog',
         'heading' => 'Catatan lapangan',
-        'subtitle' => 'Tulisan tentang keahlian, proses, dan kerja di balik pekerjaan. Catatan pendek dari studio.',
+        'subtitle' => 'Catatan soal cara kerja, proses, dan bagian yang tidak kelihatan dari luar. Tulisan pendek dari studio.',
     ],
     'controls' => [
         'category' => 'Kategori',
@@ -21,9 +21,9 @@ return [
         'reading_time' => ':minutes menit baca',
     ],
     'empty' => [
-        'heading' => 'Belum ada tulisan.',
+        'heading' => 'Belum ada isinya.',
         'body' => 'Coba filter lain, atau :link.',
-        'return_home' => 'kembali ke beranda',
+        'return_home' => 'balik ke beranda',
     ],
     'pagination' => [
         'previous' => 'Sebelumnya',

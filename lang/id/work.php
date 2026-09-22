@@ -4,7 +4,7 @@ return [
     'hero' => [
         'section_label' => '/karya',
         'heading' => 'Karya kami',
-        'subtitle' => 'Karya pilihan yang udah selesai kami garap. Identitas merek, situs web, aplikasi, buat yang serius sama karyanya.',
+        'subtitle' => 'Proyek yang sudah kami kirim: identitas merek, situs web, dan aplikasi buat yang serius sama karyanya.',
     ],
     'controls' => [
         'sort' => 'Urut',
@@ -17,8 +17,8 @@ return [
         'list_aria' => 'Tampilan daftar',
     ],
     'empty' => [
-        'heading' => 'Belum ada proyek.',
-        'body' => 'Bentar lagi, atau :link.',
+        'heading' => 'Belum ada yang bisa ditampilkan.',
+        'body' => 'Cek lagi nanti, atau :link.',
         'return_home' => 'balik ke beranda',
     ],
 ];

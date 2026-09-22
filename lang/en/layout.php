@@ -21,15 +21,15 @@ return [
     'meta' => [
         'home' => [
             'title' => 'The Idea Grove Studio, Digital Agency, Bali',
-            'description' => 'The Idea Grove Studio, a digital agency from Bali crafting meaningful digital experiences.',
+            'description' => 'A two-person studio in Bali making brand identities, websites, and applications for people who care how a thing is made.',
         ],
         'work' => [
             'title' => 'Work, The Idea Grove Studio',
-            'description' => 'A curated selection of our work: brand identities, websites, and applications for organisations that take their craft seriously.',
+            'description' => 'Projects we have shipped: brand identities, websites, and applications for organisations that take their craft seriously.',
         ],
         'contact' => [
             'title' => 'Contact, The Idea Grove Studio',
-            'description' => 'Get in touch with The Idea Grove Studio. We\'d love to hear about your project: brand identities, websites, and applications for organisations that take their craft seriously.',
+            'description' => 'Tell us what you are building. A two-person studio in Bali working on brand identities, websites, and applications.',
         ],
         'project' => [
             'title' => ':project, The Idea Grove Studio',
@@ -37,7 +37,7 @@ return [
         'posts' => [
             'index' => [
                 'title' => 'Field notes, The Idea Grove Studio',
-                'description' => 'Writing on craft, process, and the work behind the work. Short pieces from The Idea Grove Studio.',
+                'description' => 'Notes on craft, process, and the parts of the work nobody sees. Short pieces from The Idea Grove Studio.',
             ],
             'show' => [
                 'title' => ':post, The Idea Grove Studio',

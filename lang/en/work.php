@@ -4,7 +4,7 @@ return [
     'hero' => [
         'section_label' => '/work',
         'heading' => 'Our work',
-        'subtitle' => 'A curated selection of projects we\'ve delivered. Brand identities, websites, and applications for organisations that take their craft seriously.',
+        'subtitle' => 'Projects we have shipped: brand identities, websites, and applications for organisations that take their craft seriously.',
     ],
     'controls' => [
         'sort' => 'Sort',
@@ -17,8 +17,8 @@ return [
         'list_aria' => 'List view',
     ],
     'empty' => [
-        'heading' => 'No projects found.',
+        'heading' => 'Nothing to show yet.',
         'body' => 'Check back soon, or :link.',
-        'return_home' => 'return home',
+        'return_home' => 'head back home',
     ],
 ];
