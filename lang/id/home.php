@@ -165,7 +165,7 @@ return [
     ],
     'contact' => [
         'section_label' => '/kontak',
-        'heading' => 'Ada proyek di kepala?',
+        'heading' => 'Terbesit ide proyek di kepalamu?',
         'subtitle' => 'Kalau yang kamu bangun itu berarti, kami mau dengar ceritanya.',
     ],
 ];
