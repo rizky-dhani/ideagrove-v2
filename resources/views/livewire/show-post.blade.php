@@ -36,7 +36,7 @@
 
     {{-- Body --}}
     <section class="px-6 py-16 sm:px-8 lg:px-12">
-        <article class="prose prose-lg mx-auto max-w-3xl text-base leading-relaxed text-charcoal-soft">
+        <article class="post-body mx-auto max-w-3xl text-base leading-relaxed text-charcoal-soft">
             {!! \Illuminate\Support\Str::sanitizeHtml($post->body) !!}
         </article>
 
