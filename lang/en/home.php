@@ -40,7 +40,7 @@ return [
         'web_title' => 'Web design',
         'web_body' => 'Marketing sites, editorial platforms, and product interfaces, each one designed for the job it has to do.',
         'dev_title' => 'Web development',
-        'dev_body' => 'Hand-built and quick to load. Usually Laravel and Filament, sometimes something custom because the brief asked for it.',
+        'dev_body' => 'Hand-built and quick to load. Clean, maintainable code, so the site is still easy to work on a year from now.',
         'strategy_title' => 'Digital strategy',
         'strategy_body' => 'Positioning, content systems, and a roadmap, so the digital work and the business point the same way.',
     ],

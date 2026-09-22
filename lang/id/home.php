@@ -40,7 +40,7 @@ return [
         'web_title' => 'Desain web',
         'web_body' => 'Situs marketing, platform editorial, antarmuka produk. Masing-masing dirancang sesuai tugasnya.',
         'dev_title' => 'Pengembangan web',
-        'dev_body' => 'Dibangun manual dan ringan dibuka. Umumnya Laravel dan Filament, kadang custom karena briefnya memang minta begitu.',
+        'dev_body' => 'Dibangun manual dan ringan dibuka. Kodenya bersih dan gampang dirawat, jadi kamu atau developer berikutnya bisa lanjut tanpa ribet.',
         'strategy_title' => 'Strategi digital',
         'strategy_body' => 'Positioning, sistem konten, dan roadmap, biar kerja digital dan bisnisnya menunjuk arah yang sama.',
     ],
