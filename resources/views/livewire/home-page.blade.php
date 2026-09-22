@@ -335,6 +335,53 @@
         </div>
     </section>
 
+    {{-- Blog: latest field notes. Ruled text cards, not the image grid above, so the two
+         sections do not collapse into one rhythm (R-05). --}}
+    <section id="blog" class="scroll-reveal border-t border-peach-medium/40 px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
+        <div class="mx-auto max-w-6xl">
+            <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                <div class="max-w-2xl">
+                    <span class="font-mono text-xs font-medium tracking-[0.2em] text-brand uppercase">{{ __('home.blog.section_label') }}</span>
+                    <h2 class="mt-4 font-serif text-3xl text-charcoal sm:text-4xl">{{ __('home.blog.heading') }}</h2>
+                    <p class="mt-4 text-base leading-relaxed text-warm-gray">{{ __('home.blog.subtitle') }}</p>
+                </div>
+                <a href="{{ route('posts.index') }}" class="group inline-flex shrink-0 items-center gap-2 text-sm font-medium text-charcoal transition-colors hover:text-brand-dark">
+                    {{ __('posts.hero.section_label') }}
+                    <span class="inline-block h-px w-8 bg-charcoal transition-all group-hover:w-12 group-hover:bg-brand-dark" aria-hidden="true"></span>
+                </a>
+            </div>
+
+            @if ($posts->count())
+                <div class="scroll-reveal-group mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($posts as $post)
+                        <a href="{{ route('posts.show', $post->slug) }}" class="group block border-t border-peach-medium/60 pt-6">
+                            @if ($post->category)
+                                <p class="font-mono text-xs font-medium tracking-[0.15em] text-brand-dark uppercase">{{ $post->category->name }}</p>
+                            @endif
+                            <h3 class="mt-3 font-serif text-xl leading-snug text-charcoal transition-colors group-hover:text-brand-dark">{{ $post->title }}</h3>
+                            <p class="mt-3 text-sm leading-relaxed text-warm-gray">{{ $post->excerpt(20) }}</p>
+                            <p class="mt-4 font-mono text-xs tracking-[0.1em] text-warm-gray uppercase">
+                                @if ($post->published_at){{ $post->published_at->format('j M Y') }} &middot; @endif{{ __('posts.card.reading_time', ['minutes' => $post->readingTime()]) }}
+                            </p>
+                        </a>
+                    @endforeach
+                </div>
+            @else
+                <div class="mt-14 rounded-xl border border-dashed border-peach-medium/60 px-8 py-16 text-center">
+                    <p class="font-serif text-lg text-warm-gray">{{ __('home.blog.empty') }}</p>
+                </div>
+            @endif
+
+            <a href="{{ route('posts.index') }}"
+               class="mt-14 flex w-full items-center justify-center gap-2 rounded-full bg-charcoal px-8 py-4 text-base font-medium text-cream transition-colors hover:bg-brand-dark">
+                {{ __('home.blog.view_all') }}
+                <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
     {{-- Contact --}}
     <section id="contact" class="scroll-reveal relative overflow-hidden bg-cream px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
         <div class="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>

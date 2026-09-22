@@ -45,7 +45,7 @@ body{font-family:'Bricolage Grotesque',sans-serif;background:var(--ground);color
 <nav class="max-w-7xl mx-auto px-5 sm:px-8 py-4" aria-label="Primary">
 <div class="flex items-center justify-between gap-3">
 <a href="{{ url('/') }}" class="brand-logo" role="img" aria-label="The Idea Grove Studio"></a>
-<div class="hidden md:flex gap-7 text-[15px] font-medium"><a href="#layanan" class="hover:text-[#FF7A33] transition">{{ __('home.services.heading') }}</a><a href="#kerja" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.work') }}</a><a href="#tim" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.team') }}</a><a href="#harga" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.pricing') }}</a><a href="#krama" class="hover:text-[#FF7A33] transition">{{ __('contact.reach_out') }}</a></div>
+<div class="hidden md:flex gap-7 text-[15px] font-medium"><a href="#layanan" class="hover:text-[#FF7A33] transition">{{ __('home.services.heading') }}</a><a href="#kerja" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.work') }}</a><a href="#catatan" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.blog') }}</a><a href="#tim" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.team') }}</a><a href="#harga" class="hover:text-[#FF7A33] transition">{{ __('layout.nav.pricing') }}</a><a href="#krama" class="hover:text-[#FF7A33] transition">{{ __('contact.reach_out') }}</a></div>
 <div class="flex items-center gap-2">
 <a href="#gabung" class="hidden sm:inline-block rounded-full bg-[#F45B0E] text-[#171512] text-sm font-bold px-6 py-2.5 hover:bg-[#FF7A33] transition">{{ __('home.hero.cta_contact') }}</a>
 <button type="button" id="navToggle" class="md:hidden w-11 h-11 rounded-full bg-[#F45B0E] text-[#171512] flex items-center justify-center" aria-expanded="false" aria-controls="mobileNav" aria-label="{{ __('layout.nav.toggle_menu') }}"><i class="ph ph-list text-xl"></i></button>
@@ -56,6 +56,7 @@ body{font-family:'Bricolage Grotesque',sans-serif;background:var(--ground);color
 <div id="mobileNav" class="fixed inset-0 z-[55] md:hidden flex-col justify-center gap-2 px-6 bg-[#141210]/98 backdrop-blur-2xl">
 <a href="#layanan" class="block px-5 py-4 rounded-2xl text-2xl font-extrabold hover:bg-[#F45B0E]/12 transition">{{ __('home.services.heading') }}</a>
 <a href="#kerja" class="block px-5 py-4 rounded-2xl text-2xl font-extrabold hover:bg-[#F45B0E]/12 transition">{{ __('layout.nav.work') }}</a>
+<a href="#catatan" class="block px-5 py-4 rounded-2xl text-2xl font-extrabold hover:bg-[#F45B0E]/12 transition">{{ __('layout.nav.blog') }}</a>
 <a href="#tim" class="block px-5 py-4 rounded-2xl text-2xl font-extrabold hover:bg-[#F45B0E]/12 transition">{{ __('layout.nav.team') }}</a>
 <a href="#harga" class="block px-5 py-4 rounded-2xl text-2xl font-extrabold hover:bg-[#F45B0E]/12 transition">{{ __('layout.nav.pricing') }}</a>
 <a href="#krama" class="block px-5 py-4 rounded-2xl text-2xl font-extrabold hover:bg-[#F45B0E]/12 transition">{{ __('contact.reach_out') }}</a>
@@ -306,6 +307,39 @@ body{font-family:'Bricolage Grotesque',sans-serif;background:var(--ground);color
 <span class="reveal rounded-full border border-[#3D3733] px-5 py-2 text-sm">{{ __('home.sectors.technology') }}</span>
 <span class="reveal rounded-full bg-[#F45B0E] text-[#171512] px-5 py-2 text-sm font-bold">{{ __('home.sectors.more') }}</span>
 </div></div>
+</section>
+
+{{-- Field notes: live DB, latest published posts. Flat cards with a tabular index numeral
+     instead of ruled rows, so the section reads as a different composition from the services
+     index and the sectors chips (RHYTHM 3). --}}
+@php $banjarPosts = \App\Models\Post::published()->forLocale()->with('category')->orderByDesc('published_at')->take(6)->get(); @endphp
+<section id="catatan" class="scroll-mt-24 max-w-7xl mx-auto px-5 sm:px-8 py-24">
+<div class="flex flex-wrap items-end justify-between gap-6 reveal">
+<div>
+<p class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF7A33]">{{ __('home.blog.section_label') }}</p>
+<h2 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight">{{ __('home.blog.heading') }}</h2>
+</div>
+<a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="rounded-full border border-[#3D3733] px-6 py-3 text-sm font-bold hover:border-[#F45B0E] hover:text-[#FF7A33] transition">{{ __('layout.nav.blog') }}</a>
+</div>
+<p class="mt-4 muted max-w-xl">{{ __('home.blog.subtitle') }}</p>
+@if($banjarPosts->count())
+<div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#3D3733] border-y border-[#3D3733]">
+@foreach($banjarPosts as $post)
+<a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}" class="reveal group flex flex-col bg-[#141210] p-7 hover:bg-[#1E1B19] transition-colors">
+<div class="flex items-baseline justify-between gap-4">
+<span class="text-sm font-bold text-[#FF7A33] tabular-nums" aria-hidden="true">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+@if($post->category)<p class="text-[11px] font-bold uppercase tracking-[0.16em] muted">{{ $post->category->name }}</p>@endif
+</div>
+<h3 class="mt-5 text-xl sm:text-2xl font-extrabold leading-snug group-hover:text-[#FF7A33] transition-colors">{{ $post->title }}</h3>
+<p class="mt-3 text-sm muted leading-relaxed">{{ $post->excerpt(20) }}</p>
+<p class="mt-auto pt-6 text-xs uppercase tracking-[0.14em] muted">@if($post->published_at){{ $post->published_at->format('j M Y') }} &middot; @endif{{ __('posts.card.reading_time', ['minutes' => $post->readingTime()]) }}</p>
+</a>
+@endforeach
+</div>
+@else
+<p class="mt-12 muted">{{ __('home.blog.empty') }}</p>
+@endif
+<a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="reveal mt-12 flex w-full items-center justify-center gap-3 rounded-full bg-[#F45B0E] text-[#171512] font-extrabold px-8 py-4 hover:bg-[#FF7A33] transition">{{ __('home.blog.view_all') }} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
 </section>
 
 {{-- Team: the studio is two people. Ruled index rows, matching the services composition, so

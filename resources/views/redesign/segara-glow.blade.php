@@ -44,7 +44,7 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--night);color:var(--
 <div id="siteNav" class="fixed top-4 left-1/2 -translate-x-1/2 z-[60] w-[94%] max-w-7xl">
 <nav id="siteNavBar" class="glass rounded-2xl px-5 py-3 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-3" aria-label="Primary">
 <div class="flex items-center min-w-0"><a href="{{ url('/') }}" class="brand-logo shrink-0" role="img" aria-label="The Idea Grove Studio"></a></div>
-<div class="hidden md:flex gap-6 text-sm justify-center"><a href="#layanan" class="hover:text-[#2DD4BF]">{{ __('home.services.heading') }}</a><a href="#kerja" class="hover:text-[#2DD4BF]">{{ __('layout.nav.work') }}</a><a href="#harga" class="hover:text-[#2DD4BF]">{{ __('layout.nav.pricing') }}</a><a href="#hubungi" class="hover:text-[#2DD4BF]">{{ __('layout.nav.contact') }}</a></div>
+<div class="hidden md:flex gap-6 text-sm justify-center"><a href="#layanan" class="hover:text-[#2DD4BF]">{{ __('home.services.heading') }}</a><a href="#kerja" class="hover:text-[#2DD4BF]">{{ __('layout.nav.work') }}</a><a href="#catatan" class="hover:text-[#2DD4BF]">{{ __('layout.nav.blog') }}</a><a href="#harga" class="hover:text-[#2DD4BF]">{{ __('layout.nav.pricing') }}</a><a href="#hubungi" class="hover:text-[#2DD4BF]">{{ __('layout.nav.contact') }}</a></div>
 <div class="flex items-center gap-2 justify-end">
 <a href="#hubungi" class="btn-main bg-[#2DD4BF] text-black text-sm font-bold rounded-full pl-5 pr-1.5 py-1.5 hidden sm:flex items-center gap-2">{{ __('home.hero.cta_contact') }} <span class="w-8 h-8 rounded-full bg-black/15 flex items-center justify-center"><i class="ph ph-arrow-down"></i></span></a>
 <button type="button" id="navToggle" class="md:hidden w-10 h-10 rounded-xl bg-[#2DD4BF] text-black flex items-center justify-center" aria-expanded="false" aria-controls="mobileNav" aria-label="{{ __('layout.nav.toggle_menu') }}"><i class="ph ph-list text-lg"></i></button>
@@ -54,6 +54,7 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--night);color:var(--
 <div id="mobileNav" class="fixed inset-0 z-[55] md:hidden flex-col justify-center gap-2 px-6 bg-[#04120E]/97 backdrop-blur-2xl">
 <a href="#layanan" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:text-[#2DD4BF] transition">{{ __('home.services.heading') }}</a>
 <a href="#kerja" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:text-[#2DD4BF] transition">{{ __('layout.nav.work') }}</a>
+<a href="#catatan" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:text-[#2DD4BF] transition">{{ __('layout.nav.blog') }}</a>
 <a href="#harga" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:text-[#2DD4BF] transition">{{ __('layout.nav.pricing') }}</a>
 <a href="#hubungi" class="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-[#2DD4BF] text-black px-5 py-4 text-lg font-bold transition">{{ __('layout.nav.contact') }} <i class="ph ph-arrow-down"></i></a>
 </div>
@@ -180,6 +181,35 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--night);color:var(--
 <p class="text-xs muted max-w-2xl">{{ __('home.pricing.note') }}</p>
 <a href="#hubungi" class="btn-main bg-[#2DD4BF] text-black font-bold rounded-full px-7 py-3.5">{{ __('home.pricing.cta') }} <span aria-hidden="true">&rarr;</span></a>
 </div>
+</section>
+
+{{-- Field notes: live DB, latest published posts. Panels on the night ground, first card
+     carries the sea-glass fill so the section has one focal point (levers). No image cards:
+     the work grid above already owns that composition (RHYTHM 2). --}}
+@php $segaraPosts = \App\Models\Post::published()->forLocale()->with('category')->orderByDesc('published_at')->take(6)->get(); @endphp
+<section id="catatan" class="max-w-7xl mx-auto px-5 pb-28">
+<div class="flex flex-wrap items-end justify-between gap-6">
+<div>
+<h2 class="reveal text-4xl sm:text-5xl font-bold tracking-tight">{{ __('home.blog.heading') }}</h2>
+<p class="mt-3 muted max-w-md">{{ __('home.blog.subtitle') }}</p>
+</div>
+<a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="rounded-full border border-white/30 px-6 py-3 font-semibold hover:bg-[#2DD4BF] hover:text-black hover:border-[#2DD4BF] transition">{{ __('layout.nav.blog') }} <span aria-hidden="true">&rarr;</span></a>
+</div>
+@if($segaraPosts->count())
+<div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+@foreach($segaraPosts as $post)
+<a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}" class="card reveal group flex flex-col rounded-3xl p-7 {{ $loop->first ? 'bg-[#2DD4BF] text-black' : 'panel' }}">
+@if($post->category)<p class="text-xs font-semibold uppercase tracking-[0.16em] {{ $loop->first ? 'text-black/70' : 'text-[#2DD4BF]' }}">{{ $post->category->name }}</p>@endif
+<h3 class="mt-3 text-2xl font-bold leading-snug">{{ $post->title }}</h3>
+<p class="mt-3 text-[15px] leading-relaxed {{ $loop->first ? 'text-black/75' : 'muted' }}">{{ $post->excerpt(20) }}</p>
+<p class="mt-auto pt-6 text-xs uppercase tracking-[0.14em] {{ $loop->first ? 'text-black/60' : 'muted' }}">@if($post->published_at){{ $post->published_at->format('j M Y') }} &middot; @endif{{ __('posts.card.reading_time', ['minutes' => $post->readingTime()]) }}</p>
+</a>
+@endforeach
+</div>
+@else
+<p class="mt-8 muted">{{ __('home.blog.empty') }}</p>
+@endif
+<a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="btn-main reveal mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-[#2DD4BF] text-black font-bold px-8 py-4">{{ __('home.blog.view_all') }} <span aria-hidden="true">&rarr;</span></a>
 </section>
 
 {{-- Sectors: chips, radius .75rem so the pill stays a status/CTA signal --}}

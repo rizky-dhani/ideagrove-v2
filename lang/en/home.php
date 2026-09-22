@@ -64,6 +64,13 @@ return [
         'technology' => 'Technology',
         'more' => 'And more…',
     ],
+    'blog' => [
+        'section_label' => '/blog',
+        'heading' => 'Field notes',
+        'subtitle' => 'Writing on craft, process, and the work behind the work.',
+        'view_all' => 'Read the field notes',
+        'empty' => 'No field notes published yet. The first ones are being written.',
+    ],
     'team' => [
         'section_label' => '/team',
         'heading' => 'The two of us',

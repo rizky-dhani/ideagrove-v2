@@ -64,6 +64,13 @@ return [
         'technology' => 'Teknologi',
         'more' => 'Dan masih banyak lagi…',
     ],
+    'blog' => [
+        'section_label' => '/blog',
+        'heading' => 'Catatan lapangan',
+        'subtitle' => 'Tulisan tentang keahlian, proses, dan kerja di balik pekerjaan.',
+        'view_all' => 'Baca catatan lapangan',
+        'empty' => 'Belum ada catatan lapangan yang terbit. Yang pertama masih ditulis.',
+    ],
     'team' => [
         'section_label' => '/tim',
         'heading' => 'Kami berdua',

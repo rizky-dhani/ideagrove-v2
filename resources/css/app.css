@@ -34,6 +34,9 @@
     --color-warm-gray: #b0a090;
     --color-peach: #2a1f18;
     --color-peach-medium: #3d2e24;
+    /* Accent text on a dark ground. #C9440B is 3.85:1 on #121212 and fails AA; DESIGN.md
+       names #FF7A33 as the bright variant for dark grounds (7.19:1 on #141210). */
+    --color-brand-dark: #ff7a33;
 }
 
 

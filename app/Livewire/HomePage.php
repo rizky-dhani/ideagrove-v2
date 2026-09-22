@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Post;
 use App\Models\Project;
 use Livewire\Component;
 
@@ -12,6 +13,13 @@ class HomePage extends Component
         return [
             'projects' => Project::query()
                 ->orderBy('created_at', 'desc')
+                ->take(6)
+                ->get(),
+            'posts' => Post::query()
+                ->published()
+                ->forLocale()
+                ->with('category')
+                ->orderByDesc('published_at')
                 ->take(6)
                 ->get(),
         ];

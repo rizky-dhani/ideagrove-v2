@@ -49,6 +49,7 @@ body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink)}
 <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-1">
 <a href="#layanan" class="text-sm font-medium px-3 py-1.5 rounded-full hover:bg-[#F45B0E]/15 hover:text-[#C9440B] transition">{{ __('home.services.heading') }}</a>
 <a href="#kerja" class="text-sm font-medium px-3 py-1.5 rounded-full hover:bg-[#F45B0E]/15 hover:text-[#C9440B] transition">{{ __('layout.nav.work') }}</a>
+<a href="#catatan" class="text-sm font-medium px-3 py-1.5 rounded-full hover:bg-[#F45B0E]/15 hover:text-[#C9440B] transition">{{ __('layout.nav.blog') }}</a>
 <a href="#tim" class="text-sm font-medium px-3 py-1.5 rounded-full hover:bg-[#F45B0E]/15 hover:text-[#C9440B] transition">{{ __('layout.nav.team') }}</a>
 <a href="#harga" class="text-sm font-medium px-3 py-1.5 rounded-full hover:bg-[#F45B0E]/15 hover:text-[#C9440B] transition">{{ __('layout.nav.pricing') }}</a>
 </div>
@@ -61,6 +62,7 @@ body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink)}
 <div id="mobileNav" class="fixed inset-0 z-[55] md:hidden flex-col justify-center gap-2 px-6 bg-[#FDFAF7]/98 backdrop-blur-2xl">
 <a href="#layanan" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:bg-[#F45B0E]/15 transition">{{ __('home.services.heading') }}</a>
 <a href="#kerja" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:bg-[#F45B0E]/15 transition">{{ __('layout.nav.work') }}</a>
+<a href="#catatan" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:bg-[#F45B0E]/15 transition">{{ __('layout.nav.blog') }}</a>
 <a href="#tim" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:bg-[#F45B0E]/15 transition">{{ __('layout.nav.team') }}</a>
 <a href="#harga" class="block px-5 py-4 rounded-2xl text-2xl font-bold hover:bg-[#F45B0E]/15 transition">{{ __('layout.nav.pricing') }}</a>
 <a href="#hubungi" class="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-[#F45B0E] text-[#171512] px-5 py-4 text-lg font-bold transition">{{ __('layout.nav.contact') }} <i class="ph ph-arrow-up-right"></i></a>
@@ -338,6 +340,36 @@ body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink)}
 <li class="reveal border-t border-[#171512]/15 pt-4 text-lg font-medium">{{ __('home.sectors.technology') }}</li>
 <li class="reveal border-t border-[#171512]/15 pt-4 text-lg font-medium brand-text">{{ __('home.sectors.more') }}</li>
 </ul>
+</section>
+
+{{-- Field notes: live DB, latest published posts for this locale. Flat white cards on the
+     paper ground, so the composition differs from the ruled sectors list above it (RHYTHM 2).
+     Text-led on purpose: the work section already owns the image grid. --}}
+@php $sawahPosts = \App\Models\Post::published()->forLocale()->with('category')->orderByDesc('published_at')->take(6)->get(); @endphp
+<section id="catatan" class="scroll-mt-28 max-w-7xl mx-auto px-5 sm:px-10 py-28">
+<div class="flex flex-wrap items-end justify-between gap-6 reveal">
+<div>
+<p class="text-[11px] font-semibold uppercase tracking-[0.2em] brand-text">{{ __('home.blog.section_label') }}</p>
+<h2 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight">{{ __('home.blog.heading') }}</h2>
+</div>
+<a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="rounded-full border border-[#171512]/20 px-6 py-3 font-semibold hover:border-[#F45B0E] hover:text-[#C9440B] transition">{{ __('layout.nav.blog') }} <span aria-hidden="true">&rarr;</span></a>
+</div>
+<p class="mt-4 muted max-w-xl">{{ __('home.blog.subtitle') }}</p>
+@if($sawahPosts->count())
+<div class="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+@foreach($sawahPosts as $post)
+<a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}" class="card reveal group flex flex-col rounded-3xl border border-[#171512]/10 bg-white p-7">
+@if($post->category)<p class="text-[11px] font-semibold uppercase tracking-[0.16em] brand-text">{{ $post->category->name }}</p>@endif
+<h3 class="mt-3 text-2xl font-bold leading-snug group-hover:text-[#C9440B] transition">{{ $post->title }}</h3>
+<p class="mt-3 muted text-[15px] leading-relaxed">{{ $post->excerpt(20) }}</p>
+<p class="mt-auto pt-6 text-xs uppercase tracking-[0.14em] muted">@if($post->published_at){{ $post->published_at->format('j M Y') }} &middot; @endif{{ __('posts.card.reading_time', ['minutes' => $post->readingTime()]) }}</p>
+</a>
+@endforeach
+</div>
+@else
+<p class="mt-12 muted">{{ __('home.blog.empty') }}</p>
+@endif
+<a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="reveal mt-12 flex w-full items-center justify-center gap-3 rounded-full bg-[#F45B0E] text-[#171512] font-bold px-8 py-4 hover:bg-[#171512] hover:text-[#FDFAF7] transition-all duration-500">{{ __('home.blog.view_all') }} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
 </section>
 
 {{-- Team: the studio is two people, so this is two cards with a real offset rather than a
