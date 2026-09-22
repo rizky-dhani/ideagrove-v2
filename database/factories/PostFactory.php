@@ -15,6 +15,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->unique()->sentence(4),
+            'locale' => 'en',
             'excerpt' => $this->faker->sentence(),
             'body' => '<p>'.$this->faker->paragraph().'</p>',
             'status' => Post::STATUS_PUBLISHED,
@@ -39,5 +40,10 @@ class PostFactory extends Factory
             'status' => Post::STATUS_PUBLISHED,
             'published_at' => now()->addWeek(),
         ]);
+    }
+
+    public function locale(string $locale): static
+    {
+        return $this->state(fn (): array => ['locale' => $locale]);
     }
 }

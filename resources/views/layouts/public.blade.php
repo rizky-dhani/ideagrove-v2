@@ -15,6 +15,21 @@
         $otherUrl = url('/' . $otherLocale . $path);
 
         $seo = $seo ?? [];
+
+        // Post detail pages pass their own locale plus the translated sibling's URL when one exists.
+        $enUrl = url('/en' . $path);
+        $idUrl = url('/id' . $path);
+
+        if (! empty($seo['translation_url'])) {
+            if ($locale === 'en') {
+                $idUrl = $seo['translation_url'];
+            } else {
+                $enUrl = $seo['translation_url'];
+            }
+        } elseif (! empty($seo['locale'])) {
+            // Untranslated post: both alternates point at the only version that exists.
+            $enUrl = $idUrl = $canonical;
+        }
         $seoTitle = ($seo['title'] ?? null) ?: config('app.name');
         $seoDescription = ($seo['description'] ?? null) ?: __('layout.meta.home.description');
         $ogTitle = ($seo['og_title'] ?? null) ?: $seoTitle;
@@ -22,9 +37,9 @@
         $seoImage = $seo['og_image'] ?? null;
     @endphp
     <link rel="canonical" href="{{ $canonical }}">
-    <link rel="alternate" hreflang="en" href="{{ url('/en' . $path) }}">
-    <link rel="alternate" hreflang="id" href="{{ url('/id' . $path) }}">
-    <link rel="alternate" hreflang="x-default" href="{{ url('/en' . $path) }}">
+    <link rel="alternate" hreflang="en" href="{{ $enUrl }}">
+    <link rel="alternate" hreflang="id" href="{{ $idUrl }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $enUrl }}">
     <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
     <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">

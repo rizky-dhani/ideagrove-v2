@@ -30,6 +30,12 @@ class PostsTable
                     ->searchable()
                     ->sortable()
                     ->wrap(),
+                TextColumn::make('locale')
+                    ->label('Locale')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => $state === 'id' ? 'ID' : 'EN')
+                    ->color(fn (string $state): string => $state === 'id' ? 'info' : 'gray')
+                    ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Category')
                     ->sortable()
@@ -69,6 +75,8 @@ class PostsTable
                         Post::STATUS_DRAFT => 'Draft',
                         Post::STATUS_PUBLISHED => 'Published',
                     ]),
+                SelectFilter::make('locale')
+                    ->options(['en' => 'English', 'id' => 'Bahasa Indonesia']),
                 SelectFilter::make('category_id')
                     ->label('Category')
                     ->relationship('category', 'name'),

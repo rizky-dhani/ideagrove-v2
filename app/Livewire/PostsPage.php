@@ -56,6 +56,7 @@ class PostsPage extends Component
     {
         $posts = Post::query()
             ->published()
+            ->forLocale()
             ->with(['category', 'tags', 'author'])
             ->when($this->category, fn ($query) => $query->whereHas(
                 'category',

@@ -28,9 +28,19 @@ class PostForm
                     ->columnSpanFull(),
                 TextInput::make('slug')
                     ->maxLength(255)
-                    ->unique(ignoreRecord: true)
-                    ->helperText('Leave empty to generate from the title.')
+                    ->unique(ignoreRecord: true, modifyRuleUsing: fn ($rule, Get $get) => $rule->where('locale', $get('locale') ?? 'en'))
+                    ->helperText('Leave empty to generate from the title. Must be unique within the locale.')
                     ->columnSpanFull(),
+                Select::make('locale')
+                    ->options(['en' => 'English', 'id' => 'Bahasa Indonesia'])
+                    ->default('en')
+                    ->required()
+                    ->live()
+                    ->helperText('The language this post is written in. Its URL lives under this locale.'),
+                TextInput::make('translation_key')
+                    ->label('Translation key')
+                    ->maxLength(255)
+                    ->helperText('Optional. Give the EN and ID versions the same key so they link to each other as translations.'),
                 Textarea::make('excerpt')
                     ->nullable()
                     ->rows(2)

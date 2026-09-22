@@ -10,13 +10,35 @@ Add a blog to the site: public index and detail pages under the existing
 locale-prefixed routes, and Filament resources so the studio can write and manage
 posts, categories, and tags from the admin panel.
 
-Single-language posts. One post row serves both `/en/blog/{slug}` and
-`/id/blog/{slug}`. The body is not translated; only the surrounding chrome and UI
-labels come from the lang files.
+Single-language posts. Each post row carries a `locale`, so a post is written in
+one language and served under that language's URL only. Two rows (one `en`, one
+`id`) share a `translation_key` when they are translations of each other, which is
+what drives `hreflang`. Chrome and UI labels still come from the lang files.
+
+> Amended 2026-09-22: originally one row served both locales with an untranslated
+> body. That produced duplicate-content URLs and no real `hreflang`, which defeats
+> the point of a search-intent post. See "Locale model" below.
+
+## Locale model
+
+| column | type | notes |
+| --- | --- | --- |
+| `locale` | string(5), default `en`, indexed | The language this post is written in. Its URL lives under this locale. |
+| `translation_key` | string, nullable, indexed | Shared by the `en` and `id` rows that are translations of each other. |
+
+- Slug uniqueness is per locale (`unique(['locale', 'slug'])`), not global. Two posts
+  may share a slug across locales, and auto-suffixing only counts clashes inside
+  the same locale.
+- `Post::forLocale()` scopes a query to the active (or given) locale.
+- `Post::translation()` returns the published post in the other locale sharing the
+  same `translation_key`, or null.
+- Blog index, post detail, related posts, and the sitemap are all locale-scoped.
+- A post without a `translation_key` still renders; its `hreflang` alternates point
+  at itself rather than at a nonexistent sibling.
 
 ## Non-goals
 
-- No per-locale post translations. One body, both locales.
+- No machine translation. A translated post is written, not generated.
 - No revisions. Post history is `updated_at` only.
 - No RSS feed.
 - No comments.
@@ -157,17 +179,25 @@ excerpt, date, reading time. Empty state with no fabricated content. `perPage` 9
 
 ### `ShowPost`
 
-Resolves with the published scope so draft and future-scheduled slugs 404:
-`Post::published()->where('slug', $slug)->firstOrFail()`, no implicit route binding.
+Resolves with the published scope plus the active locale so draft, future-scheduled,
+and other-locale slugs 404: `Post::published()->forLocale()->where('slug', $slug)->firstOrFail()`,
+no implicit route binding.
 Renders cover, title, meta row (author, date, reading time), category and tag links
-back to the filtered index, body in a prose container, related posts, and a
-back-to-blog link.
+back to the filtered index, body in the `.post-body` container, related posts, and a
+back-to-blog link. Related posts are locale-scoped.
 
 ### SEO
 
 Both components pass a `seo` array to `layouts.public`. `ShowPost` adds
 `BlogPosting` JSON-LD (headline, datePublished, author, image, publisher) and
-`og:type` `article`.
+`og:type` `article`. It also passes `locale` and, when a translated sibling exists,
+`translation_url`, which the layout uses to emit a correct `hreflang` pair. A post
+with no sibling points both alternates at its own canonical URL.
+
+Long-form body styling lives in `resources/css/app.css` under `.post-body`
+(headings, lists, quotes, code, scrollable tables, and a `.post-callout` block).
+The Tailwind typography plugin is not installed, so these rules are written by hand
+against the existing design tokens.
 
 Styling uses existing tokens only (`brand`, `cream`, `charcoal`, `warm-gray`,
 `peach`, `font-serif` display, `font-mono` uppercase tracking labels). No new
@@ -180,8 +210,8 @@ colors.
 - Lang: new `lang/{en,id}/posts.php` (hero, controls, card labels, show page,
   related, empty state). `lang/{en,id}/layout.php` gains `nav.blog` and
   `meta.posts.index` / `meta.posts.show`.
-- Sitemap: blog index per locale, plus every `published()` post per locale with
-  hreflang alternates.
+- Sitemap: blog index per locale, plus every `published()` post once, under its own
+  locale URL, with hreflang alternates only when a translated sibling exists.
 - Factories: `PostFactory`, `PostCategoryFactory`, `PostTagFactory`.
 - Seeder: 3 categories, about 8 tags, about 6 posts in studio voice. No invented
   statistics, testimonials, or clients.

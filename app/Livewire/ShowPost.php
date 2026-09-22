@@ -14,6 +14,7 @@ class ShowPost extends Component
     {
         $this->post = Post::query()
             ->published()
+            ->forLocale()
             ->with(['category', 'tags', 'author'])
             ->where('slug', $slug)
             ->firstOrFail();
@@ -25,6 +26,7 @@ class ShowPost extends Component
 
         return Post::query()
             ->published()
+            ->forLocale()
             ->with(['category'])
             ->whereKeyNot($this->post->getKey())
             ->withCount(['tags as shared_tags_count' => fn ($query) => $query->whereIn('post_tags.id', $tagIds)])
@@ -39,6 +41,8 @@ class ShowPost extends Component
     {
         $description = $this->post->meta_description ?? $this->post->excerpt(30);
 
+        $translation = $this->post->translation();
+
         return view('livewire.show-post', [
             'related' => $this->related(),
         ])
@@ -50,6 +54,10 @@ class ShowPost extends Component
                     'og_description' => $description,
                     'og_image' => $this->post->coverImageUrl(),
                     'og_type' => 'article',
+                    'locale' => $this->post->locale,
+                    'translation_url' => $translation
+                        ? route('posts.show', ['locale' => $translation->locale, 'slug' => $translation->slug])
+                        : null,
                     'json_ld' => [
                         '@context' => 'https://schema.org',
                         '@type' => 'BlogPosting',

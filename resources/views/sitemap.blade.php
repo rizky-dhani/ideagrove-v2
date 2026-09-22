@@ -72,19 +72,19 @@
         </url>
     @endforeach
 
-    {{-- Blog posts --}}
+    {{-- Blog posts: one URL per post, under its own locale --}}
     @foreach ($posts as $post)
-        @foreach ($locales as $locale)
-            <url>
-                <loc>{{ url('/' . $locale . '/blog/' . $post->slug) }}</loc>
-                <lastmod>{{ $post->updated_at->format('Y-m-d\TH:i:sP') }}</lastmod>
-                <changefreq>monthly</changefreq>
-                <priority>0.7</priority>
-                @foreach ($locales as $alt)
-                    <xhtml:link rel="alternate" hreflang="{{ $alt }}" href="{{ url('/' . $alt . '/blog/' . $post->slug) }}" />
-                @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ url('/en/blog/' . $post->slug) }}" />
-            </url>
-        @endforeach
+        @php $translation = $post->translation(); @endphp
+        <url>
+            <loc>{{ url('/' . $post->locale . '/blog/' . $post->slug) }}</loc>
+            <lastmod>{{ $post->updated_at->format('Y-m-d\TH:i:sP') }}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
+            @if ($translation)
+                <xhtml:link rel="alternate" hreflang="{{ $translation->locale }}" href="{{ url('/' . $translation->locale . '/blog/' . $translation->slug) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $post->locale }}" href="{{ url('/' . $post->locale . '/blog/' . $post->slug) }}" />
+            @endif
+            <xhtml:link rel="alternate" hreflang="x-default" href="{{ url('/' . $post->locale . '/blog/' . $post->slug) }}" />
+        </url>
     @endforeach
 </urlset>

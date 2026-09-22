@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 #[Fillable([
-    'title', 'slug', 'excerpt', 'body', 'cover_image', 'category_id',
-    'author_id', 'status', 'published_at', 'is_featured', 'meta_description',
+    'title', 'slug', 'locale', 'translation_key', 'excerpt', 'body', 'cover_image',
+    'category_id', 'author_id', 'status', 'published_at', 'is_featured', 'meta_description',
 ])]
 class Post extends Model
 {
@@ -27,13 +27,15 @@ class Post extends Model
     protected static function booted(): void
     {
         static::creating(function (Post $post) {
+            $post->locale ??= app()->getLocale();
+
             if (! $post->slug) {
                 $post->slug = Str::slug($post->title);
             }
 
             $slug = $post->slug;
             $n = 1;
-            while (static::where('slug', $post->slug)->exists()) {
+            while (static::where('locale', $post->locale)->where('slug', $post->slug)->exists()) {
                 $post->slug = $slug.'-'.(++$n);
             }
         });
@@ -79,6 +81,29 @@ class Post extends Model
         return $query
             ->where('status', self::STATUS_PUBLISHED)
             ->where('published_at', '>', now());
+    }
+
+    public function scopeForLocale(Builder $query, ?string $locale = null): Builder
+    {
+        return $query->where('locale', $locale ?? app()->getLocale());
+    }
+
+    /**
+     * The published post in the other locale that shares this post's translation key.
+     */
+    public function translation(?string $locale = null): ?self
+    {
+        $locale ??= app()->getLocale() === 'en' ? 'id' : 'en';
+
+        if (! $this->translation_key) {
+            return null;
+        }
+
+        return static::query()
+            ->published()
+            ->where('locale', $locale)
+            ->where('translation_key', $this->translation_key)
+            ->first();
     }
 
     public function isScheduled(): bool
